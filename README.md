@@ -1,4 +1,4 @@
-# おすすめの撮影スポット
+# おすすめの撮影スポットサイト
 
 ## サイト概要
 ### サイトテーマ
@@ -45,8 +45,7 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
-- 
+-  使用検討中です.
+
 
 https://docs.google.com/spreadsheets/d/1N4rRy6qq6NEqPCmocNlI3Y3Wutuyr1dbHsOAyPwA8ls/edit#gid=885378170

@@ -1,6 +1,20 @@
 # frozen_string_literal: true
 
 class Customer::SessionsController < Devise::SessionsController
+  # def guest_sign_in
+  #   user = User.guest
+  #   sign_in user
+  #   redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
+  # end
+
+
+
+  def new_guest
+    customer = Customer.guest
+    sign_in customer
+    redirect_to root_path, notice: "Thank you for your testing!"
+  end
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

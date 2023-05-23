@@ -6,12 +6,17 @@ Rails.application.routes.draw do
   #   :sessions => 'users/sessions',
   # }
   devise_scope :customer do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-    get '/users', to: redirect("/users/sign_up")
+    get '/customer/sign_out' => 'devise/sessions#destroy'
+    get '/customes', to: redirect("/customer/sign_up")
+    get 'customer/guest_sign_up', to: 'customer/sessions#new_guest'
     post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
 
   end
 
+ devise_for :customers, controllers: {
+    sessions: 'customer/sessions',
+    registrations: 'customer/registrations',
+  }
 
 
 

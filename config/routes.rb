@@ -11,12 +11,14 @@ Rails.application.routes.draw do
     get 'customer/guest_sign_up', to: 'customer/sessions#new_guest'
     post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
 
+    get 'customer/sign_up', to: 'customer/sessions#new'
+
   end
 
- devise_for :customers, controllers: {
-    sessions: 'customer/sessions',
-    registrations: 'customer/registrations',
-  }
+# devise_for :customers, controllers: {
+#     sessions: 'customer/sessions',
+#     registrations: 'customer/registrations',
+#   }
 
 
 
@@ -56,7 +58,7 @@ devise_for :customer,skip: [:passwords], controllers: {
   sessions: 'customer/sessions'
 }
 
-# 管理者用
+# # 管理者用
 # URL /admin/sign_in ...
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"

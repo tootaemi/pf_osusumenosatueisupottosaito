@@ -6,46 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-
-<%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    
-  <header>
-    <% if customer_signed_in? %>
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
-      <li>
-        <%#= link_to "ログイン", new_session_path %>
-      </li>
-    <% end %>
-  </header>  <%= yield %>
-    
-    
-    
-    <%= yield %>
-  </body>
 </html>
-
-
-
-
 
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NaganoCake</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -57,21 +26,23 @@
   <body>
     <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
       <div class="header-content">
-      <%= link_to 'NaganoCake', (admin_signed_in? ? admin_top_path : root_path ), class: "logo" %>
         <ul class="flex">
           <% if admin_signed_in? %>
-            <li><%= link_to '商品一覧',  admin_items_path %></li>
-            <li><%= link_to '会員一覧',  admin_customers_path %></li>
-            <li><%= link_to '注文履歴一覧',  admin_orders_path %></li>
-            <li><%= link_to 'ジャンル一覧',  admin_genres_path %></li>
+            <li><%= link_to 'つーざー一覧',  admin_items_path %></li>
+            <li><%= link_to 'コメント一覧',  admin_customers_path %></li>
             <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
           <% elsif customer_signed_in? %>
             <p>ようこそ、<%= current_customer.name %>さん!</p>
+            <li><%= link_to 'トップページ', customes_path %></li>
+            <li><%= link_to '新規投稿', customes_path %></li>
             <li><%= link_to 'マイページ', customes_path %></li>
+            <li><%= link_to 'ブックマーク', customes_path %></li>
             <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
+
           <% else %>
             <li><%#= link_to '商品一覧', image_path %></li>
-            <li><%= link_to '新規登録', new_customer_registration_path %></li>
+            <li><%= link_to 'ゲストログイン', new_customer_registration_path %></li>
+            <li><%= link_to '会員登録', new_customer_registration_path %></li>
             <li><%= link_to 'ログイン', new_customer_session_path %></li>
           <% end %>
         </ul>
@@ -83,7 +54,7 @@
             <%= submit_tag '検索', class: "btn btn-primary" %>
           <% end %>
         <% end %>
-        
+
       </div>
     </header>
 
@@ -91,52 +62,6 @@
       <%= yield %>
     </main>
 
-    <footer>Copyright © Infratop Inc. All Rights Reserved.</footer>
   </body>
 </html>
 
-
-
-
-
-					<% if admin_signed_in? %>
-					<%# if request.fullpath.include? %>
-					<%#"/admin"
-						//admin側のheaderを返す %>
-					<%# else %>
-					<li class="nav-item active">
-						<%= link_to '商品一覧', admin_items_path, class: 'nav-link text-dark' %>
-					</li>
-					<li class="nav-item active">
-						<%= link_to '会員一覧',  admin_customers_path, class: 'nav-link text-dark'%>
-					</li>
-					<li class="nav-item active">
-						<%= link_to "注文履歴一覧",  admin_root_path, class: 'nav-link text-dark'  %>
-					</li>
-					<li class="nav-item">
-						<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
-					</li>
-
-							<% elsif customer_signed_in? %>
-					<!--%// customerログイン状態の際に、表示したいheaderのメニューを記載-->
-					<div class="text-center">ようこそ、<%= current_customer.name %>さん！</div>
-					　　　　　　　　　　　　　　　　　　　　　　　
-					<li class="nav-item active">
-						<%= link_to 'マイページ', customes_path, class: 'nav-link text-dark' %>
-					</li>
-					
-					<li class="nav-item">
-						<%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
-					</li>
-					<% else %>
-					<li class="nav-item active">
-						<%#= link_to 'About', about_path, class: 'nav-link text-dark' %>
-					</li>
-					<li class="nav-item">
-						<%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
-					</li>
-					<li class="nav-item">
-						<%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
-					</li>
-					<%# // user側のheaderを返す %>
-					<% end %>

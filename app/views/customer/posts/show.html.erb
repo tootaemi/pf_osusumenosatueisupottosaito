@@ -1,0 +1,39 @@
+<h1>Customer::Posts　index#show</h1>
+<p>Find me in app/views/customer/posts　index/show.html.erb</p>
+
+<%= form_with model: @post, url: 'customer_posts', method: :get do |f| %>
+<% end %>
+  <div class="mx-auto" style="width: 1000px">
+ <div class="container">
+   <span class="p-3 mb-2 bg-light text-dark">商品詳細
+   </span>
+ </div>
+  </div>
+  </br>
+
+  <div class="container">
+  <div class="row align-items-center" style="height:50px">
+ 
+    <div class="col">
+   <div><% if @post.image.attached? %>
+   <%= image_tag @post.image, size: "200x200" %>
+<% else %>
+  <%= image_tag 'no_image', size: "200x200" %>
+<% end %>
+</div>
+    </div>
+  </div>
+</div>
+<div class="mx-auto" style="width: 400px">
+  <div>商品名　　　　<%= @post.name %></div>
+  <div>商品説明　　　<%= @post.introduction %></div>
+  <div>税込価格</br>
+（税抜価格）　　　<%= @post.with_tax_price.to_s(:delimited) %>　(<%= @post.price.to_s(:delimited) %>)円
+ </div>
+  </br>
+  
+  <div class="mx-auto" style="width: 200px">
+    <div style="text-align:center">
+    <%= link_to "編集する",  edit_customer_post_path(@post.id) ,class: "btn btn-success" %>
+  </div>
+  </div>

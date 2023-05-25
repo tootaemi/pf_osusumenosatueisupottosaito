@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :customer do
+      resources :posts, only: [:index, :show] 
+  end
+
+
   root to: 'homes#top'
 
   # devise_for :customers, :controllers => {

@@ -1,26 +1,17 @@
-<h2>Sign up</h2>
-<%= form_with model: @customers, url: customers_registration_path do |f| %>
-<% end %>
+<h2>新規会員登録</h2>
+<%#= form_with model: @customers, url: customers_registration_path do |f| %>
+<%# end %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "customer/shared/error_messages", resource: resource %>
-
-
-<%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
-
-
+<%= render "customer/shared/error_messages", resource: resource %>
 <div class="field">
   <%= f.label :name %><br>
   <%= f.text_field :name %>
 </div>
-
-
-
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
@@ -28,17 +19,17 @@
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
-
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
-
+	<div class="container">
+	  <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方
+	  </span>
+	</div>
+	<%= link_to "こちら", new_customer_session_path %>からログインしてください。
 <%= render "customer/shared/links" %>
-
-

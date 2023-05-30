@@ -1,24 +1,43 @@
 Rails.application.routes.draw do
-  namespace :customer do
-      resources :posts, only: [:index, :show] 
-  end
-
-
-  root to: 'homes#top'
+           root to: 'homes#top'
+                    # resources :customer
+          # namespace :customer do
+            
+          #   resources :posts
+          #   # post "/posts" => "/customer/posts#index"
+          #   # get 'posts/:id', to: 'posts#show'
+          #     # get 'posts/:id' => 'posts#show'
+          #   end
 
   # devise_for :customers, :controllers => {
   #   :registrations => 'users/registrations',
   #   :sessions => 'users/sessions',
   # }
+       scope module: :customer do
+         post "customer" => "customers#create"
+         post "customer" => "customers#show"
+         get "customer/edit" => "customers#edit"
+         #patch  "customer/edit" => "customers#edit"
+         patch "customer" => "customers#update"
+        resources :customer
+        post "post/new" => "posts#new"
+          get "customer" => "customers#show"
+
+         resources :post
+  end
+      
   devise_scope :customer do
     get '/customer/sign_out' => 'devise/sessions#destroy'
     get '/customes', to: redirect("/customer/sign_up")
     get 'customer/guest_sign_up', to: 'customer/sessions#new_guest'
     post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
-
-    get 'customer/sign_up', to: 'customer/sessions#new'
-
+    
+    get 'customer/guest_sign_in',to: 'customer/registrations#new'
+    get 'customer/guest_sign_up', to: 'customer/sessions#new'
   end
+  
+ 
+
 
 # devise_for :customers, controllers: {
 #     sessions: 'customer/sessions',
@@ -71,3 +90,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
+
+
+

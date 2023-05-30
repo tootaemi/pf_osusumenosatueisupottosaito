@@ -1,0 +1,39 @@
+<div class="mx-auto" style="width: 1000px">
+ <div class="container">
+   <span class="p-3 mb-2 bg-light text-dark">商品編集
+   </span>
+ </div>
+
+
+
+<div class="mx-auto" style="width: 400px">
+  <%= form_with model: @item, url:admin_item_path(@item.id) do |f| %>
+  <div class="inputImage">商品画像　　&emsp;
+    <%= f.file_field :profile_image, placeholder: "商品画像", accept: "image/*" %>
+    </div>
+    <div class="field">
+      <%= f.label :商品名 %>    　　&emsp; 
+      <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"いちごのショートケーキ（ホール）"%>
+    </div>
+    <div class="field">
+      <%= f.label :商品説明 %>　     &emsp;
+      <%= f.text_area :introduction, placeholder:"栃木県産のとちおとめを贅沢に使用しています。", size:"30x5" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :税抜価格 %>   　 &emsp;
+      <%= f.text_field :price, autofocus: true, id:"inputPrice", placeholder: "2500" %>円
+    </div>
+    <label>
+    <%= f.label :販売ステータス %>
+    <%= f.radio_button :is_active, true %> 販売中
+    </label>
+    <label><%= f.radio_button :is_active, false %> 販売停止中
+    </label>
+    
+    
+      　　　　　　　　　　<div><%= f.submit '変更を保存',class: "btn btn-success"%>
+      </div>
+    <% end %>
+ 
+ </div>

@@ -7,13 +7,21 @@ class Customer::SessionsController < Devise::SessionsController
   #   redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   # end
 
+  before_action :configure_sign_in_params, only: [:create]
 
+  def after_sign_in_path_for(_resource)
+    root_path
+  end
 
   def new_guest
     customer = Customer.guest
     sign_in customer
     redirect_to root_path, notice: "Thank you for your testing!"
   end
+  
+
+
+
   
   # before_action :configure_sign_in_params, only: [:create]
 

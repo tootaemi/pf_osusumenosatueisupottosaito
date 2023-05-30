@@ -1,11 +1,10 @@
-<div class="mx-auto" style="width: 1000px">
+<div class="mx-auto" style="width:500px">
  <div class="container">
    <span class="p-3 mb-2 bg-light text-dark">マイページ
    </span>
  </div>
- </div>
  </br>
-
+ 
  <div class="mx-auto" style="width:750px">
  <div class="container">
  <p class="text-left">
@@ -15,24 +14,26 @@
     <!--<table class='table table-hover table-inverse'>-->
     		<table class="table col table-bordered">
     <!--<table class="table table-bordered">-->
-
+      
       <div class="table-secondary">
             <tr><td class="bg-light">氏名</td>
-            <td><%= current_customer.name %></td></tr>
+            <td><%= current_customer.full_name %></td></tr>
             <tr><td class="bg-light">メールアドレス</td>
             <td><%= current_customer.email %></td></tr>
       </div>
     </table>
     <!--</table>-->
-    <%= link_to "Show", customer_posts_path %>
-    　　<%= link_to "編集する", edit_customer_post_path(current_customer) ,class: "btn btn-success" %>
-
+    作者：<%= link_to @novel_list.user.name, user_path(@novel_list) %>
+    作者：<%= link_to @post.customer.name, customer_path(@post) %>
+    <%= link_to "編集する", customer_edit_path(current_customer) ,class: "btn btn-success" %>
 </div>
 </div>
 </br>
- </p>
+</p>
 </div>
 </div>
+
+
 
 <div class="XXXX">
   <p><%= current_customer.name %>さんの投稿一覧</p>

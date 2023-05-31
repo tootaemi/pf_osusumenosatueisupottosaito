@@ -1,6 +1,11 @@
 class Customer::PostsController < ApplicationController
 
-  before_action :find_post, only: [:edit, :update, :show, :destroy]
+  def new
+    @post = Post.new
+  end
+  
+
+  # before_action :find_post, only: [:edit, :update, :show, :destroy]
 
 
  def top
@@ -18,10 +23,11 @@ class Customer::PostsController < ApplicationController
 # end
 
  def index
-  @post = Post.new
-  @customer = current_customer
   @posts = Post.all
   @customers = Customer.all
+  @post = Post.new
+  @customer = current_customer
+
  end
 
  def show
@@ -39,6 +45,7 @@ class Customer::PostsController < ApplicationController
 
     def new
       @post = Post.new
+      @customer = Customer.new
     end
     
 
@@ -47,15 +54,19 @@ class Customer::PostsController < ApplicationController
       @post.customer.name
     end
 
-    def create
+  def create
       @post = current_customer
           @posts = Post.all
 
       # @post = Post.create 
       # params.require(:post).permit(:content, images: []) 
-       @post.save
+   @post.save
         redirect_to post_path,notice:'投稿に成功しました'
-    end
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
+    @post.save
+    redirect_to posts_path
+  end
     
     
 
@@ -88,10 +99,7 @@ class Customer::PostsController < ApplicationController
           return redirect_to root_path,alert:'権限がありません'if @post.user != current_user
         end
         
-  private
-   def post_params
-    params.require(:post).permit(:image, :address, :introduction, :tag, :customer_id)
-   end
+
         
 end
 

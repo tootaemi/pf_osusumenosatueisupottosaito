@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
            root to: 'homes#top'
-                    # resources :customer
+            # resources :customer
           # namespace :customer do
             
           #   resources :posts
@@ -20,10 +20,10 @@ Rails.application.routes.draw do
          #patch  "customer/edit" => "customers#edit"
          patch "customer" => "customers#update"
         resources :customer
+        get "customer" => "customers#show"
+        get "post/new" => "posts#new"
         post "post/new" => "posts#new"
-          get "customer" => "customers#show"
-
-         resources :post
+        # resources :post
   end
       
   devise_scope :customer do

@@ -1,6 +1,40 @@
 <h1>Customer::Posts　index#show</h1>
 <p>Find me in app/views/customer/posts　index/show.html.erb</p>
 
+
+
+<h1>Posts#show</h1>
+<p>Find me in app/views/posts/show.html.erb</p>
+
+<h2>Actions --></h2>
+<%= link_to 'Top', root_path %>
+<%= link_to 'Edit', edit_post_path(@post) %>
+<%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
+
+<h3>Title --></h3>
+<%= @post.title %>
+
+<h3>Content --></h3>
+<%# simple_formatは、pタグで囲み、改行コードをbrに変換する %>
+<%= simple_format(@post.content) %>
+
+<h3>Tags --></h3>
+<ul>
+  <%# 該当のPostからアソシエーションでタグを取得 %>
+  <% @post.tags.each do |tag| %>
+    <%# タグを展開 %>
+    <li>
+      <%= link_to tag.name, tag_path(tag) %>
+    </li>
+  <% end %>
+</ul>
+
+
+
+
+
+
+
 <%= form_with model: @post, url: 'customer_posts', method: :get do |f| %>
 <% end %>
   <div class="mx-auto" style="width: 1000px">

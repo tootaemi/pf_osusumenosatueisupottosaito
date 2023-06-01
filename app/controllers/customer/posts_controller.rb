@@ -1,5 +1,69 @@
 class Customer::PostsController < ApplicationController
 
+  def index
+    @posts = Post.all
+  end
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    # パラメーターを受け取り保存準備
+    @post = Post.new(post_params)
+
+    # Postを保存
+    if @post.save
+      # タグの保存
+      @post.save_tags(params[:post][:tag])
+      # 成功したらトップページへリダイレクト
+      redirect_to root_path
+    else
+      # 失敗した場合は、newへ戻る
+      render :new
+    end
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      # タグの更新
+      @post.save_tags(params[:post][:tag])
+      # 成功したら投稿記事へリダイレクト
+      redirect_to post_path(@post)
+    else
+      # 失敗した場合は、editへ戻る
+      render :edit
+    end
+  end
+
+  def destroy
+    Post.find(params[:id]).destroy()
+    redirect_to root_path
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :content)
+  end
+end
+
+
+
+
+
+
+class Customer::PostsController < ApplicationController
+
   def new
     @post = Post.new
   end
@@ -149,6 +213,34 @@ end
 
   def update
   end
+
+
+# ~
+# ~
+# def search
+#   @section_title = "「#{params[:search]}」の検索結果"
+#   @posts = if params[:search].present?
+#             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
+#                         "%#{params[:search]}%", "%#{params[:search]}%"])
+#                 .paginate(page: params[:page], per_page: 12).recent
+#           else
+#             Post.none
+#           end
+# end
+# ~
+# ~
+
+
+
+  # def search
+  #   if params[:name].present?
+  #     @users = User.where('name LIKE ?', "%#{params[:name]}%")
+  #   else
+  #     @users = User.none
+  #   end
+  # end
+
+
 
   private
    def post_params

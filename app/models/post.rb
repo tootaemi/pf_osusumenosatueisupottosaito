@@ -12,4 +12,4 @@ class Post < ApplicationRecord
   
   belongs_to :customers, optional: true
   
-  end
+end

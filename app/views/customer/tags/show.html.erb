@@ -1,0 +1,20 @@
+<h1>Tags#show</h1>
+<p>Find me in app/views/tags/show.html.erb</p>
+
+<h2>Actions --></h2>
+<%= link_to 'Tags List', tags_path %>
+<%= link_to 'Delete', tag_path(@tag), method: :delete, data: {confirm: '関連づいた記事のタグが空になりますがタグを削除しますか？'} %>
+
+<h2>Tag --></h2>
+
+<%# タグ名 %>
+<h3><%= @tag.name %></h3>
+
+<%# タグに関連付く記事一覧 %>
+<ul>
+  <% @tag.posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post_path(post) %>
+    </li>
+  <% end %>
+</ul>

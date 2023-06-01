@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
            root to: 'homes#top'
+           
+           
+           
+           
+    
+           
             # resources :customer
           # namespace :customer do
             
@@ -19,11 +25,32 @@ Rails.application.routes.draw do
          get "customer/edit" => "customers#edit"
          #patch  "customer/edit" => "customers#edit"
          patch "customer" => "customers#update"
+         
+           # root to: 'posts#index'
+  resources :posts, except: %w[index]
+  resources :tags, only: %w[index show destroy]
+  
+  
+  
         resources :customer
         get "customer" => "customers#show"
         get "post/new" => "posts#new"
         post "post/new" => "posts#new"
         # resources :post
+        
+        
+        
+               
+            resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
+    post 'tag/:id' => 'tags#create', as: 'tag'
+    delete 'tag/:id' => 'tags#destroy', as: 'unlike'
+    resources :comments, only: [:create, :destroy]
+    collection do 
+      get 'search'
+    end
+  end
+        
+        
   end
       
   devise_scope :customer do
@@ -36,7 +63,19 @@ Rails.application.routes.draw do
     get 'customer/guest_sign_up', to: 'customer/sessions#new'
   end
   
+  
+
+
+
  
+# resources :users do
+#   get :search, on: :collection
+# end
+
+# resources :posts, only: [:new, :create, :edit, :show, :update, :destroy] do
+#   get :search, on: :collection
+# end
+
 
 
 # devise_for :customers, controllers: {
@@ -87,6 +126,8 @@ devise_for :customer,skip: [:passwords], controllers: {
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

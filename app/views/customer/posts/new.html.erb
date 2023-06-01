@@ -82,3 +82,16 @@
      <% end %>
 
 </div>
+
+
+
+<h1>Posts#new</h1>
+<p>Find me in app/views/posts/new.html.erb</p>
+
+<h2>Actions --></h2>
+<%= link_to 'Top', root_path %>
+
+<h2>Post --></h2>
+<%= form_with model: @post do |post| %>
+  <%= render 'form', post: post %>
+<% end %>

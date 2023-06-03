@@ -1,7 +1,11 @@
 # frozen_string_literal: true
-
 class Customer::RegistrationsController < Devise::RegistrationsController
-  
+# class Companies::RegistrationsController < Devise::RegistrationsController
+# class RegistrationsController < Devise::RegistrationsController
+
+
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
   before_action :ensure_normal_user, only: :destroy
 
   def ensure_normal_user
@@ -11,7 +15,18 @@ class Customer::RegistrationsController < Devise::RegistrationsController
   end
 
 
-  
+
+  # ログイン後のリダイレクト先
+  def after_sign_in_path_for(resource_or_scope)
+    root_path(resource)
+  end
+
+  # # ログアウト後のリダイレクト先
+  # def after_sign_out_path_for(resource_or_scope)
+  #   root_path 
+  # end
+
+
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -71,3 +86,5 @@ class Customer::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+
+

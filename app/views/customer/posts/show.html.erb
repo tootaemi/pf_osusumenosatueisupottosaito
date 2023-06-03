@@ -8,25 +8,21 @@
 
 <h2>Actions --></h2>
 <%= link_to 'Top', root_path %>
-<%= link_to 'Edit', edit_post_path(@post) %>
-<%= link_to 'Delete', post_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
+<%= link_to 'Edit', post_new_path(@post) %>
+<%= link_to 'Delete', post_new_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
 
 <h3>Title --></h3>
-<%= @post.title %>
 
-<h3>Content --></h3>
-<%# simple_formatは、pタグで囲み、改行コードをbrに変換する %>
-<%= simple_format(@post.content) %>
 
 <h3>Tags --></h3>
 <ul>
   <%# 該当のPostからアソシエーションでタグを取得 %>
-  <% @post.tags.each do |tag| %>
+  <%# @post.tag.each do |tag| %>
     <%# タグを展開 %>
     <li>
       <%= link_to tag.name, tag_path(tag) %>
     </li>
-  <% end %>
+  <%# end %>
 </ul>
 
 
@@ -45,40 +41,14 @@
   </div>
   </br>
 
-  <div class="container">
-  <div class="row align-items-center" style="height:50px">
- 
-    <div class="col">
-   <div><% if @post.image.attached? %>
-   <%= image_tag @post.image, size: "200x200" %>
-<% else %>
-  <%= image_tag 'no_image', size: "200x200" %>
-<% end %>
-</div>
-    </div>
-  </div>
-</div>
-<div class="mx-auto" style="width: 400px">
-  <div>商品名　　　　<%= @post.name %></div>
-  <div>商品説明　　　<%= @post.introduction %></div>
-  <div>税込価格</br>
-（税抜価格）　　　<%= @post.with_tax_price.to_s(:delimited) %>　(<%= @post.price.to_s(:delimited) %>)円
- </div>
-  </br>
-  
+
+
+
   <div class="mx-auto" style="width: 200px">
     <div style="text-align:center">
-    <%= link_to "編集する",  edit_customer_post_path(@post.id) ,class: "btn btn-success" %>
+    <%= link_to "編集する",  post_new_path(@post) ,class: "btn btn-success" %>
   </div>
   </div>
-
-
-<h2>タイトル</h2>
-<p><%= @post.title %></p>
-
-<h2>本文</h2>
-<p><%= @post.body %></p>
-
 
 
 
@@ -91,46 +61,6 @@
  </div>
   </div>
   </br>
-
-  <div class="container">
-  <div class="row align-items-center" style="height:50px">
- 
-    <div class="col">
-   <div><% if @item.image.attached? %>
-   <%= image_tag @item.image, size: "200x200" %>
-<% else %>
-  <%= image_tag 'no_image', size: "200x200" %>
-<% end %>
-</div>
-    </div>
-  </div>
-</div>
-<div class="mx-auto" style="width: 400px">
-  <div>商品名　　　　<%= @item.name %></div>
-  <div>商品説明　　　<%= @item.introduction %></div>
-  <div>税込価格</br>
-（税抜価格）　　　<%= @item.with_tax_price.to_s(:delimited) %>　(<%= @item.price.to_s(:delimited) %>)円
- </div>
-  <div>販売ステータス　
-  　<% if @item.is_active==true %>
-   <strong class="text-success">　　販売中</strong>
-  <% else %>
-  <strong class="text-secondary">　販売停止中</strong> 
-  <% end %>
-  
-  </div>
-  </br>
-  
-  <div class="mx-auto" style="width: 200px">
-    <div style="text-align:center">
-    <%= link_to "編集する",  edit_admin_item_path(@item.id) ,class: "btn btn-success" %>
-  </div>
-  </div>
-  
-  
-  
-  
-  
   
   !
   <%= form_with model: @item, url: 'admin_items', method: :get do |f| %>
@@ -142,38 +72,3 @@
  </div>
   </div>
   </br>
-
-  <div class="container">
-  <div class="row align-items-center" style="height:50px">
- 
-    <div class="col">
-   <div><% if @item.image.attached? %>
-   <%= image_tag @item.image, size: "200x200" %>
-<% else %>
-  <%= image_tag 'no_image', size: "200x200" %>
-<% end %>
-</div>
-    </div>
-  </div>
-</div>
-<div class="mx-auto" style="width: 400px">
-  <div>商品名　　　　<%= @item.name %></div>
-  <div>商品説明　　　<%= @item.introduction %></div>
-  <div>税込価格</br>
-（税抜価格）　　　<%= @item.with_tax_price.to_s(:delimited) %>　(<%= @item.price.to_s(:delimited) %>)円
- </div>
-  <div>販売ステータス　
-  　<% if @item.is_active==true %>
-   <strong class="text-success">　　販売中</strong>
-  <% else %>
-  <strong class="text-secondary">　販売停止中</strong> 
-  <% end %>
-  
-  </div>
-  </br>
-  
-  <div class="mx-auto" style="width: 200px">
-    <div style="text-align:center">
-    <%= link_to "編集する",  edit_admin_item_path(@item.id) ,class: "btn btn-success" %>
-  </div>
-  </div>

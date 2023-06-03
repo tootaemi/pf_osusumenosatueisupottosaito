@@ -37,9 +37,9 @@
             <li><%= link_to '新規投稿', post_new_path %></li>
             <li><%= link_to 'マイページ', customer_path %></li>
             <li><%#= link_to 'ブックマーク', bookmarks_path %></li>
-            <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
+            <li><%= link_to 'ログアウト', customer_sign_out_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to 'ゲストログイン', customer_guest_sign_in_path %></li>
+            <li><%= link_to 'ゲストログイン', customer_guest_sign_in_path, method: :post %></li>
             <li><%= link_to '会員登録', new_customer_registration_path %></li>
             <li><%= link_to 'ログイン', new_customer_session_path %></li>
           <% end %>

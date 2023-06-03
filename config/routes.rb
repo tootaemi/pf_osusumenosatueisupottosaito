@@ -1,14 +1,8 @@
 Rails.application.routes.draw do
-           root to: 'homes#top'
-           
-           
-           
-           
-    
-           
-            # resources :customer
+
+          # resources :customer
           # namespace :customer do
-            
+
           #   resources :posts
           #   # post "/posts" => "/customer/posts#index"
           #   # get 'posts/:id', to: 'posts#show'
@@ -19,56 +13,54 @@ Rails.application.routes.draw do
   #   :registrations => 'users/registrations',
   #   :sessions => 'users/sessions',
   # }
+     devise_scope :customer do
+    get '/customer/sign_out' => 'customer/sessions#destroy'
+    get '/customer', to: redirect("/customer/sign_up")
+    #get 'customer/guest_sign_up', to: 'customers/sessions#new_guest'
+    post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
+
+#get 'customer/guest_sign_in',to: 'customers/registrations#new'
+    #get 'customer/guest_sign_up', to: 'customers/sessions#new'
+
+    get "customer/sign_up" => "customer/registrations#new"
+    delete "customer/sign_out"  => "customer/sessions#destroy"
+
+  end
        scope module: :customer do
+        post "/" => "homes#top"
+        root to: 'homes#top'
+
          post "customer" => "customers#create"
          post "customer" => "customers#show"
          get "customer/edit" => "customers#edit"
          #patch  "customer/edit" => "customers#edit"
          patch "customer" => "customers#update"
-         
+
            # root to: 'posts#index'
   resources :posts, except: %w[index]
   resources :tags, only: %w[index show destroy]
-  
-  
-  
-        resources :customer
+
+
+        resources :customers
         get "customer" => "customers#show"
         get "post/new" => "posts#new"
         post "post/new" => "posts#new"
         # resources :post
-        
-        
-        
-               
-            resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
+
+    resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
     post 'tag/:id' => 'tags#create', as: 'tag'
     delete 'tag/:id' => 'tags#destroy', as: 'unlike'
     resources :comments, only: [:create, :destroy]
-    collection do 
+    collection do
       get 'search'
     end
   end
-        
-        
-  end
-      
-  devise_scope :customer do
-    get '/customer/sign_out' => 'devise/sessions#destroy'
-    get '/customes', to: redirect("/customer/sign_up")
-    get 'customer/guest_sign_up', to: 'customer/sessions#new_guest'
-    post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
-    
-    get 'customer/guest_sign_in',to: 'customer/registrations#new'
-    get 'customer/guest_sign_up', to: 'customer/sessions#new'
-  end
-  
-  
+end
 
 
 
- 
-# resources :users do
+
+ # resources :users do
 #   get :search, on: :collection
 # end
 
@@ -119,6 +111,10 @@ Rails.application.routes.draw do
 devise_for :customer,skip: [:passwords], controllers: {
   registrations: "customer/registrations",
   sessions: 'customer/sessions'
+
+
+
+
 }
 
 # # 管理者用
@@ -131,6 +127,5 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
-
 
 

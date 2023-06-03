@@ -4,29 +4,27 @@ class Customer::PostsController < ApplicationController
     @posts = Post.all
   end
 
-  def show
-    @post = Post.find(params[:id])
-  end
+  
+def show
+  @post_new = Post.new
+  @post = Post.find(params[:id])
+  @customer = @post.customer
+  @nickname = user.nickname
+  @posts = user.posts
+  # @tag =Tag.new
+end
 
   def new
     @post = Post.new
   end
 
   def create
-    # パラメーターを受け取り保存準備
     @post = Post.new(post_params)
-
-    # Postを保存
-    if @post.save
-      # タグの保存
+     @post.save
       @post.save_tags(params[:post][:tag])
-      # 成功したらトップページへリダイレクト
       redirect_to root_path
-    else
-      # 失敗した場合は、newへ戻る
-      render :new
-    end
   end
+
 
   def edit
     @post = Post.find(params[:id])
@@ -35,12 +33,9 @@ class Customer::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      # タグの更新
       @post.save_tags(params[:post][:tag])
-      # 成功したら投稿記事へリダイレクト
       redirect_to post_path(@post)
     else
-      # 失敗した場合は、editへ戻る
       render :edit
     end
   end
@@ -55,19 +50,14 @@ class Customer::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :content)
   end
-end
 
 
 
-
-
-
-class Customer::PostsController < ApplicationController
 
   def new
     @post = Post.new
   end
-  
+
 
   # before_action :find_post, only: [:edit, :update, :show, :destroy]
 
@@ -94,24 +84,14 @@ class Customer::PostsController < ApplicationController
 
  end
 
- def show
-  @post_new = Post.new
-  @post = Post.find(params[:id])
-  @customer = @post.customer
-  @nickname = user.nickname
-  @posts = user.posts
- end
 
-    # def index
-    #     @posts = Post.all
-    #     @post = Post.new
-    # end
+
 
     def new
       @post = Post.new
       @customer = Customer.new
     end
-    
+
 
     def edit
       @post = Post.find(post_params)
@@ -122,17 +102,17 @@ class Customer::PostsController < ApplicationController
       @post = current_customer
           @posts = Post.all
 
-      # @post = Post.create 
-      # params.require(:post).permit(:content, images: []) 
+      # @post = Post.create
+      # params.require(:post).permit(:content, images: [])
    @post.save
-        redirect_to post_path,notice:'投稿に成功しました'
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+        redirect_to posts_path,notice:'投稿に成功しました'
+    # @post = Post.new(post_params)
+    current_customer = current_customer
+    # @post.save
+    # redirect_to new_post_path
   end
-    
-    
+
+
 
       def update
         if @post.update(post_params)
@@ -162,10 +142,9 @@ class Customer::PostsController < ApplicationController
         def force_redirect_unless_my_post
           return redirect_to root_path,alert:'権限がありません'if @post.user != current_user
         end
-        
 
-        
-end
+
+
 
 
 
@@ -246,6 +225,6 @@ end
    def post_params
     params.require(:post).permit(:image, :address, :introduction, :tag, :customer_id)
    end
-
+end
 
 # class Customer::RegistrationsController < Devise::RegistrationsController

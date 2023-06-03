@@ -1,13 +1,8 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+タグ index</br>
 
-<h2>Post Actions --></h2>
-<%= link_to 'New Post', new_post_path %>
 
-<h2>Tag Actions --></h2>
 <%= link_to 'Tags List', tags_path %>
 
-<h2>Posts --></h2>
 <% @posts.each do |post| %>
   <div>
     <%= link_to post.title, post_path(post) %>
@@ -42,8 +37,8 @@
       </div>
     </table>
     <!--</table>-->
-    <%= link_to "Show", customer_posts_path %>
-    　　<%= link_to "編集する", edit_customer_post_path(current_customer) ,class: "btn btn-success" %>
+    <%= link_to "Show", customers_path %>
+    　　<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
 
 </div>
 </div>
@@ -62,4 +57,3 @@
     </div>
   <% end %>
 </div>
-

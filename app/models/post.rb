@@ -6,10 +6,10 @@ class Post < ApplicationRecord
   #       :recoverable, :rememberable, :validatable
   
   
-   has_one_attached :images
-  has_many :customers
-  has_many :tags
+  has_one_attached :images
+  has_many :customers, dependent: :destroy
+  has_many :tags, dependent: :destroy
   
-  belongs_to :customers, optional: true
+  belongs_to :customer, optional: true
   
 end

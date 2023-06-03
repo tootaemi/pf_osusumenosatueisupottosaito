@@ -1,5 +1,4 @@
-class Customer::CustomerController< ApplicationController
-
+class Customer::CustomersController< ApplicationController
   def index
     # @customer = Customer.new
     @posts = Post.all
@@ -7,8 +6,8 @@ class Customer::CustomerController< ApplicationController
   end
 
   def show
-    #   @customer = Customer.new
-    # @customers = Customer.all
+    @customer = Customer.new
+    @customers = Customer.all
     @customer = Customer.find(params[:id])
   end
 
@@ -20,6 +19,22 @@ class Customer::CustomerController< ApplicationController
   def new
     @customer = Customer.new
   end
+
+
+   #redirect_to customer_post_path(@customer.id)
+
+
+
+def create
+    # @customer = Customer.new(customer_params)
+      @customers = Customer.all
+  if
+      redirect_to post_new_path(@post), notice: 'メッセージが送信されました'
+  else
+      @customers = @post.customers.includes(:user)
+      render :index
+  end
+end
 
 
 #  def update
@@ -66,7 +81,9 @@ class Customer::CustomerController< ApplicationController
 
   private
    def customer_params
-    params.require(:customer).permit(:_name, :email, :encrypted_password)
+    params.require(:customer).permit(:name, :email, :encrypted_password)
    end
 
 end
+
+#,:image, :address, :introduction, :tag

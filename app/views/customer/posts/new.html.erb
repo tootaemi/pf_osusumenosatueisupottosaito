@@ -7,7 +7,7 @@
  </div>
 
 <div class="mx-auto" style="width: 400px">
-       <%= form_with model: @customer, url:customer_index_path ,local: false do |f| %>
+       <%= form_with model: @customer, url:posts_path ,local: false do |f| %>
 
    <div class="inputImage">
     <%= f.label :写真 %>　　　　　　　　　　
@@ -41,57 +41,3 @@
 
 
 
-
-<div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">商品新規登録
-   </span>
- </div>
- </div>
-
-<div class="mx-auto" style="width: 400px">
-  
-   <%= form_with model: @item, url:customer_index_path ,local: false do |f| %>
-  　　　　　　<div class="inputImage">
-    <%= f.label :商品画像 %>　　　　　　　　　　
-  　<%= f.file_field :image, placeholder: "商品画像", accept: "image/*" %>
-  </div>
-  <div class="field">
-      <%= f.label :商品名 %>　
-      　<%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"商品名"%>
-    </div>
-    
-    <div class="field">
-       <%= f.label :商品説明 %>　 
-       <%= f.text_area :introduction, placeholder:"ここに説明文を記述します。", size:"30x5" %>
-       <!--<%#= f.text_area :introduction, autofocus: true, id:"inputName", placeholder:"ここに説明文を記述します"  cols="30" rows="5" %>-->
-       </div>
-    <div class="field">
-      <%= f.label :税抜価格 %>　
-      <%= f.text_field :price, autofocus: true, id:"inputPrice", placeholder: "1,000" %>円
-    </div>
-    <label>
-      <%= f.label :販売ステータス %> 
-      <%= f.radio_button :is_active, true %> 販売中
-    </label>
-    <label><%= f.radio_button :is_active, false %> 販売停止中
-    </label>
-    <div class="actions">
-      　　　　　　　<%= f.submit "新規登録",class: "btn btn-success" %>
-    </div>
-     <% end %>
-
-</div>
-
-
-
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
-
-<h2>Actions --></h2>
-<%= link_to 'Top', root_path %>
-
-<h2>Post --></h2>
-<%= form_with model: @post do |post| %>
-  <%= render 'form', post: post %>
-<% end %>

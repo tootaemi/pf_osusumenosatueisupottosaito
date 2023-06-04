@@ -7,19 +7,27 @@
  </div>
 
 <div class="mx-auto" style="width: 400px">
-       <%= form_with model: @customer, url:posts_path ,local: false do |f| %>
+   <%#= form_with model: @post do |f| %>
+ <%= form_with model: @post, url: posts_path, local: true do |f|  %>
+ <%#= form_with model: @post do |f| %>
+ <%#= form_with model: @post, url:post_path ,local: false do |f| %>
+ 
+<table>
+ 
+
+ 
 
    <div class="inputImage">
-    <%= f.label :写真 %>　　　　　　　　　　
+    <%= f.label :写真 %>
   　<%= f.file_field :image, placeholder: "写真", accept: "image/*" %>
   </div>
   <div class="field">
-      <%= f.label :写真の住所 %>　
+      <%= f.label :写真の住所 %>
       　<%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045　山形県鶴岡市西新斎町9-10"%>
     </div>
-    
+
     <div class="field">
-       <%= f.label :写真の紹介文 %>　 
+       <%= f.label :写真の紹介文 %>
        <%= f.text_area :introduction, placeholder:"ここに説明文を記述します。", size:"30x5" %>
        <!--<%#= f.text_area :introduction, autofocus: true, id:"inputName", placeholder:"ここに説明文を記述します"  cols="30" rows="5" %>-->
        </div>
@@ -28,16 +36,29 @@
     <!--  <%#= f.text_field :customer_id, autofocus: true, id:"inputName", placeholder: "EMi" %>-->
     <!--</div>-->
        <div class="field">
-      <%= f.label :タグ %>　
+      <%= f.label :タグ %>
       <%= f.text_field :tag, autofocus: true, id:"inputTag", placeholder: "＃山形県　＃冬　＃雪道　＃信号待ちにいい感じの写真が撮れたので投稿します" %>
     </div>
     <div class="actions">
       　　　　　　　<%= f.submit "新規登録",class: "btn btn-success" %>
     </div>
      <% end %>
-
+</table>
 </div>
 
 
 
 
+<%= form_for @post, url: posts_path do |form| %>
+
+    <table>
+        <tr><th>メンバー</th>
+        <tr><th>定演</th>
+        <tr><th>学内</th>
+            <td><%= form.text_field :introduction %></td></tr>
+        <tr><th>備考</th>
+            <td><%= form.text_field :address %></td></tr>
+        <tr><th></th>
+            <td><%= form.submit "送信" %></td></tr>
+    </table>
+<% end %>

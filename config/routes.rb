@@ -29,22 +29,27 @@ Rails.application.routes.draw do
        scope module: :customer do
         post "/" => "homes#top"
         root to: 'homes#top'
-
+        
          post "customer" => "customers#create"
          post "customer" => "customers#show"
+
          get "customer/edit" => "customers#edit"
          #patch  "customer/edit" => "customers#edit"
          patch "customer" => "customers#update"
-
            # root to: 'posts#index'
   resources :posts, except: %w[index]
+          post "post/:id" => "posts#show"
+          
   resources :tags, only: %w[index show destroy]
 
 
         resources :customers
         get "customer" => "customers#show"
+        
         get "post/new" => "posts#new"
         post "post/new" => "posts#new"
+        # post "post/:id" => "post#show"
+
         # resources :post
 
     resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do

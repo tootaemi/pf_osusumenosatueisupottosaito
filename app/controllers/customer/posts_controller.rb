@@ -1,80 +1,14 @@
 class Customer::PostsController < ApplicationController
 
-  def index
-    @posts = Post.all
-  end
-
-  
-def show
-  @post_new = Post.new
-  @post = Post.find(params[:id])
-  @customer = @post.customer
-  @nickname = user.nickname
-  @posts = user.posts
-  # @tag =Tag.new
-end
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @post = Post.new(post_params)
-     @post.save
-      @post.save_tags(params[:post][:tag])
-      redirect_to root_path
-  end
-
-
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      @post.save_tags(params[:post][:tag])
-      redirect_to post_path(@post)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    Post.find(params[:id]).destroy()
-    redirect_to root_path
-  end
-
-  private
-
-  def post_params
-    params.require(:post).permit(:title, :content)
-  end
-
-
-
-
-  def new
-    @post = Post.new
-  end
-
-
-  # before_action :find_post, only: [:edit, :update, :show, :destroy]
-
-
  def top
-  @user = User.find(params[:id])
-  if @user.save
-   flash[:notice] = "Welcome! You have signed up successfully."
-   redirect_to user_path(@users.id)
+  @post = Post.find(params[:id])
+  if @post.save
+   redirect_to post_path(@posts.id)
   else
     render :index
   end
  end
 
-# def new
-#   @post = Post.new
-# end
 
  def index
   @posts = Post.all
@@ -86,41 +20,49 @@ end
 
 
 
+  def show
+    # @post = Post.find(params[:id])
+    @posts = customer_url
+  end
 
-    def new
-      @post = Post.new
-      @customer = Customer.new
-    end
+
+  def new
+    @post = Post.new
+    @customer = Customer.new
+  end
+
+
+  def create
+    @post = Post.new(post_params)
+    # @post.user_id = current_customer.id
+    @post.save
+    redirect_to post_path(current_customer.id)
+  end
+  
+  
+# def create
+#   @post = Post.new(post_params)
+#   @posts = Post.all
+#   @posts.save
+#   redirect_to post_path
+# end
 
 
     def edit
+      @post = Post.find(params[:id])
       @post = Post.find(post_params)
       @post.customer.name
     end
 
-  def create
-      @post = current_customer
-          @posts = Post.all
-
-      # @post = Post.create
-      # params.require(:post).permit(:content, images: [])
-   @post.save
-        redirect_to posts_path,notice:'投稿に成功しました'
-    # @post = Post.new(post_params)
-    current_customer = current_customer
-    # @post.save
-    # redirect_to new_post_path
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      @post.save_tags(params[:post][:tag])
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
-
-
-
-      def update
-        if @post.update(post_params)
-          redirect_to root_path
-        else
-          render :edit
-        end
-      end
 
       def destroy
         if @post.destroy
@@ -129,6 +71,35 @@ end
           redirect_to root_path
         end
       end
+
+
+
+  # def create
+  #   @message = @group.messages.new(message_params)
+  #   if @message.save
+  #     redirect_to group_messages_path(@group), notice: 'メッセージが送信されました'
+  #   else
+  #     @messages = @group.messages.includes(:user)
+  #     flash.now[:alert] = 'メッセージを入力してください。'
+  #     render :index
+  #   end
+  # end
+
+
+  # def create
+  #     @post = current_customer
+  #         @posts = Post.all
+
+  #     # @post = Post.create
+  #     # params.require(:post).permit(:content, images: [])
+  # @post.save
+  #       redirect_to posts_path,notice:'投稿に成功しました'
+  #   # @post = Post.new(post_params)
+  #   current_customer = current_customer
+  #   # @post.save
+  #   # redirect_to new_post_path
+  # end
+
 
       # private
       #   def post_params
@@ -148,33 +119,13 @@ end
 
 
 
-  def index
-    @post = Post.new
-    @posts = Post.all
-
-    # @posts = Post.page(params[:page]).per(10)
-  end
-
-
-  def show
-    @post = Post.find(params[:id])
-     @nickname = user.nickname
-    @posts = user.posts
-  end
-
-
-def new
-    @post = Post.new
-end
-
-
-  def create
-    @post = Post.new(post_params)
-    @posts = Post.all
-    @post.save
-    redirect_to customer_post_path(@post.id)
-    #@post.save ? (redirect_to customer_post_path(@post)) : (render :new)
-  end
+  # def create
+  #   @post = Post.new(post_params)
+  #   @posts = Post.all
+  #   @post.save
+  #   redirect_to customer_post_path(@post.id)
+  #   #@post.save ? (redirect_to customer_post_path(@post)) : (render :new)
+  # end
 
 
 
@@ -189,9 +140,6 @@ end
 #   end
 # end
 
-
-  def update
-  end
 
 
 # ~
@@ -223,8 +171,9 @@ end
 
   private
    def post_params
-    params.require(:post).permit(:image, :address, :introduction, :tag, :customer_id)
+    params.require(:post).permit(:image, :address, :introduction, :tag, :customer_id, :tag_id)
    end
 end
 
-# class Customer::RegistrationsController < Devise::RegistrationsController
+  # before_action :find_post, only: [:edit, :update, :show, :destroy]
+

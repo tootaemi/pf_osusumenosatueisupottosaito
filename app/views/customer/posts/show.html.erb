@@ -1,69 +1,112 @@
-<h1>Customer::Posts　index#show</h1>
-<p>Find me in app/views/customer/posts　index/show.html.erb</p>
+<div class="content-wrapper">
+    <div class="content-block">
+        <div class="content">
+         <div class="user-about">
 
 
-
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
-
-<h2>Actions --></h2>
-<%= link_to 'Top', root_path %>
-<%= link_to 'Edit', post_new_path(@post) %>
-<%= link_to 'Delete', post_new_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
-
-<h3>Title --></h3>
+         <div class="profile">
+            <div class="name-history">
+             </div>
+         </div>
+       </div>
 
 
-<h3>Tags --></h3>
-<ul>
+    <!--<#% if @post.image.attached? %>-->
+    <!--<%# post.images.each do |image| %>-->
+    <!--<div class = 'images'>-->
+    <!--<%#= image_tag image %>-->
+    <!--</div>-->
+    <!--<%# end %>-->
+
+         <!--<div class="action-menu">-->
+         <!--    <div class="like">-->
+             <!--いいね件数:-->
+             <%#= @post.likes.count %>
+             <%# if current_user.already_liked?(@post) %>
+               <%#= button_to 'いいねを取り消す', post_like_path(@post), method: :delete %>
+             <%# else %>
+               <%#= button_to 'いいね', post_likes_path(@post) %>
+             <%# end %>
+         <!--    </div>-->
+         <!--    <div class="comment">-->
+
+         <!--    </div>-->
+         <!--</div>-->
+
+        </div>
+        <%# end %>
+
+    </div>
+ 
+</div>
+
+<%#= link_to 'Top', root_path %>
+<%#= link_to 'Edit', post_new_path(@post) %>
+<%#= link_to 'Delete', post_new_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
+
+
+<!--<ul>-->
   <%# 該当のPostからアソシエーションでタグを取得 %>
   <%# @post.tag.each do |tag| %>
     <%# タグを展開 %>
-    <li>
+    <!--<li>-->
       <%= link_to tag.name, tag_path(tag) %>
-    </li>
-  <%# end %>
-</ul>
+    <!--</li>-->
+         <%# end %>
+<!--</ul>-->
+
+   <div class="container">
+  <div class="row align-items-center" style="height:50px">
+    <div class="col">
+<!--      <div><#% if @post.image.attached? %>-->
+<!--   <#%= image_tag @post.image, size: "200x200" %>-->
+<!--<#% else %>-->
+<!--  <%#= image_tag 'no_image', size: "200x200" %>-->
+<!--<#% end %>-->
+<!--</div>-->
+    </div>
+  </div>
+</div>
+
+<% if @post.image.attached? %>
+    <div class = 'images'>
+    <% post.images.each do |image| %>
+    <%= image_tag image %>
+    </div>
+    <% end %>
+    <% end %>
+    
+    # ファイルをモデルから指定する場合
+<%= image_tag モデル名.has_one_attachedで設定したファイル名 %>
+<%= image_tag user.avatar %>
+
+# app/assets/ディレクトリ下の画像ファイルパスでも指定できる
+<%= image_tag 画像ファイルのパス %>
+<%= image_tag "avatar.png" %>
 
 
 
 
+<div class="mx-auto" style="width: 400px">
+  <div>写真　　　　<%= @post.image %></div>
+  <div>写真の住所　<%= @post.address %></div>
+    <div>写真の紹介文　<%= @post.introduction %></div>
+  <div>タグ　　　<%= @post.tag %></div>
 
-
-
-<%= form_with model: @post, url: 'customer_posts', method: :get do |f| %>
-<% end %>
-  <div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">商品詳細
-   </span>
- </div>
   </div>
   </br>
-
-
-
 
   <div class="mx-auto" style="width: 200px">
     <div style="text-align:center">
-    <%= link_to "編集する",  post_new_path(@post) ,class: "btn btn-success" %>
+    <%= link_to "編集する",  edit_customer_path(@post) ,class: "btn btn-success" %>
   </div>
-  </div>
-
-
-
-<%= form_with model: @item, url: 'admin_items', method: :get do |f| %>
-<% end %>
-  <div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">商品詳細
-   </span>
- </div>
-  </div>
-  </br>
+  </div
   
-  !
-  <%= form_with model: @item, url: 'admin_items', method: :get do |f| %>
+  
+  
+  
+  
+  <%= form_with model: @post, url: 'post', method: :get do |f| %>
 <% end %>
   <div class="mx-auto" style="width: 1000px">
  <div class="container">
@@ -72,3 +115,23 @@
  </div>
   </div>
   </br>
+
+  <div class="container">
+  <div class="row align-items-center" style="height:50px">
+ 
+    <div class="col">
+
+    </div>
+  </div>
+</div>
+<div class="mx-auto" style="width: 400px">
+  <div>商品名　　　　<%= @post.name %></div>
+  <div>商品説明　　　<%= @post.introduction %></div>
+  <div>税込価格</br>
+（税抜価格）　　　<%= @post.with_tax_price.to_s(:delimited) %>　(<%= @post.price.to_s(:delimited) %>)円
+ </div>
+  <div class="mx-auto" style="width: 200px">
+    <div style="text-align:center">
+    <%= link_to "編集する",  edit_admin_item_path(@item.id) ,class: "btn btn-success" %>
+  </div>
+  </div>

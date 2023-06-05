@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2023_05_27_063734) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "tag_id", null: false
     t.string "image", default: "", null: false
     t.string "address", default: "", null: false
     t.text "introduction", default: "", null: false

@@ -37,7 +37,7 @@
         <%# end %>
 
     </div>
- 
+
 </div>
 
 <%#= link_to 'Top', root_path %>
@@ -68,27 +68,23 @@
   </div>
 </div>
 
-<% if @post.image.attached? %>
-    <div class = 'images'>
-    <% post.images.each do |image| %>
-    <%= image_tag image %>
-    </div>
-    <% end %>
-    <% end %>
-    
-    # ファイルをモデルから指定する場合
-<%= image_tag モデル名.has_one_attachedで設定したファイル名 %>
-<%= image_tag user.avatar %>
 
-# app/assets/ディレクトリ下の画像ファイルパスでも指定できる
-<%= image_tag 画像ファイルのパス %>
-<%= image_tag "avatar.png" %>
+  <!--<h4>画像</h4>-->
+  <%#= f.file_field :image, accept: "image/*" %>
+
+
 
 
 
 
 <div class="mx-auto" style="width: 400px">
-  <div>写真　　　　<%= @post.image %></div>
+  <div>写真　　　　    <% if @post.image.attached? %>
+    <div class = 'images'>
+    <%# post.images.each do |image| %>
+    <%= image_tag @post.image %>
+    </div>
+    <%# end %>
+    <% end %></div>
   <div>写真の住所　<%= @post.address %></div>
     <div>写真の紹介文　<%= @post.introduction %></div>
   <div>タグ　　　<%= @post.tag %></div>
@@ -100,38 +96,6 @@
     <div style="text-align:center">
     <%= link_to "編集する",  edit_customer_path(@post) ,class: "btn btn-success" %>
   </div>
-  </div
-  
-  
-  
-  
-  
-  <%= form_with model: @post, url: 'post', method: :get do |f| %>
-<% end %>
-  <div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">商品詳細
-   </span>
- </div>
   </div>
-  </br>
 
-  <div class="container">
-  <div class="row align-items-center" style="height:50px">
- 
-    <div class="col">
 
-    </div>
-  </div>
-</div>
-<div class="mx-auto" style="width: 400px">
-  <div>商品名　　　　<%= @post.name %></div>
-  <div>商品説明　　　<%= @post.introduction %></div>
-  <div>税込価格</br>
-（税抜価格）　　　<%= @post.with_tax_price.to_s(:delimited) %>　(<%= @post.price.to_s(:delimited) %>)円
- </div>
-  <div class="mx-auto" style="width: 200px">
-    <div style="text-align:center">
-    <%= link_to "編集する",  edit_admin_item_path(@item.id) ,class: "btn btn-success" %>
-  </div>
-  </div>

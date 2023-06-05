@@ -49,7 +49,7 @@ class Customer::PostsController < ApplicationController
 
     def edit
       @post = Post.find(params[:id])
-      @post = Post.find(post_params)
+      # @post = Post.find(post_params)
       @post.customer.name
     end
 

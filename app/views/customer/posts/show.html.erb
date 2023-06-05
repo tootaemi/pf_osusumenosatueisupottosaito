@@ -11,13 +11,6 @@
        </div>
 
 
-    <!--<#% if @post.image.attached? %>-->
-    <!--<%# post.images.each do |image| %>-->
-    <!--<div class = 'images'>-->
-    <!--<%#= image_tag image %>-->
-    <!--</div>-->
-    <!--<%# end %>-->
-
          <!--<div class="action-menu">-->
          <!--    <div class="like">-->
              <!--いいね件数:-->
@@ -68,23 +61,19 @@
   </div>
 </div>
 
-
-  <!--<h4>画像</h4>-->
-  <%#= f.file_field :image, accept: "image/*" %>
-
-
-
-
-
-
 <div class="mx-auto" style="width: 400px">
-  <div>写真　　　　    <% if @post.image.attached? %>
-    <div class = 'images'>
+  <div>写真　　　　   
+  <%# if @post.image.attached? %>
+    <!--<div class = 'images'>-->
     <%# post.images.each do |image| %>
-    <%= image_tag @post.image %>
+    <%#= image_tag @post.image %>
+  <% if @post.image.attached? %>
+    <%= image_tag @post.image, size: "500x400" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "500x400" %>
+  <% end %>
     </div>
-    <%# end %>
-    <% end %></div>
+</div>
   <div>写真の住所　<%= @post.address %></div>
     <div>写真の紹介文　<%= @post.introduction %></div>
   <div>タグ　　　<%= @post.tag %></div>
@@ -94,7 +83,7 @@
 
   <div class="mx-auto" style="width: 200px">
     <div style="text-align:center">
-    <%= link_to "編集する",  edit_customer_path(@post) ,class: "btn btn-success" %>
+    <%= link_to "編集する",  edit_post_path(@post) ,class: "btn btn-success" %>
   </div>
   </div>
 

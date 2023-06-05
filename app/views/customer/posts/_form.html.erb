@@ -4,6 +4,6 @@
 <%= post.text_area :content %><br>
 <%= post.label :tag, 'タグ' %><br>
 <%# Edit用に@post.tags.pluck(:name)でタグの配列を取得 %>
-<%= post.text_field :tag, value: @post.tags.pluck(:name) %><br>
+<%#= post.text_field :tag, value: @post.tag.pluck(:name) %><br>
 <small>スペースで区切ることで複数指定できます。</small><br>
 <%= post.submit %>

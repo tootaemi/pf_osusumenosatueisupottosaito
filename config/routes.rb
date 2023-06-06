@@ -39,6 +39,7 @@ Rails.application.routes.draw do
            # root to: 'posts#index'
   resources :posts, except: %w[index]
           post "post/:id" => "posts#show"
+          patch "post/id" => "posts#update"
           
   resources :tags, only: %w[index show destroy]
 
@@ -48,7 +49,8 @@ Rails.application.routes.draw do
         
         get "post/new" => "posts#new"
         post "post/new" => "posts#new"
-        patch "posts/:id" => "posts#update"
+
+        # patch "posts/:id" => "posts#update"
 
         # post "post/:id" => "post#show"
 

@@ -16,6 +16,7 @@ class Customer::PostsController < ApplicationController
   @post = Post.new
   @customer = current_customer
  end
+  
 
 
 

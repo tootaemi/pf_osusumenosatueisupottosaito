@@ -1,4 +1,15 @@
 class Customer::CustomersController< ApplicationController
+  
+  def top
+    # @customer = Customer.limit(4).order('id DESC')
+    # @customers = Customer.page(params[:page]).per(8)
+    # @customer = current_customer
+    # @customer = Customer.new
+    @customers = Customer.limit(4).order('id DESC')
+    @customers = Customer.all
+    # @posts = Post.all
+  end
+  
   def index
     # @customer = Customer.new
     @posts = Post.all

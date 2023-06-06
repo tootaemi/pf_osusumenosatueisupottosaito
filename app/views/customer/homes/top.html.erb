@@ -28,3 +28,45 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+<!--<div class="col-lg-13 mx-auto">-->
+<div class="container">
+	<!--<div class="row">-->
+	<h1>おすすめスポット一覧！</h1>
+	<div class="col-lg-8 mx-auto">
+		<div class="row">
+			<% @posts.each do |post| %>
+			<div class="col-3">
+				<%= link_to post_path(post) do %>
+				<div>
+				<p>	
+				<% if post.image.attached? %>
+				<%= image_tag post.image, size: "200x200" %>
+				<% else %>
+				<%= image_tag 'no_images', size: "200x200" %>
+				<% end %>
+				</p>
+				
+				
+		
+				
+					<p>
+						<%#= post.name %>
+					</p>
+				</div>
+				<% end %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+	<!--</div>-->
+</div>
+<!--</div>-->
+<div class="mx-auto" style="width: 100px">
+	<!--<p class="text-center">-->
+	<%#= paginate @posts %>
+	<!--</p>-->
+</div>

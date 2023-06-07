@@ -46,19 +46,3 @@
 </table>
 </div>
 
-
-
-
-<%= form_for @post, url: posts_path do |form| %>
-
-    <table>
-        <tr><th>メンバー</th>
-        <tr><th>定演</th>
-        <tr><th>学内</th>
-            <td><%= form.text_field :introduction %></td></tr>
-        <tr><th>備考</th>
-            <td><%= form.text_field :address %></td></tr>
-        <tr><th></th>
-            <td><%= form.submit "送信" %></td></tr>
-    </table>
-<% end %>

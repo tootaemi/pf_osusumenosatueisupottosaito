@@ -7,7 +7,7 @@ class Customer::SessionsController < Devise::SessionsController
   #   redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   # end
 
-  before_action :configure_sign_in_params, only: [:create]
+  # before_action :configure_sign_in_params, only: [:create]
 
   # ログイン後のリダイレクト先
   # def after_sign_in_path_for(resource_or_scope)
@@ -16,7 +16,7 @@ class Customer::SessionsController < Devise::SessionsController
 
   # ログアウト後のリダイレクト先
   def after_sign_out_path_for(resource_or_scope)
-    root_path 
+    root_path
   end
 
 
@@ -26,7 +26,6 @@ class Customer::SessionsController < Devise::SessionsController
     redirect_to root_path, notice: "ゲストユーザーとしてログインしました"
   end
 
-  # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -34,19 +33,23 @@ class Customer::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    p '-------create-----'
+    p params
+    p configure_sign_in_params
+    p '------------'
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  end
 end

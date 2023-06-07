@@ -19,7 +19,7 @@ class Customer::CustomersController< ApplicationController
   def show
     @customer = Customer.new
     @customers = Customer.all
-    @customer = Customer.find(params[:id])
+    # @customer = Customer.find(params[:id])
   end
 
   def edit

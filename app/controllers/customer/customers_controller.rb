@@ -13,12 +13,16 @@ class Customer::CustomersController< ApplicationController
   def index
     # @customer = Customer.new
     @posts = Post.all
-    @customers = Customer.all
+    @customer = Customer.all
   end
 
   def show
+    @customers = Customer.where(user_id: current_customer.id).includes(:user).order("created_at DESC")
+
+    @posts = Post.where(id: params[:id])
+    @customer = Customer.all
     @customer = Customer.new
-    @customers = Customer.all
+    @posts = Post.all
     # @customer = Customer.find(params[:id])
   end
 

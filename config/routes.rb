@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     get "post/new" => "posts#new"
     post "post/new" => "posts#new"
     patch "posts/id" => "posts#update"
+    
     # patch "posts/:id" => "posts#update"
     # post "post/:id" => "post#show"
     # resources :post

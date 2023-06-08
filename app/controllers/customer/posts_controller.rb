@@ -15,6 +15,7 @@ class Customer::PostsController < ApplicationController
   @customers = Customer.all
   @post = Post.new
   @customer = current_customer
+  
  end
   
 
@@ -23,6 +24,7 @@ class Customer::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @posts = customer_url
+    @posts = Post.all
   end
 
 

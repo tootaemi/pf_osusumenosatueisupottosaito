@@ -1,3 +1,33 @@
+
+h2 投稿一覧
+　
+#タグリスト
+ @tag_list.each do |list|
+  span
+    = link_to list.tag_name, tag_posts_path(post_tag_id: list.id)
+    = "(#{list.posts.count})"
+br
+#タグによって絞り込んだ投稿一覧
+= "タグが ─ "
+strong= "#{@tag.tag_name}"
+= " ─ の投稿一覧"
+br
+- @posts.each do |post|
+  = link_to post.content, post
+br
+= link_to 'ホーム', root_path
+
+
+
+
+
+
+
+
+
+
+
+
 <!--<h1>User search</h1>-->
 <!--<%#= form_with url: search_users_path, method: :get, local: true do |f| %>-->
 <!--  <%#= f.text_field :name %>-->
@@ -24,4 +54,5 @@
 <!--  %input.search__input{name: "keyword", placeholder: 'キーワードから探す'}-->
 <!--  %button{type: 'submit'}-->
 <!--    .icon-->
-<!--      = image_tag 'icon/icon-search 1.png', class: 'icon-image'-->
+<!--      = image_tag 'icon/icon-search 1.png', class: 'icon-image
+

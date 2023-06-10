@@ -31,6 +31,21 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
+  
+  # devise_for :customers
+  devise_scope :customer do
+  # post 'customer/guest_sign_in', to: 'customers/sessions#new_guest'
+  post 'customers/guest_sign_out', to: 'customers/sessions#new'
+  post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
+  
+  get 'customer/sign_out' => 'customer/sessions#destroy'
+  get 'customer/guest_sign_up', to: 'customers/sessions#new_guest'
+  get 'customer/guest_sign_in',to: 'customers/registrations#new'
+  get "customer/sign_up" => "customer/registrations#new" 
+  delete "customer/sign_out"  => "customer/sessions#destroy"
+  
+  end
+  
   scope module: :customer do
     root to: 'homes#top'
     post "/" => "homes#top"
@@ -59,10 +74,13 @@ Rails.application.routes.draw do
       collection do
         get 'search'
       end
-    end
+    # end
   end
 end
 
+resources :tags do
+    get 'posts', to: 'posts#search'
+  end
 
  # resources :users do
 #   get :search, on: :collection
@@ -110,8 +128,7 @@ end
 
 
 
+end
 
 
 
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

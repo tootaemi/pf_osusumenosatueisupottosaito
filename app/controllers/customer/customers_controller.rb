@@ -1,5 +1,5 @@
 class Customer::CustomersController< ApplicationController
-  
+
   def top
     # @customer = Customer.limit(4).order('id DESC')
     # @customers = Customer.page(params[:page]).per(8)
@@ -9,20 +9,28 @@ class Customer::CustomersController< ApplicationController
     @customers = Customer.all
     # @posts = Post.all
   end
-  
+
   def index
+    
+       @customer = current_customer
+        @post = Post.new
     # @customer = Customer.new
     @posts = Post.all
-    @customer = Customer.all
+    @customers = Customer.all
   end
 
   def show
+    @customers = Customer.where(id: params[:id])
     @customers = Customer.where(user_id: current_customer.id).includes(:user).order("created_at DESC")
-
     @posts = Post.where(id: params[:id])
     @customer = Customer.all
     @customer = Customer.new
     @posts = Post.all
+
+    @post = @customer.posts
+    @post_new = Post.new
+
+
     # @customer = Customer.find(params[:id])
   end
 

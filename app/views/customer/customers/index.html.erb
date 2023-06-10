@@ -43,3 +43,27 @@ index
     </div>
   <% end %>
 </div>
+
+<!--h3 タグリスト-->
+<!-- @tag_list.each do |list|-->
+<!--  span-->
+<!--    = link_to list.tag_name, tag_posts_path(tag_id: list.id)-->
+<!--    = "(#{list.posts.count})"-->
+　
+<!--hr-->
+　
+<!--h3 投稿する-->
+<!--= form_with(model: @post, url: posts_path, local: true) do |f|-->
+<!--  = f.text_area :content-->
+<!--  br-->
+<!--  = "スペースを入力することで複数のタグを付けることができます。"-->
+<!--  = "例：音楽 文芸 スポーツ"-->
+<!--  = f.text_field :tag_name-->
+<!--  br-->
+<!--  = f.submit-->
+　
+<!--hr-->
+　
+<!--h3 投稿一覧-->
+<!--- @posts.each do |post|-->
+<!--    = link_to post.content, post-->

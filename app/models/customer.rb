@@ -16,6 +16,10 @@ class Customer < ApplicationRecord
   #     user.name = "ゲストユーザー"
   #   end
   # end
+  
+  
+  has_many :posts, dependent: :destroy
+
 
   def self.guest
     find_or_create_by(email: "test@com") do |customer|

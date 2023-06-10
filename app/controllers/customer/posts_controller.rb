@@ -1,4 +1,5 @@
 class Customer::PostsController < ApplicationController
+before_action :ensure_user, only: [:edit, :update, :destroy]
 
  def top
   @post = Post.find(params[:id])
@@ -16,6 +17,9 @@ class Customer::PostsController < ApplicationController
   @post = Post.new
   @customer = current_customer
   
+  @tag_list = Tag.all 
+    @post = current_user.posts.new 
+  
  end
   
 
@@ -25,21 +29,25 @@ class Customer::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @posts = customer_url
     @posts = Post.all
+    @post_tags = @post.tags 
   end
 
 
   def new
-    @post = Post.new
-    @customer = Customer.new
+    @post = current_customer.posts.build
   end
 
 
   def create
-    @post = Post.new(post_params)
-    @post.customer_id = current_customer.id
-    @post.save
-    redirect_to post_path(@post.id)
+    @post = current_customer.posts.build(post_params)
+  
+    if @post.save                                         
+      redirect_back(fallback_location: root_path)          
+    else
+      redirect_back(fallback_location: root_path)       
+    end
   end
+
 
 
 # def create
@@ -144,6 +152,14 @@ class Customer::PostsController < ApplicationController
 
 
 
+
+
+def search
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+end
+
 # ~
 # ~
 # def search
@@ -171,9 +187,35 @@ class Customer::PostsController < ApplicationController
 
 
 
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to new_post_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to new_post_path
+  end
+
+  private
+  def ensure_user
+    @posts = current_customer.posts
+    @post = @posts.find_by(id: params[:id])
+    redirect_to new_post_path unless @post
+  end
+
+
+
+
   private
    def post_params
-    params.require(:post).permit(:image, :address, :introduction, :tag, :customer_id, :tag_id)#.merge(user_id: current_customer.id)
+    params.require(:post).permit(:image, :address, :introduction, :hash_tags)#.merge(user_id: current_customer.id)
    end
 
 end

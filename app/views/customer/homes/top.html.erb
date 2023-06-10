@@ -1,71 +1,72 @@
-
- <h2> おすすめの撮影スポットサイト</h2>
-
- <h5>写真好きの写真好きによる
-</br>
-写真好きの為のサイトです📸</h5>
-
-
-
-
 <!--<div class="col-lg-13 mx-auto">-->
-<div class="container">
+<!--<div class="container">-->
 	<!--<div class="row">-->
-	<h1>都道府県一覧</h1>
-	<div class="col-lg-8 mx-auto">
-		<div class="row">
-			<div class="col-3">
-				<div>
-				<p>
+<!--	<h1>都道府県一覧</h1>-->
+<!--	<div class="col-lg-8 mx-auto">-->
+<!--		<div class="row">-->
+<!--			<div class="col-3">-->
+<!--				<div>-->
+<!--				<p>-->
 					<%#  @post.image.attached? %>
 					<%#= image_tag item.image, size: "90x90" %>
-				</p>
-					<p>
+<!--				</p>-->
+<!--					<p>-->
 						<%#= @post.name %>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-
-
-<!--<div class="col-lg-13 mx-auto">-->
-<div class="container">
-	<!--<div class="row">-->
-	<h1>おすすめスポット一覧！</h1>
-	<div class="col-lg-8 mx-auto">
-		<div class="row">
-			<% @posts.each do |post| %>
-			<div class="col-3">
-				<%= link_to post_path(post) do %>
-				<div>
-				<p>	
-				<% if post.image.attached? %>
-				<%= image_tag post.image, size: "200x200" %>
-				<% else %>
-				<%= image_tag 'no_images', size: "200x200" %>
-				<% end %>
-				</p>
-				
-				
-		
-				
-					<p>
-						<%#= post.name %>
-					</p>
-				</div>
-				<% end %>
-			</div>
-			<% end %>
-		</div>
-	</div>
-	<!--</div>-->
-</div>
+<!--					</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 <!--</div>-->
-<div class="mx-auto" style="width: 100px">
+
+
+
+
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <%#= render 'posts/info', post: @post, customer: @customer_new %>
+      </div>
+      <div class='col-md-8 offset-md-1'>
+      	<h2> おすすめの撮影スポットサイト</h2>
+      	<h5>写真好きの写真好きによる
+      	</br>
+      	写真好きの為のサイトです📸</h5>
+        <table class='table table-hover table-inverse'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>写真の住所</th>
+              <th>写真の紹介文</th>
+              <th colspan="3"></th>
+              </tr>
+              </thead>
+                  <tbody>
+                <tbody>
+                  <% @posts.each do |post| %>
+                  <tr>
+                     <td>
+                         <%= link_to post_path(post) do %>
+                         <%= image_tag post.image, size: "200x200" %>
+                       <% end %>
+                     </td>
+                     <!--<td><%#= link_to post_path(post), method: :get do %>-->
+                
+                  <!--</td>-->
+                    <td><%= post.address %></td>
+                  <%# end %>
+                    <td><%= post.introduction %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                    </table>
+                    </div>
+                    </tbody>
+
+                      </div>
+                      </div>
+                      
+                      <div class="mx-auto" style="width: 100px">
 	<!--<p class="text-center">-->
 	<%#= paginate @posts %>
 	<!--</p>-->

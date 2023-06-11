@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   get 'customer/guest_sign_in',to: 'customers/registrations#new'
   get "customer/sign_up" => "customer/registrations#new" 
   delete "customer/sign_out"  => "customer/sessions#destroy"
-  
   end
   
   scope module: :customer do
@@ -56,7 +55,7 @@ Rails.application.routes.draw do
     patch "customer" => "customers#update"
     # root to: 'posts#index'
     resources :posts, except: %w[index]
-    post "post/:id" => "posts#show"
+   
     resources :tags, only: %w[index show destroy]
     resources :customers
     get "customer" => "customers#show"
@@ -67,6 +66,18 @@ Rails.application.routes.draw do
     # patch "posts/:id" => "posts#update"
     # post "post/:id" => "post#show"
     # resources :post
+    
+    resources :tags do
+    get 'posts', to: 'posts#search'
+  end
+  
+  resources :posts do
+  # resource :bookmarks, only: [:create, :destroy]
+   resources :bookmarks, only: [:create, :destroy]
+end
+
+    
+    
     resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
       post 'tag/:id' => 'tags#create', as: 'tag'
       delete 'tag/:id' => 'tags#destroy', as: 'unlike'
@@ -78,9 +89,7 @@ Rails.application.routes.draw do
   end
 end
 
-resources :tags do
-    get 'posts', to: 'posts#search'
-  end
+
 
  # resources :users do
 #   get :search, on: :collection
@@ -126,9 +135,9 @@ resources :tags do
 #     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
 #   end
 
-
-
+ namespace :admin do
+  root to: 'homes#top'
 end
 
-
+end
 

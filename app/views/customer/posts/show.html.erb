@@ -62,29 +62,95 @@
 </div>
 
 <div class="mx-auto" style="width: 400px">
-  <div>写真　　　　   
+  <div>
   <%# if @post.image.attached? %>
     <!--<div class = 'images'>-->
     <%# post.images.each do |image| %>
     <%#= image_tag @post.image %>
   <% if @post.image.attached? %>
-    <%= image_tag @post.image, size: "500x400" %>
+    <%= image_tag @post.image, size: "450x450" %>
   <% else %>
-    <%= image_tag 'no_image', size: "500x400" %>
+    <%= image_tag 'no_image', size: "450x450" %>
   <% end %>
     </div>
 </div>
   <div>写真の住所　<%= @post.address %></div>
     <div>写真の紹介文　<%= @post.introduction %></div>
-  <div>タグ　　　<%= @post.tag %></div>
+  <div>タグ　　　<%= @post.hash_tags %></div>
+    <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    <p>投稿者　<%= @post.customer.name %></p>
+
 
   </div>
   </br>
 
   <div class="mx-auto" style="width: 200px">
     <div style="text-align:center">
-    <%= link_to "編集する",  edit_post_path(@post) ,class: "btn btn-success" %>
+    <%#= link_to "編集する",  edit_post_path(@post) ,class: "btn btn-success" %>
+
+<% if customer_signed_in? && current_customer.id == @post.customer_id %>
+            <li>
+              <%= link_to '編集', "/posts/#{@post.id}/edit", method: :get %>
+            </li>
+            <li>
+              <%= link_to '削除', "/posts/#{@post.id}", method: :delete %>
+            </li>
+          <% end %>
+
+
+
   </div>
   </div>
 
+  <div>
+<div>
+  <p>コメント件数：<%#= @post.post.count %></p>
+  <% @post.post_tags.each do |post| %>
+    <p><%#= image_tag post.user.image(50,50) %></p>
+    <%#= post.customer.name %>
+    <%= post.created_at.strftime('%Y/%m/%d') %><%= post.committed! %>
+    <%# if post.current_customer == current_customer %>
+      <%#= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete %>
+    <%# end %>
 
+  <% end %>
+</div>
+<!--<div>-->
+  <%#= form_with model: [@post, @bookmark] do |f| %>
+    <%#= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%#= f.submit "送信する" %>
+  <%# end %>
+<!--</div>-->
+
+
+<%# if @post.bookmarks(current_customer) %>
+<!--    # 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
+<!--    <%#= link_to post_bookmarks_path(@post.id), method: :delete do %>-->
+<!--        <span style="color:red;">❤︎</span>-->
+<!--    <%# end %>-->
+<%# else %>
+<!--    # 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
+<!--    <%#= link_to post_bookmarks_path(@post.id), method: :post do %>-->
+<!--        <span>❤︎</span>-->
+<!--    <%# end %>-->
+<%# end %>
+
+
+
+
+
+
+<div>
+  <%# if @post.bookmarks(current_customer) %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        ♥<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+    <%# else %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        ♡<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+  <%# end %></div>

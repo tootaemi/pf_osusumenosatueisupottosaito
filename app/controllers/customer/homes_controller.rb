@@ -1,23 +1,17 @@
 class Customer::HomesController< ApplicationController
+ 
+ 
+   # before_action :authorize
+ 
   def top
-    # @customers = Customer.all
-    @customers = Customer.limit(4).order('id DESC')
-    @customer = Customer.limit(4).order('id DESC')
-    # @customers = Customer.page(params[:page]).per(8)
+    # @customers = Customer.all.order("id DESC")
+    # @customers = Customer.limit(4).order('id DESC')
     @customer = current_customer
     @customer = Customer.new
     @customers = Customer.all
     @posts = Post.all
-  end
-  
-  
- def top
-  # @customer = Customer.new(params[:id])
-  
-  @posts = Post.all
-  @customers = Customer.all
-  @post = Post.new
-  @customer = current_customer
+    @post = Post.new
+    @customer = current_customer
  end
 
 

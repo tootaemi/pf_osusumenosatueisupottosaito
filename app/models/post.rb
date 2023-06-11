@@ -1,16 +1,30 @@
 class Post < ApplicationRecord
   belongs_to :customer
+  has_many :bookmarks, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
+    
   attribute :hash_tags
   attribute :sent_tags
   
   validates :address, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 2000 }
   
+
+  # def bookmarkd_by?(customer)
+  #   bookmarks.exists?(customer_id: customer.id)
+  # end
+  
+  
+# def bookmarkd?(customer)
+#   bookmarks.where(customer_id: customer.id).exists?
+# end
+
+
   has_one_attached :image
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_images.jpg')
-      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
+      image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpg')
     end
     image
   end

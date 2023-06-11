@@ -33,31 +33,31 @@
       	</br>
       	写真好きの為のサイトです📸</h5>
         <table class='table table-hover table-inverse'>
-          <thead>
-            <tr>
-              <th></th>
-              <th>写真の住所</th>
-              <th>写真の紹介文</th>
-              <th colspan="3"></th>
-              </tr>
-              </thead>
+
                   <tbody>
                 <tbody>
-                  <% @posts.each do |post| %>
+
                   <tr>
                      <td>
-                         <%= link_to post_path(post) do %>
-                         <%= image_tag post.image, size: "200x200" %>
-                       <% end %>
-                     </td>
-                     <!--<td><%#= link_to post_path(post), method: :get do %>-->
-                
-                  <!--</td>-->
-                    <td><%= post.address %></td>
-                  <%# end %>
-                    <td><%= post.introduction %></td>
+
+                  <% @posts.each do |post| %>
+                  <%= link_to post_path(post) do %>
+                  <% if post.image.attached? %>
+                  <%# if @post.image.attached? %>
+
+					<%= image_tag post.image, size: "250x250" %>
+					<% else %>
+					<%= image_tag 'no_image', size: "250x250" %>
+					<% end %>
+					<% end %>
+					<div>写真の住所　<%= post.address %></div>
+					<div>写真の紹介文　<%= post.introduction %></div>
+					<div>タグ　　　<%= post.hash_tags %></div>
+					 <p>投稿者　<%= post.customer.name %></p>
+
+   </td>
                     </tr>
-                    <% end %>
+
                     </tbody>
                     </table>
                     </div>
@@ -65,9 +65,56 @@
 
                       </div>
                       </div>
-                      
+  <% end %>
                       <div class="mx-auto" style="width: 100px">
 	<!--<p class="text-center">-->
-	<%#= paginate @posts %>
+	<!--<%#= paginate @posts %>-->
 	<!--</p>-->
 </div>
+
+
+
+
+
+<!--<div class="content-wrapper">-->
+<!--    <div class="content-block">-->
+<!--        <div class="content">-->
+<!--         <div class="user-about">-->
+
+
+<!--         <div class="profile">-->
+<!--            <div class="name-history">-->
+<!--             </div>-->
+<!--         </div>-->
+<!--       </div>-->
+
+
+         <!--<div class="action-menu">-->
+         <!--    <div class="like">-->
+         <!--    いいね件数:-->
+             <%#= @post.likes.count %>
+             <%# if current_customer.already_liked?(@post) %>
+         <!--      <%#= button_to 'いいねを取り消す', posts_id_path(@post), method: :delete %>-->
+             <%# else %>
+         <!--      <%#= button_to 'いいね', post_new_path(@post) %>-->
+             <%# end %>
+         <!--    </div>-->
+         <!--    <div class="comment">-->
+
+         <!--    </div>-->
+         <!--</div>-->
+
+
+
+<!--        </div>-->
+        <%# end %>
+
+<!--    </div>-->
+
+<!--</div>-->
+<%#= link_to 'Delete', post_new_path(@post), method: :delete, data: {confirm: '削除しますか？'} %>
+
+
+
+
+

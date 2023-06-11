@@ -29,7 +29,7 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
     @post = Post.find(params[:id])
     @posts = customer_url
     @posts = Post.all
-    @post_tags = @post.tags 
+    @post_tags = @post.tags
   end
 
 
@@ -215,7 +215,7 @@ end
 
   private
    def post_params
-    params.require(:post).permit(:image, :address, :introduction, :hash_tags)#.merge(user_id: current_customer.id)
+    params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)#.merge(user_id: current_customer.id)
    end
 
 end

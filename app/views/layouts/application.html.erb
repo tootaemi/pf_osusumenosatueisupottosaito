@@ -31,6 +31,7 @@
             <li><%= link_to 'ユーザー一覧',  admin_items_path %></li>
             <li><%= link_to 'コメント一覧',  admin_customers_path %></li>
             <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+            
           <% elsif customer_signed_in? %>
           <p>ようこそ、<%= current_customer.name %>さん!</p>
           

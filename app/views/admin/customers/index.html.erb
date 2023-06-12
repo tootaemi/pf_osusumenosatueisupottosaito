@@ -1,0 +1,97 @@
+<div class="mx-auto" style="width: 1200px">
+ <!--<div class="container">-->
+   <strong class="p-3 mb-2 bg-light text-dark">
+ 会員一覧
+   </strong>
+ <!--</div>  -->
+ </div>  
+
+
+<div class="container">
+<!--<p class="p-0 mb-0 bg-light text-dark">会員一覧</p>-->
+	<div class="row">
+		<table class='table table-hover table-inverse'>
+			<thead>
+				<tr>
+					<th class="bg-light">会員ID</th>
+					<th class="bg-light">名前</th>
+					<th class="bg-light">メールアドレス</th>
+					<th class="bg-light">パスワード</th>
+				</tr>
+			</thead>
+			
+		</table>
+	</div>
+</div>
+<!--<div class="mx-auto" style="width: 95px">-->
+	<%#= paginate @customers %>
+<!--</div>-->
+
+
+<!-- index.html.erb -->
+
+<div class="main users-index">
+  <div class="container">
+    <h1 class="users-heading">ユーザー一覧</h1>
+
+    <% @customers.each do |customer| %>
+      <div class="customers-index-item">
+        <div class="customer-right">
+　　　　　　<!-- 下記のコードでユーザーを表示させています。 -->
+　　　　　　<%= link_to(customer.name, "/customers/#{customer.id}") %>
+        </div>
+      </div>
+      <% end %>
+
+  </div>
+</div>
+
+<!-- show.html.erb -->
+<div class="main customer-show">
+  <div class="container">
+    <div class="customer">
+      <h2><%= @customer.name %></h2>
+      <p><%= @customer.email %></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="mx-auto" style="width: 1200px">
+ <!--<div class="container">-->
+   <strong class="p-3 mb-2 bg-light text-dark">
+ 会員一覧
+   </strong>
+ <!--</div>  -->
+ </div>  
+
+
+<div class="container">
+<!--<p class="p-0 mb-0 bg-light text-dark">会員一覧</p>-->
+	<div class="row">
+		<table class='table table-hover table-inverse'>
+			<thead>
+				<tr>
+					<th class="bg-light">会員ID</th>
+					<th class="bg-light">氏名</th>
+					<th class="bg-light">メールアドレス</th>
+					<th class="bg-light">パスワード</th>
+				</tr>
+			</thead>
+			<tbody class="col-md-6">
+			<% @customers.each do |customer| %>
+				<tr>
+					<td><%= customer.id %></td>
+					<td><%= link_to customer.name, admin_customer_path(customer.id)%></td>
+					<td><%= customer.email %></td>
+										<td><%= customer.encrypted_password %></td>
+					　　
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!--<div class="mx-auto" style="width: 95px">-->
+	<%#= paginate @customers %>
+<!--</div>-->

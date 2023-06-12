@@ -1,0 +1,34 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <%#= render 'customers/info', customer: @customer %>
+      </div>
+      <div class='col-md-8 offset-md-1'>
+      	<h2> ユーザー　一覧</h2>
+        <table class='table table-hover table-inverse'>
+
+                  <tbody>
+                <tbody>
+                  <tr>
+                    <td>
+                       
+					<div>会員ID　<%= @customer.id %></div>
+					<div>名前　<%= @customer.name %></div>
+					<div>メールアドレス　　　<%=@customer.email %></div>
+					 <p>パスワード　<%= @customer.encrypted_password %></p>
+
+   </td>
+                    </tr>
+
+                    </tbody>
+                    </table>
+                    </div>
+                    </tbody>
+
+                      </div>
+                      </div>
+<!--                      <div class="mx-auto" style="width: 100px">-->
+<!--	<p class="text-center">-->
+<!--	<%#= paginate @customers %>-->
+<!--	</p>-->
+<!--</div>-->

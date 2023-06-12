@@ -137,7 +137,11 @@ end
 
  namespace :admin do
   root to: 'homes#top'
+  
+  resources :customers
+  resources :commentss
 end
+
 
 end
 

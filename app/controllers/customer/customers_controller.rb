@@ -1,5 +1,5 @@
 class Customer::CustomersController< ApplicationController
-
+  
   def top
     # @customer = Customer.limit(4).order('id DESC')
     # @customers = Customer.page(params[:page]).per(8)
@@ -9,11 +9,11 @@ class Customer::CustomersController< ApplicationController
     @customers = Customer.all
     # @posts = Post.all
   end
+  
 
   def index
-    
-       @customer = current_customer
-        @post = Post.new
+    @customer = current_customer
+    @post = Post.new
     # @customer = Customer.new
     @posts = Post.all
     @customers = Customer.all

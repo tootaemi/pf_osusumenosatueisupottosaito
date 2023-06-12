@@ -8,21 +8,13 @@
 
 
 Admin.create!(
-  email: "admin@gmail.com",
-  password: "aaaaaa"
+  email: 'admin@gmail.com',
+  encrypted_password: 'aaaaaa'
   )
   
-Customer.create!(
-  last_name: "aa",
-  first_name: "aa",
-  last_name_kana: "aa",
-  first_name_kana: "aa",
-  postal_code: "aa",
-  address: "aa",
-  telephone_number: "11",
-  email: "bb@ab",
-  password: "aaaaaa"
-  )
+
+
+  
   
   # Item.create!(
   # name: "test0",

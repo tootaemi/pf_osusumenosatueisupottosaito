@@ -48,69 +48,69 @@
 
 いいねした写真一覧
 
-    <div class='container px-5 px-sm-0'>
-      <div class='row'>
-        <div class='col-md-3'>
-          </div>
-          <div class='col-md-8 offset-md-1'>
+<!--    <div class='container px-5 px-sm-0'>-->
+<!--      <div class='row'>-->
+<!--        <div class='col-md-3'>-->
+<!--          </div>-->
+<!--          <div class='col-md-8 offset-md-1'>-->
 
-            <table class='table table-hover table-inverse'>
-                  <tbody>
-</div>
-<% @posts.each do |post| %>
-<div class="col-3">
-  <%= link_to post_path(post) do %>
-  <div>
-    <p>
-        <tr>
-      <% if post.image.attached? %>
-      <%= image_tag post.image, size: "200x200" %>
-      <% else %>
-      <%= image_tag 'no_images', size: "200x200" %>
-      <% end %>
-      <td><%= post.address %></td>
-    <td><%= post.introduction %></td>
-    <td><%= post.tag %></td>
-    <td><%= post.customer.name %></td>
-    <td><%= post.address %></td>
-    <td><%= post.introduction %></td>
-    <td><%= post.tag %></td>
-    <td><%= post.customer.name %></td>
+<!--            <table class='table table-hover table-inverse'>-->
+<!--                  <tbody>-->
+<!--</div>-->
+<!--<% @posts.each do |post| %>-->
+<!--<div class="col-3">-->
+<!--  <%= link_to post_path(post) do %>-->
+<!--  <div>-->
+<!--    <p>-->
+<!--        <tr>-->
+<!--      <% if post.image.attached? %>-->
+<!--      <%= image_tag post.image, size: "200x200" %>-->
+<!--      <% else %>-->
+<!--      <%= image_tag 'no_images', size: "200x200" %>-->
+<!--      <% end %>-->
+<!--      <td><%= post.address %></td>-->
+<!--    <td><%= post.introduction %></td>-->
+<!--    <td><%= post.tags %></td>-->
+<!--    <td><%= post.customer.name %></td>-->
+<!--    <td><%= post.address %></td>-->
+<!--    <td><%= post.introduction %></td>-->
+<!--    <td><%= post.tags %></td>-->
+<!--    <td><%= post.customer.name %></td>-->
 
-    <td><%= link_to "詳細", post_path(post) %></td>
-    <% if post.customer == current_customer %>
-      <td><%= link_to "編集", edit_post_path(post) %></td>
-      <td><%= link_to "削除", post_path(post), method: :delete %></td>
-    <% else %>
-      <td></td>
-      <td></td>
-    <% end %>
-  </tr>
-<% end %>
-      <% end %>
-           </p>
-      </div>
-      </div>
-                        </tbody>
-                        </table>
+<!--    <td><%= link_to "詳細", post_path(post) %></td>-->
+<!--    <% if post.customer == current_customer %>-->
+<!--      <td><%= link_to "編集", edit_post_path(post) %></td>-->
+<!--      <td><%= link_to "削除", post_path(post), method: :delete %></td>-->
+<!--    <% else %>-->
+<!--      <td></td>-->
+<!--      <td></td>-->
+<!--    <% end %>-->
+<!--  </tr>-->
+<!--<% end %>-->
+<!--      <% end %>-->
+<!--           </p>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--                        </tbody>-->
+<!--                        </table>-->
+<!--                        </div>-->
+<!--                        </div>-->
                         </div>
-                        </div>
-                        </div>
 
 
 
-h1 投稿詳細
+<!--h1 投稿詳細-->
 　
-p= @post.content
+<!--p= @post.content-->
 　
-br
+<!--br-->
 　
-= "タグ: "
-- @post_tags.each do |tag|
-  span
-    = link_to tag.tag_name, tag_posts_path(tag_id: tag.id)
-    = "(#{tag.posts.count})"
+<!--= "タグ: "-->
+<!--- @post_tags.each do |tag|-->
+<!--  span-->
+<!--    = link_to tag.tag_name, tag_posts_path(tag_id: tag.id)-->
+<!--    = "(#{tag.posts.count})"-->
 　
-hr
+<!--hr-->
 　
-= link_to 'ホーム', root_path
+<!--= link_to 'ホーム', root_path-->

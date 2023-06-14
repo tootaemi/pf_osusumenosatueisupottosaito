@@ -1,5 +1,48 @@
 class Customer::CustomersController< ApplicationController
   
+  
+  before_action :authenticate_customer!
+
+#   def withdraw; end
+
+#   def withdraw
+#     current_customer.update(status: 'withdrawn')
+#     reset_session
+#     redirect_to root_path
+#   end
+
+  
+#   def index
+#       @customer = Customer.find(params[:id])
+#   end
+  
+#   def new
+#       @customer = Customer.find(params[:id])
+#     @customer = Customer.all
+#   end
+   
+#   def create
+#     @customer = Customer.new(params[:id])
+#   end
+  
+#     private
+#   def customer_params
+#     params.require(:customer).permit(:last_name, :first_name)
+#   end
+  
+  
+# end
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   def top
     # @customer = Customer.limit(4).order('id DESC')
     # @customers = Customer.page(params[:page]).per(8)
@@ -20,8 +63,9 @@ class Customer::CustomersController< ApplicationController
   end
 
   def show
+    @customer = current_customer
     @customers = Customer.where(id: params[:id])
-    @customers = Customer.where(user_id: current_customer.id).includes(:user).order("created_at DESC")
+    # @customers = Customer.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
     @posts = Post.where(id: params[:id])
     @customer = Customer.all
     @customer = Customer.new
@@ -29,8 +73,6 @@ class Customer::CustomersController< ApplicationController
 
     @post = @customer.posts
     @post_new = Post.new
-
-
     # @customer = Customer.find(params[:id])
   end
 
@@ -107,6 +149,5 @@ end
     params.require(:customer).permit(:name, :email, :encrypted_password)
    end
 
-end
 
-#,:image, :address, :introduction, :tag
+end

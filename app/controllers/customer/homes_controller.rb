@@ -6,13 +6,13 @@ class Customer::HomesController< ApplicationController
   def top
     # @customers = Customer.all.order("id DESC")
     # @customers = Customer.limit(4).order('id DESC')
-    @customer = current_customer
+   #@customer = current_customer.id
+    # @customer = current_customer
     @customer = Customer.new
     @customers = Customer.all
     @posts = Post.all
     @post = Post.new
-    @customer = current_customer
- end
+  end
 
 
  def index

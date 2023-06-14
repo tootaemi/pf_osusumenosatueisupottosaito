@@ -9,7 +9,7 @@ class Customer::RegistrationsController < Devise::RegistrationsController
   before_action :ensure_normal_user, only: :destroy
 
   def ensure_normal_user
-    if resource.email == 'guest@example.com'
+    if resource.email == 'testt@test.com'
       redirect_to root_path, alert: 'ゲストユーザーは削除できません。'
     end
   end
@@ -36,9 +36,9 @@ class Customer::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit

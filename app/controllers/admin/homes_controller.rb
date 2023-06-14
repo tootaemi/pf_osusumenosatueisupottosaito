@@ -4,12 +4,12 @@ class Admin::HomesController < ApplicationController
   end
 
   def top
-    if customer_signed_in?
-      @note = Note.new
-      @notes = Note.all.order(created_at: :desc)
-    else
-      @message = "ようこそKotoritterへ！"
-    end
+    # if customer_signed_in?
+    #   @note = Note.new
+    #   @notes = Note.all.order(created_at: :desc)
+    # else
+    #   @message = "ようこそKotoritterへ！"
+    # end
     @customer = Customer.new
     # @customers = Customer.page(params[:page]).per(10)
     @customer = current_customer

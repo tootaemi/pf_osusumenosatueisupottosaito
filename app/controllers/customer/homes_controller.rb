@@ -1,8 +1,17 @@
 class Customer::HomesController< ApplicationController
- 
- 
+
+
    # before_action :authorize
- 
+
+    def top
+    end
+
+    def mypage
+        @bookmarks = Bookmark.where(user_id: current_user.id)
+    end
+
+
+
   def top
     # @customers = Customer.all.order("id DESC")
     # @customers = Customer.limit(4).order('id DESC')
@@ -20,12 +29,13 @@ class Customer::HomesController< ApplicationController
   @customers = Customer.all
   @post = Post.new
   @customer = current_customer
+  @bookmarks = Bookmark.where(user_id: current_user.id)
  end
-  
-  
+
+
   #   private
   # def post_params
-  #   params.require(:home).permit(:image, :address, :introduction, :tag) 
+  #   params.require(:home).permit(:image, :address, :introduction, :tag)
   # end
-  
+
 end

@@ -83,6 +83,112 @@
 
   </div>
   </br>
+  
+  
+  
+  <% if current_customer.present? %> 
+  # ログインユーザー
+  <% if @post.bookmarked_by?(current_customer) %>
+    # 当該のspot_idの投稿にいいねを押している場合
+    <%= link_to post_bookmarks_path(@post), method: :delete, remote: true do %>
+      <span class="fas fa-heart unlike" id="unlike-<%= post.id %>"></span>
+    <% end %>
+  <% else %>
+    # 当該のspot_idの投稿にいいねを押していない場合
+    <%= link_to post_bookmarks_path(@post), method: :post, remote: true do %>
+      <span class="far fa-heart like" id="like-<%= @post.id %>"></span>
+    <% end %>
+  <% end %>
+<% else %>
+  # ゲスト
+  <% if cookies.nil? %>
+    # cookieが保存されていない(対象のブラウザでどの投稿にもいいねが押されていない)場合
+    <%= link_to post_bookmarks_path(post), method: :post, remote: true do %>
+      <span class="far fa-heart like" id="like-<%= @post.id %>"></span>
+    <% end %>
+  <% else %>
+    # cookieが保存されている(対象のブラウザでいずれかの投稿にいいねが押されている)場合
+    <%# arr = cookies.split(",").map(&:to_i) %>
+    <%# if Array.include?(@post.id) %>
+      # 保存されたcookieの中に当該のspot_idが含まれている(いいねが押されている)場合
+      <span class="fas fa-heart unlike" id="unlike-<%= @post.id %>"></span>
+    <%# else %>
+      # 保存されたcookieの中に当該のspot_idが含まれていない(いいねが押されていない)場合
+      <%= link_to post_bookmarks_path(@post), method: :post, remote: true do %>
+        <span class="far fa-heart like" id="like-<%= @post.id %>"></span>
+      <%# end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <% if @post.bookmarked_by?(current_customer) %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        ♥<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        ♡<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+         <div class="action-menu">
+            <% if customer_signed_in? %>
+             <div class="like">
+             <h3>いいね件数: <%= @post.bookmarks.count %></h3>
+             <div class = 'like-button'>
+                <% if current_customer.bookmark?(@post.id) %>
+                <%= button_to 'いいねを取り消す', post_like_path(post), method: :delete %>
+             <% else %>
+               <%= button_to 'いいね', post_path(@post) %>
+             <% end %>
+            </div>
+            </div>
+            <% end %>
+            </div>
+
+
+
+
+  <% if @post.bookmarked_by?(current_customer) %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :delete do %>
+        ♥<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_bookmarks_path(@post), method: :post do %>
+        ♡<%= @post.bookmarks.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+
 
   <div class="mx-auto" style="width: 200px">
     <div style="text-align:center">
@@ -115,27 +221,25 @@
 
   <% end %>
 </div>
-<!--<div>-->
+<div>
   <%#= form_with model: [@post, @bookmark] do |f| %>
     <%#= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
     <%#= f.submit "送信する" %>
   <%# end %>
-<!--</div>-->
+</div>
 
 
 <%# if @post.bookmarks(current_customer) %>
 <!--    # 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ-->
-<!--    <%#= link_to post_bookmarks_path(@post.id), method: :delete do %>-->
+    <%#= link_to post_bookmarks_path(@post.id), method: :delete do %>
 <!--        <span style="color:red;">❤︎</span>-->
-<!--    <%# end %>-->
+    <%# end %>
 <%# else %>
 <!--    # 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ-->
-<!--    <%#= link_to post_bookmarks_path(@post.id), method: :post do %>-->
+    <%#= link_to post_bookmarks_path(@post.id), method: :post do %>
 <!--        <span>❤︎</span>-->
-<!--    <%# end %>-->
+    <%# end %>
 <%# end %>
-
-
 
 
 
@@ -143,8 +247,8 @@
 <div>
   <%# if @post.bookmarks(current_customer) %>
     <p>
-      <%= link_to post_bookmarks_path(@post), method: :delete do %>
-        ♥<%= @post.bookmarks.count %> いいね
+      <%= link_to post_path(@post), method: :delete do %>
+        ♥<%= @post.post_tags.count %> いいね
       <% end %>
     </p>
     <%# else %>
@@ -154,3 +258,19 @@
       <% end %>
     </p>
   <%# end %></div>
+
+
+
+<tbody>
+  <tr>
+    <td><%= @post.customer.name %></td>
+    <td><%= @post.address %></td>
+    <td><%= @post.introduction %></td>
+    <td><%= link_to "編集", edit_post_path(@post) %></td>
+    <%# if @post.bookmarks(current_customer) %>
+      <td><%#= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %></td>
+    <%# else %>
+      <td><%#= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %></td>
+    <%# end %>
+  </tr>
+</tbody>

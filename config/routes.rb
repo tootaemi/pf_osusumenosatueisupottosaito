@@ -31,20 +31,27 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-  
+
+
+  devise_scope :admin do
+      delete "admin/sign_out"  => "admin/sessions#destroy"
+end
+
+
+
   # devise_for :customers
   devise_scope :customer do
   # post 'customer/guest_sign_in', to: 'customers/sessions#new_guest'
   post 'customers/guest_sign_out', to: 'customers/sessions#new'
   post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
-  
+
   get 'customer/sign_out' => 'customer/sessions#destroy'
   get 'customer/guest_sign_up', to: 'customers/sessions#new_guest'
   get 'customer/guest_sign_in',to: 'customers/registrations#new'
-  get "customer/sign_up" => "customer/registrations#new" 
+  get "customer/sign_up" => "customer/registrations#new"
   delete "customer/sign_out"  => "customer/sessions#destroy"
   end
-  
+
   scope module: :customer do
     root to: 'homes#top'
     post "/" => "homes#top"
@@ -54,30 +61,56 @@ Rails.application.routes.draw do
     #patch  "customer/edit" => "customers#edit"
     patch "customer" => "customers#update"
     # root to: 'posts#index'
-    resources :posts, except: %w[index]
-   
+    resources :posts
+    #, except: %w[index]
+
     resources :tags, only: %w[index show destroy]
     resources :customers
     get "customer" => "customers#show"
     get "post/new" => "posts#new"
     post "post/new" => "posts#new"
     patch "posts/id" => "posts#update"
-    
+    resources :bookmarks
+
     # patch "posts/:id" => "posts#update"
     # post "post/:id" => "post#show"
     # resources :post
-    
+
     resources :tags do
     get 'posts', to: 'posts#search'
   end
-  
+
   resources :posts do
-  # resource :bookmarks, only: [:create, :destroy]
-   resources :bookmarks, only: [:create, :destroy]
+  resources :bookmarks
 end
 
-    
-    
+  # resources :posts, except: [:index] do
+  #   resource :bookmarks, only: [:create, :destroy]
+  # end
+
+       post 'posts/:id/bookmarks'=> 'posts#create', as: 'create_post_bookmarks'
+     delete 'posts/:id/bookmarks'=> 'posts#destroy', as: 'destroy_post_bookmarks'
+
+     resources :posts do
+       resource :bookmarks, only: [:create, :destroy]
+    end
+
+  # root 'static_pages#top'
+
+  resources :posts do
+    resources :comments, only: %i[create], shallow: true
+
+    # /posts/bookmarksのURLを作っている。このURLのブックマークの一覧を表示する。
+    collection do
+      get 'bookmarks'
+    end
+  end
+  # ブックマークのcreateアクションとdestroyアクション
+  resources :bookmarks, only: %i[create destroy]
+
+
+
+
     resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
       post 'tag/:id' => 'tags#create', as: 'tag'
       delete 'tag/:id' => 'tags#destroy', as: 'unlike'
@@ -137,7 +170,7 @@ end
 
  namespace :admin do
   root to: 'homes#top'
-  
+
   resources :customers
   resources :commentss
 end

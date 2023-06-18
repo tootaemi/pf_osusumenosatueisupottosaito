@@ -87,19 +87,17 @@ class Customer::CustomersController< ApplicationController
 
 
    #redirect_to customer_post_path(@customer.id)
-
-
-
-def create
-    # @customer = Customer.new(customer_params)
-      @customers = Customer.all
-  if
+   
+   def create
+     # @customer = Customer.new(customer_params)
+     @customers = Customer.all
+     if
       redirect_to post_new_path(@post), notice: 'メッセージが送信されました'
-  else
-      @customers = @post.customers.includes(:user)
+     else
+     @customers = @post.customers.includes(:user)
       render :index
-  end
-end
+     end
+   end
 
 
 #  def update

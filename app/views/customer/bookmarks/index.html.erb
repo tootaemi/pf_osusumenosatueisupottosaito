@@ -1,0 +1,118 @@
+<table>
+  <h3><%= current_customer.name %>さんのブックマーク一覧</h3>
+  <tbody>
+    <% @bookmarks.each do |bookmark| %>
+      <tr>
+          <thead>
+    <tr>
+        <div>写真の住所　<%= @post.address %></div>
+    <div>写真の紹介文　<%= @post.introduction %></div>
+  <div>タグ　　　<%= @post.hash_tags %></div>
+    <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    <p>投稿者　<%= @post.customer.name %></p>
+
+    </tr>
+        <td><%= bookmark.customer.customer.name %></td>
+        <td>
+          <%= link_to post_path(bookmark.post) do %>
+            <%= bookmark.post.title %>
+          <% end %>
+        </td>
+        <td><%= bookmark.post.body %></td>
+          </thead>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%# if current_customer.own?(@post) %>
+   <%#= render 'crud_menus', post: post %>
+<%# else  %>
+   <%#= render 'bookmark_area', post: post %>
+<%#  end %>
+
+
+<table>
+    <thead>
+    <span><%= current_customer.name %>さんの</span>
+    <%= link_to 'マイページへ', customer_path %>
+        <tr>
+            <th>投稿者名</th>
+            <th>本文</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @posts.each do |post| %>
+            <tr>
+                <td><%= post.customer.name %></td>
+                <td><%= post.introduction %></td>
+                <% if post.customer == current_customer %>
+                    <td><%= link_to "編集", edit_post_path(post) %></td>
+                    <td><%= link_to "削除", post_path(post), method: :delete %></td>
+                <% else %>
+                    <td></td>
+                    <td></td>
+                <% end %>
+                  <%# if @post.bookmarks(current_customer) %>
+                <% if @post.bookmarks %>
+                    <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
+                    <td><%#= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %></td>
+                <% else %>
+                    <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
+
+                <% end %>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+
+
+
+<% @posts.each do |post| %>
+                <% if @post.bookmarks %>
+
+<%# if post.bookmarks(current_customer) %>
+  <%= link_to post_bookmarks_path(post), method: :delete do %>♥<%= post.bookmarks.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_bookmarks_path(post), method: :post do %>♡<%= post.bookmarks.count %>
+  <% end %>
+<% end %>
+#<% end %>
+
+
+
+<%= current_customer.name %><br>
+<%= current_customer.email %><br>
+<%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %>
+<%= link_to '新規作成', new_post_path %>
+
+<table>
+<caption>ブックマーク一覧</caption>
+<thead>
+<tr>
+<th>投稿者名</th>
+<th>本文</th>
+</tr>
+</thead>
+<tbody>
+<% @bookmarks.each do |bookmark| %>
+<tr>
+<td><%= bookmark.post.customer.name %></td>
+<td><%= bookmark.post.body %></td>
+</tr>
+<% end %>
+                <% if @post.bookmarks %>
+
+<%# if @post.bookmarks(current_customer) %>
+<td><%= link_to "ブックマークを外す", post_bookmarks_path(@posts), method: :delete %></td>
+<td><%#= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %></td>
+<% else %>
+<td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
+<% end %>
+</tbody>
+</table>

@@ -14,20 +14,23 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
  def index
   @posts = Post.all
   @customers = Customer.all
+  @bookmarks = Bookmark.all
   @post = Post.new
   @customer = current_customer
-  
-  @tag_list = Tag.all 
-    @post = current_user.posts.new 
-  
+
+  @tag_list = Tag.all
+    @post = current_customer.posts.new
+
  end
-  
+
 
 
 
   def show
+    # @customer = Customer.find(params[:id])
+    @customer = Customer.where(id: params[:id])
     @post = Post.find(params[:id])
-    @posts = customer_url
+    @posts = customer_path
     @posts = Post.all
     @post_tags = @post.tags
   end
@@ -40,11 +43,11 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
 
   def create
     @post = current_customer.posts.build(post_params)
-  
-    if @post.save                                         
-      redirect_back(fallback_location: root_path)          
+
+    if @post.save
+      redirect_back(fallback_location: root_path)
     else
-      redirect_back(fallback_location: root_path)       
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -75,11 +78,17 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
   end
 
       def destroy
-        if @post.destroy
+        if @posts.destroy
           redirect_to root_path,alert: '投稿を削除しました'
         else
           redirect_to root_path
         end
+
+  @post = Post.find(params[:id])
+  # @post.destroy
+  # @post.destroy
+    # redirect_to new_post_path
+
       end
 
 
@@ -198,14 +207,12 @@ end
     end
   end
 
-  def destroy
-    @post.destroy
-    redirect_to new_post_path
-  end
+
+
 
   private
   def ensure_user
-    @posts = current_customer.posts
+    @post = current_customer.posts
     @post = @posts.find_by(id: params[:id])
     redirect_to new_post_path unless @post
   end
@@ -215,7 +222,8 @@ end
 
   private
    def post_params
-    params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)#.merge(user_id: current_customer.id)
+    params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
+    #.merge(user_id: current_customer.id)
    end
 
 end

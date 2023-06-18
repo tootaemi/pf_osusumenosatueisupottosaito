@@ -2,13 +2,18 @@ class Post < ApplicationRecord
   belongs_to :customer
   has_many :bookmarks, dependent: :destroy
   has_many :post_comments, dependent: :destroy
-    
+  
   attribute :hash_tags
   attribute :sent_tags
   
   validates :address, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 2000 }
-  
+
+
+  #   def bookmarked_by?(user)
+  #   bookmarks.where(user_id: user).exists?
+  # end
+
 
   # def bookmarkd_by?(customer)
   #   bookmarks.exists?(customer_id: customer.id)
@@ -33,6 +38,9 @@ class Post < ApplicationRecord
   after_validation :to_sent_tags
   after_save :save_tag
   
+  has_many :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
+  
   def to_hash_tags
     if self.tags.any?
       self.hash_tags = self.tags.map{|o| "#" + o.tag_name }.join(" ")
@@ -47,8 +55,6 @@ class Post < ApplicationRecord
     end
   end
 
-  has_many :post_tags, dependent: :destroy
-  has_many :tags, through: :post_tags
   
   def save_tag
     current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
@@ -70,7 +76,11 @@ class Post < ApplicationRecord
     end
   end
 
-  
+  def bookmarked_by?(post)
+  bookmarks.where(post_id: post_tag_ids).exists?
+  #bookmarks.exists?(post_id: post.id)
+  # bookmarks.where(customer_id: customer.id).exists?
+  end
   #has_many :comments, dependent: :destroy
   #has_many :favorits, dependent: :destroy
 end

@@ -113,3 +113,26 @@
 <!--hr-->
 　
 <!--= link_to 'ホーム', root_path-->
+
+
+
+<!-- ユーザーの詳細 -->
+<div>
+  <h3><%= @customer.name %></h3>
+  <%= image_tag @customer.image(100,100) %>
+  <% if @customer.id == current_customer.id %>
+  <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p>
+  <% end %>
+</div>
+
+<!-- ユーザーの投稿一覧 -->
+<% @posts.each do |post| %>
+  <div>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post_image.get_image %>
+    <% end %>
+    <p>投稿ユーザー画像：<%= image_tag post_image.customer.get_profile_image(100,100) %></p>
+    <p>説明：<%= post_image.introduction %></p>
+    <p>ユーザーネーム：<%= post_image.customer.name %></p>
+    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>  </div>
+<% end %>

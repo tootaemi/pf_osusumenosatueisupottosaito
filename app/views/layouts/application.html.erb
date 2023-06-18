@@ -34,11 +34,10 @@
             
           <% elsif customer_signed_in? %>
           <p>ようこそ、<%= current_customer.name %>さん!</p>
-          
             <li><%= link_to 'トップページ', root_path %></li>
             <li><%= link_to '新規投稿', new_post_path %></li>
             <li><%= link_to 'マイページ', customer_path %></li>
-            <li><%= link_to 'ブックマーク', bookmarks_path %></li>
+            <li><%= link_to 'ブックマーク一覧', bookmarks_path %></li>
             <!--<li><%#= link_to 'ログアウト', customers_guest_sign_in_path, method: :get %></li>-->
             <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
                       <!--<p>ようこそ、  ゲストさん!</p>-->
@@ -67,3 +66,7 @@
   </body>
 </html>
 
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ </head>

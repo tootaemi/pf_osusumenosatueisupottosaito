@@ -1,3 +1,18 @@
 // Place all the styles related to the customers::bookmarks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.like-btn {
+  color: #8899a6;
+}
+
+
+.like-btn-unlike {
+  color: #ff2581;
+}
+
+
+.posts-show-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
+}

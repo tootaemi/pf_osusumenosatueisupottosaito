@@ -2,23 +2,35 @@
   <h3><%= current_customer.name %>さんのブックマーク一覧</h3>
   <tbody>
     <% @bookmarks.each do |bookmark| %>
+    
+        <% @posts.each do |post| %>
+
       <tr>
           <thead>
     <tr>
         <div>写真の住所　<%= @post.address %></div>
     <div>写真の紹介文　<%= @post.introduction %></div>
   <div>タグ　　　<%= @post.hash_tags %></div>
-    <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    <p>投稿者　<%= @post.customer.name %></p>
+  <td><%= link_to post_path(post) do %><%= post.created_at.to_s(:datetime_jp) %><% end %></td>
 
-    </tr>
-        <td><%= bookmark.customer.customer.name %></td>
+   <p>投稿日：day&.started_at&.strftime('%m/%d')
+    <p>投稿日時：<%= @bookmark.created_at.strftime('%Y/%m/%d') %></p>
+
+   <%#= @post.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @post.customer == current_customer %>
+    <%= link_to "削除", post_path(@post), method: :delete %>
+  <% end %>
+  <p>投稿者　<%= post.customer.name %></p>
+  </tr>
+              <% end %>
+
+        <td><%#= bookmark.customer.customer.name %></td>
         <td>
           <%= link_to post_path(bookmark.post) do %>
-            <%= bookmark.post.title %>
+            <%= bookmark.post.address %>
           <% end %>
         </td>
-        <td><%= bookmark.post.body %></td>
+        <td><%= bookmark.post.introduction %></td>
           </thead>
 
       </tr>
@@ -103,7 +115,7 @@
 <% @bookmarks.each do |bookmark| %>
 <tr>
 <td><%= bookmark.post.customer.name %></td>
-<td><%= bookmark.post.body %></td>
+<td><%= bookmark.post.address%></td>
 </tr>
 <% end %>
                 <% if @post.bookmarks %>

@@ -1,5 +1,6 @@
 class Customer::PostsController < ApplicationController
-before_action :ensure_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_customer!, only: [:edit, :update, :destroy]
+  # before_action :ensure_customer, only: [:edit, :update, :destroy]
 
  def top
   @post = Post.find(params[:id])
@@ -24,16 +25,20 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
  end
 
 
+def show
+    @post = Post.find(params[:id])
+    @customer = Customer.find(params[:id])
+    @comment = Comment.new
+    @comments = @post.comments.includes(:customer)
+    @bookmark_count = Bookmark.where(post_id: @post.id).count
 
-
-  def show
     # @customer = Customer.find(params[:id])
     @customer = Customer.where(id: params[:id])
-    @post = Post.find(params[:id])
+    # @post = Post.find(params[:id])
     @posts = customer_path
-    @posts = Post.all
-    @post_tags = @post.tags
-  end
+    @posts= Post.all
+    @hash_tags = @hash_tag
+end
 
 
   def new
@@ -77,19 +82,14 @@ before_action :ensure_user, only: [:edit, :update, :destroy]
     end
   end
 
-      def destroy
-        if @posts.destroy
-          redirect_to root_path,alert: '投稿を削除しました'
-        else
-          redirect_to root_path
-        end
-
-  @post = Post.find(params[:id])
-  # @post.destroy
-  # @post.destroy
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
+    # @post.destroy
+    # @post.destroy
     # redirect_to new_post_path
-
-      end
+  end
 
 
 
@@ -208,10 +208,8 @@ end
   end
 
 
-
-
   private
-  def ensure_user
+  def ensure
     @post = current_customer.posts
     @post = @posts.find_by(id: params[:id])
     redirect_to new_post_path unless @post

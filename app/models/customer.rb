@@ -38,6 +38,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
+
   has_one :image, dependent: :destroy
   # belongs_to :post
   has_one_attached :image

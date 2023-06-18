@@ -71,7 +71,9 @@ end
     post "post/new" => "posts#new"
     patch "posts/id" => "posts#update"
     resources :bookmarks
-
+    post "bookmarks/:post_id/create" => "bookmarks#create"
+    post "bookmarks/:post_id/destroy" => "bookmarks#destroy"
+    
     # patch "posts/:id" => "posts#update"
     # post "post/:id" => "post#show"
     # resources :post
@@ -96,9 +98,12 @@ end
     end
 
   # root 'static_pages#top'
-
+  resources :posts, only: [:new, :create, :index, :show, :destroy] do
+  resources :comments, only: [:create]
+  end
+  resources :comments, only: [:create, :destroy]
   resources :posts do
-    resources :comments, only: %i[create], shallow: true
+  resources :comments, only: %i[create], shallow: true
 
     # /posts/bookmarksのURLを作っている。このURLのブックマークの一覧を表示する。
     collection do

@@ -142,6 +142,17 @@
    </td>
                     
                     
+                    
+                    <% @posts.each do |post| %>
+  <div>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_image %>
+    <% end %>
+    <p>ユーザーネーム：<%= post.customer.name %></p>
+    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
+    </div>
+<% end %>
+                    
                     </tbody>
                     </table>
                     </div>

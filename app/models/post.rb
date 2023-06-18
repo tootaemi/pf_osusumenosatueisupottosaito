@@ -1,13 +1,15 @@
 class Post < ApplicationRecord
   belongs_to :customer
   has_many :bookmarks, dependent: :destroy
-  has_many :post_comments, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  
   
   attribute :hash_tags
   attribute :sent_tags
   
   validates :address, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 2000 }
+
 
 
   #   def bookmarked_by?(user)

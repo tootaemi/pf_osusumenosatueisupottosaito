@@ -1,6 +1,4 @@
 class Customer::CustomersController< ApplicationController
-  
-  
   before_action :authenticate_customer!
 
 #   def withdraw; end
@@ -63,6 +61,7 @@ class Customer::CustomersController< ApplicationController
   end
 
   def show
+    @customer = Customer.find(params[:id])
     @customer = current_customer
     @customers = Customer.where(id: params[:id])
     # @customers = Customer.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
@@ -91,12 +90,12 @@ class Customer::CustomersController< ApplicationController
    def create
      # @customer = Customer.new(customer_params)
      @customers = Customer.all
-     if
+    if
       redirect_to post_new_path(@post), notice: 'メッセージが送信されました'
-     else
+    else
      @customers = @post.customers.includes(:user)
       render :index
-     end
+    end
    end
 
 

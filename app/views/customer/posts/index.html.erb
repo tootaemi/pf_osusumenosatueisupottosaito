@@ -119,8 +119,8 @@
                     <td><%= post.introduction %></td>
                     </tr>
                     <% end %>
-                    
-                    
+
+
                                          <td>
 
                   <% @posts.each do |post| %>
@@ -140,9 +140,9 @@
 					<% end %>
 
    </td>
-                    
-                    
-                    
+
+
+
                     <% @posts.each do |post| %>
   <div>
     <%= link_to post_path(post.id) do %>
@@ -152,7 +152,7 @@
     <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
     </div>
 <% end %>
-                    
+
                     </tbody>
                     </table>
                     </div>
@@ -160,3 +160,22 @@
 
                       </div>
                       </div>
+
+
+
+
+
+- @posts.each do |post|
+  <%= link_to @post.customer.email, customer_path(@post.customer.id) %>
+  <%= link_to @post.comments %>
+
+  <% if customer_signed_in? %> 
+  # deviseが用意してくれてる、ユーザーがログインしてるかどうかを確かめるメソッド
+  <% if @post.bookmarked_by?(current_customer) %>
+  <% link_to post.bookmarks.count, post_bookmarks_path(post.id), method: :delete %>
+    <% else %>
+      <%#= link_to @post.bookmarks.count, post_bookmarks_path(@post.id), method: :post %>
+        <% end %>
+
+    <%= @post.bookmarks.count %>
+    <% end %>

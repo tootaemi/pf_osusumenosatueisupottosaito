@@ -5,6 +5,10 @@
  </div>
 
 
+<% if @customer.email == 'guestda@example.com'%>
+      　<p>ゲストユーザーはユーザー情報の編集ができません。</p>
+      <% else %>
+
 
 <div class="mx-auto" style="width: 400px">
   <%= form_with model: @item, url:admin_item_path(@item.id) do |f| %>

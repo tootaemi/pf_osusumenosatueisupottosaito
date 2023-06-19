@@ -83,9 +83,9 @@
 
   </div>
   </br>
-  
-  
-  
+
+
+
 <!--  <%# if current_customer.present? %> -->
 <!--  # ログインユーザー-->
 <!--  <%# if @post.bookmarked_by?(current_customer) %>-->
@@ -155,19 +155,7 @@
   <!--<%# end %>-->
 
 
-  <div class="mx-auto" style="width: 200px">
-    <div style="text-align:center">
-    <%#= link_to "編集する",  edit_post_path(@post) ,class: "btn btn-success" %>
-    <% if customer_signed_in? && current_customer.id == @post.customer_id %>
-    <li>
-    <%= link_to '編集', "/posts/#{@post.id}/edit", method: :get %>
-    </li>
-    <li>
-    <%= link_to '削除', "/posts/#{@post.id}", method: :delete %>
-    </li>
-    <% end %>
-    </div>
-  </div>
+
     <!--<div>-->
     <!--<div>-->
 
@@ -249,3 +237,12 @@
     <%= f.submit "送信する" %>
   <% end %>
 </div>
+
+<% if customer_signed_in? && current_customer.id == @post.customer_id %>
+       <li>
+    <%= link_to "編集", edit_post_path(@post.id), class: "YYYY" %>
+     </li>
+      <li>
+    <%= link_to "削除", post_path(@post.id), method: :delete, class: "ZZZZ" %>
+   </li>
+<% end %>

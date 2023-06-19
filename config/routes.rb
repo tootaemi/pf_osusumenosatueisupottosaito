@@ -76,7 +76,14 @@ end
     
     # patch "posts/:id" => "posts#update"
     # post "post/:id" => "post#show"
+
+resources :customers do
+  member do
+    get :bookmarks
+  end
+end
     # resources :post
+
 
     resources :tags do
     get 'posts', to: 'posts#search'

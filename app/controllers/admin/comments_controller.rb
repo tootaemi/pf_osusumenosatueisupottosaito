@@ -11,8 +11,18 @@ def index
     @comment = Comment.all.order("created_at DESC")
 end
 
+def show
+    @comments = Comment.all
+    @comment = Comment.new
+    @customers = Customer.all
+    @customer = Customer.new
+    @posts = Post.all
+    @post = Post.new
+    @comment = Comment.find(params[:id])
 
-
+  
+  # @customer = Customer.find(params[:id])
+end
 
 
 

@@ -1,4 +1,4 @@
-<% if current_user.bookmark?(post)  %>
+<% if current_customer.bookmark?(@post)  %>
   <%# bookmarkしていれば、ブックマークしているボタンのとこへ %>
   <%= render 'unbookmark', post: post %>
 <% else  %>

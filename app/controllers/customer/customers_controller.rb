@@ -1,10 +1,6 @@
 class Customer::CustomersController< ApplicationController
   before_action :authenticate_customer!
   before_action :set_customer, only: [:bookmarks]
-
-
-
-
 #   def withdraw; end
 
 #   def withdraw
@@ -59,10 +55,12 @@ class Customer::CustomersController< ApplicationController
   def index
     @customer = current_customer
     @post = Post.new
-    # @customer = Customer.new
     @posts = Post.all
+    @customer = Customer.new
     @customers = Customer.all
+    
   end
+
 
   def show
     @customer = Customer.find(params[:id])
@@ -77,6 +75,9 @@ class Customer::CustomersController< ApplicationController
     @post = @customer.posts
     @post_new = Post.new
     # @customer = Customer.find(params[:id])
+    @posts = @customer.posts
+    @bookmark_posts = @customer.bookmark_posts
+  
   end
 
   def edit

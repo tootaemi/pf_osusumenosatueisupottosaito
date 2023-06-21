@@ -4,7 +4,7 @@
    </span>
  </div>
  </br>
-<%= link_to "いいねした投稿", bookmarks_customer_path(@customer) %>
+<%= link_to "いいねした投稿", bookmarks_customer_path(@customers) %>
 
  <div class="mx-auto" style="width:750px">
  <div class="container">
@@ -120,7 +120,6 @@
 <!-- ユーザーの詳細 -->
 <div>
   <h3><%= @customer.name %></h3>
-  <%= image_tag @customer.image(100,100) %>
   <% if @customer.id == current_customer.id %>
   <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p>
   <% end %>
@@ -136,4 +135,16 @@
     <p>説明：<%= post_image.introduction %></p>
     <p>ユーザーネーム：<%= post_image.customer.name %></p>
     <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>  </div>
+<% end %>
+
+<h3>いいね</h3> 
+<% @bookmark_posts.each do |post| %>
+  <p> <%= @post.image %></p>
+
+<h3>投稿</h3> 
+<% @posts.each do |post| %>
+
+<p><%= @post.image %></p>
+
+<% end %>
 <% end %>

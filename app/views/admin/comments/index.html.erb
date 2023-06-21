@@ -1,0 +1,31 @@
+<h1>コメント一覧</h1>
+<%#= @comments.each do |comment| %></br>
+<td><%#= comment.id %></td>
+<%# end %>
+<div class="row">
+  <table class='table table-hover table-inverse'>
+            <thead>
+                    <tr>
+                        <th  class="bg-light">コメント投稿日時</th>
+                        <th class="bg-light">コメント</th>
+                        <th class="bg-light">名前</th>
+
+                        <th colspan="3"></th>
+                    </tr>
+             </thead>
+              <% @comments.each do |comment| %>
+              <tr>
+                <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comments_path %></td>
+                                    <td><%= comment.comment %></td>                                         
+                                    <td><%= comment.customer.name %></td>
+              </tr>
+              <% end %>
+
+    </table>
+        </div>
+
+<div class="mx-auto" style="width: 250px">
+      <!--<p class="text-center">-->
+<%#= paginate @comments %>
+      <!--</p>-->
+</div>

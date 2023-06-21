@@ -1,0 +1,23 @@
+<h2>コメント詳細</h2>
+<div class="row">
+  <table class='table table-hover table-inverse'>
+            <thead>
+                    <tr>
+                        <th  class="bg-light">コメント投稿日時</th>
+                                                <th class="bg-light">名前</th>
+                        <th class="bg-light">コメント内容</th>
+
+                        <th colspan="3"></th>
+                    </tr>
+             </thead>
+              <% @comments.each do |comment| %>
+              <tr>
+                <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path %></td>
+                                    <td><%= comment.customer.name %></td>
+                                    <td><%= comment.comment %></td>
+
+              </tr>
+              <% end %>
+
+    </table>
+        </div>

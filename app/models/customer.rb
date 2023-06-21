@@ -28,14 +28,28 @@ class Customer < ApplicationRecord
 
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-        :recoverable, :validatable, :rememberable
+  # # :confirmable, :lockable, :timeoutable and :omniauthable
+  # devise :database_authenticatable, :registerable,
+  #       :recoverable, :validatable, :rememberable
 
   # Include default devise modules. Others available are:
   # # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :validatable
+  
+  # #ログアウト
+  #   devise :database_authenticatable, :registerable,
+  #       :recoverable, :validatable
+         
+        # #ログイン
+        #   devise :database_authenticatable, :registerable,
+        # :recoverable,  :validatable, :rememberable
+        
+        
+        
+          devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+        
          
 
   has_one :image, dependent: :destroy

@@ -1,56 +1,19 @@
-タグ index</br>
-
 
 <%= link_to 'Tags List', tags_path %>
 
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to post.customer, post_path(post) %>
-  </div>
-<% end %>
+    <%= @post.post_tags.count %>
 
 
 
-<div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">マイページ
-   </span>
- </div>
- </div>
- </br>
-
- <div class="mx-auto" style="width:750px">
- <div class="container">
- <p class="text-left">
-<th>登録情報</th>
-<div class="container-left">
-       <div class="row">
-    <!--<table class='table table-hover table-inverse'>-->
-    		<table class="table col table-bordered">
-    <!--<table class="table table-bordered">-->
-
-      <div class="table-secondary">
-            <tr><td class="bg-light">氏名</td>
-            <td><%= current_customer.name %></td></tr>
-            <tr><td class="bg-light">メールアドレス</td>
-            <td><%= current_customer.email %></td></tr>
-      </div>
-    </table>
-    <!--</table>-->
-    <%= link_to "Show", customers_path %>
-    　　<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
-
-</div>
-</div>
-</br>
- </p>
-</div>
-</div>
+<%# @posts.each do |post| %>
+  <%# end %>   
 
 <div class="XXXX">
   <p><%= current_customer.name %>さんの投稿一覧</p>
 
   <% @posts.each do |post| %>
+                         <%= image_tag post.image, size: "100x50" %>
+
     <div class="YYYY" style="background-image: url(<%= post.image %>);">
       <%= simple_format(@post.create_customer.name) %>
       <span class="ZZZZ"><%= @post.create_customer.image %></span>
@@ -59,34 +22,6 @@
 </div>
 
 
-<%= current_customer.name %><br>
-<%= current_customer.email %><br>
-<%= link_to 'ログアウト',  destroy_customer_session_path, method: :delete %>
-<%= link_to '新規作成', new_post_path %>
-
-<table>
-  <caption>ブックマーク一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.post.customer.name %></td>
-        <td>
-          <%= link_to post_path(bookmark.post) do %>
-            <%= bookmark.post.image %>
-          <% end %>
-        </td>
-        <td><%= bookmark.post.introduction %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
 <div class='container px-5 px-sm-0'>
   <div class='row'>
@@ -109,7 +44,7 @@
                   <tr>
                      <td>
                        <%= link_to customer_path(post.customer) do %>
-                       <%= image_tag post.image, size: "60x50" %>
+                       <%= image_tag post.image, size: "100x50" %>
                        <% end %>
                      </td>
                      <td><%= link_to post_path(post), method: :get do %>
@@ -120,29 +55,6 @@
                     </tr>
                     <% end %>
 
-
-                                         <td>
-
-                  <% @posts.each do |post| %>
-                  <%= link_to post_path(post) do %>
-                  <% if post.image.attached? %>
-                  <%# if @post.image.attached? %>
-
-					<%= image_tag post.image, size: "450x450" %>
-					<% else %>
-					<%= image_tag 'no_image', size: "450x450" %>
-					<% end %>
-					<% end %>
-					<div>写真の住所　<%= post.address %></div>
-					<div>写真の紹介文　<%= post.introduction %></div>
-					<div>タグ　　　<%= post.hash_tags %></div>
-					 <p>投稿者　<%= post.customer.name %></p>
-					<% end %>
-
-   </td>
-
-
-
                     <% @posts.each do |post| %>
   <div>
     <%= link_to post_path(post.id) do %>
@@ -152,30 +64,11 @@
     <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
     </div>
 <% end %>
-
-                    </tbody>
-                    </table>
+</tbody>
+</table>
                     </div>
                     </tbody>
 
                       </div>
                       </div>
-
-
-
-
-
-- @posts.each do |post|
-  <%= link_to @post.customer.email, customer_path(@post.customer.id) %>
-  <%= link_to @post.comments %>
-
-  <% if customer_signed_in? %> 
-  # deviseが用意してくれてる、ユーザーがログインしてるかどうかを確かめるメソッド
-  <% if @post.bookmarked_by?(current_customer) %>
-  <% link_to post.bookmarks.count, post_bookmarks_path(post.id), method: :delete %>
-    <% else %>
-      <%#= link_to @post.bookmarks.count, post_bookmarks_path(@post.id), method: :post %>
-        <% end %>
-
-    <%= @post.bookmarks.count %>
-    <% end %>
+                    

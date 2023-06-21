@@ -12,6 +12,9 @@ class Customer::PostsController < ApplicationController
  end
 
 
+
+
+
  def index
   @posts = Post.all
   @customers = Customer.all
@@ -42,11 +45,19 @@ end
 
 
   def new
+    @post = Post.new
     @post = current_customer.posts.build
   end
 
 
   def create
+    def create
+    @post = current_user.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
+    if @post.save
+      redirect_to @post
+    end
+    end
+    
     @post = current_customer.posts.build(post_params)
 
     if @post.save

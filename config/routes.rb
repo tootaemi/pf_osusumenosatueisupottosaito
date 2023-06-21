@@ -62,6 +62,7 @@ end
     patch "customer" => "customers#update"
     # root to: 'posts#index'
     resources :posts
+
     #, except: %w[index]
 
     resources :tags, only: %w[index show destroy]
@@ -119,9 +120,7 @@ end
   end
   # ブックマークのcreateアクションとdestroyアクション
   resources :bookmarks, only: %i[create destroy]
-
-
-
+  post "/customer/posts/:id/edit" => "customer/posts#edit"
 
     resources :customers, only: [:index, :new, :create ,:show ,:update, :edit, :destroy] do
       post 'tag/:id' => 'tags#create', as: 'tag'
@@ -184,7 +183,8 @@ end
   root to: 'homes#top'
 
   resources :customers
-  resources :commentss
+  resources :comments, only: [:index, :show]
+  #resources :comments
 end
 
 

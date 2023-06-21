@@ -29,7 +29,7 @@
         <ul class="flex">
           <% if admin_signed_in? %>
             <li><%= link_to 'ユーザー一覧',  admin_customers_path %></li>
-            <li><%= link_to 'コメント一覧',    admin_commentss_index_path %></li>
+            <li><%= link_to 'コメント一覧',    admin_comments_path %></li>
             <li><%= link_to 'ログアウト', admin_sign_out_path, method: :delete %></li>
             
           <% elsif customer_signed_in? %>

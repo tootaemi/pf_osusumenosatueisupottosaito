@@ -15,11 +15,14 @@
              </thead>
               <% @comments.each do |comment| %>
               <tr>
+                					<td><%= link_to admin_comment_path(comment) do %><%= comment.created_at.to_s(:datetime_jp) %></td>
                 <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comments_path %></td>
-                                    <td><%= comment.comment %></td>                                         
+                                    <td><%= comment.comment %></td>
                                     <td><%= comment.customer.name %></td>
               </tr>
               <% end %>
+                            <% end %>
+
 
     </table>
         </div>

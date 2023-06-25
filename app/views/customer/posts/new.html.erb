@@ -7,7 +7,8 @@
  </div>
 
 <div class="mx-auto" style="width: 400px">
-  <%= form_with model: @post, url: posts_path, local: true do |f|  %>
+  <%= form_with model:@post do |f| %>
+  <%#= form_with model: @post, url: root_path, local: true do |f|  %>
   
     <div class="inputImage">
       <%= f.label :写真 %>
@@ -26,7 +27,7 @@
   
     <div class="field">
       <%= f.label :タグ %>
-      <%= f.text_field :hash_tags, autofocus: true, id:"inputTag", placeholder: "＃山形県  ＃冬  ＃雪道  ＃信号待ちにいい感じの写真が撮れたので投稿します" %>
+      <%= f.text_field :hash_tags, autofocus: true, id:"inputTag", placeholder: "＃山形県 ＃冬 ＃信号待ちにいい感じの写真が撮れたので投稿します" %>
       </div>
       <div class="actions">
                       <%= f.submit "新規登録",class: "btn btn-success" %>

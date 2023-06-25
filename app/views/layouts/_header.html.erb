@@ -1,4 +1,4 @@
-!!  #違う
+!!  #
 
 ・
 <!--・-->
@@ -14,3 +14,42 @@
 <!--・-->
 <!--・-->
 <!--・-->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <!--<head>-->
+  <!--  <%#= csrf_meta_tags %>-->
+  <!--  <%#= csp_meta_tag %>-->
+
+  <!--  <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>-->
+  <!--  <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>-->
+  <!--  <script src="https://kit.fontawesome.com/6f0d38cdd3.js" crossorigin="anonynous"></script>-->
+  <!--</head>-->
+  <body>
+    <%= render "layouts/header" %>
+    <div class="container">
+      <%= render "layouts/flashmessage" %>
+    </div>
+    <%= yield %>
+    <%= render "layouts/footer" %>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Osusumenosatueisupotto</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+</html>

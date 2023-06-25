@@ -1,1 +1,20 @@
 !
+検索機能。
+
+<%= form_with url: search_photos_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
+  
+  
+   ## クラス名などは省略してあります
+  <h2>検索結果 "<%= @keyword %>"</h2>
+  <ul>
+    <% @photos.each do |photo| %>
+      <li>
+        <%= link_to photo_path(photo.id) do %>
+          <%= image_tag photo.image.variant(gravity: :center, resize:"640x640^", crop:"640x640+0+0"), if photo.image.attached? %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>

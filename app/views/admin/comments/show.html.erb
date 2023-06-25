@@ -4,68 +4,25 @@
             <thead>
                     <tr>
                         <th  class="bg-light">コメント投稿日時</th>
-                                                <th class="bg-light">名前</th>
+                        <th class="bg-light">名前</th>
                         <th class="bg-light">コメント内容</th>
-
                         <th colspan="3"></th>
                     </tr>
              </thead>
-              <% @comments.each do |comment| %>
               <tr>
-                <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path %></td>
-                                    <td><%= comment.customer.name %></td>
-                                    <td><%= comment.comment %></td>
-
+                <td><%= @comment.created_at.strftime('%Y/%m/%d') %></td>
+                <td><%= @comment.customer.name %></td>
+                <td><%= @comment.comment %></td>
               </tr>
-              <% end %>
-
     </table>
         </div>
-
-
-<%= form_with model: @item, url: 'admin_comment', method: :get do |f| %>
-<% end %>
-  <div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">コメント詳細！
-   </span>
- </div>
-  </div>
-  </br>
-
-  <div class="container">
-  <div class="row align-items-center" style="height:50px">
- 
-    <div class="col">
- 
-    </div>
-  </div>
-</div>
-<div class="mx-auto" style="width: 400px">
+  <!--     
   
-                					<td><%= link_to admin_comment_path(@comments) do %>
-                					
-                					<%#= @comments.create.to_s(:datetime_jp) %></td>
-                <td><%#= link_to @comments.update_all.strftime("%Y/%m/%d %H:%M:%S"), admin_comments_path %></td>
-                					
-                					<%#= @comments.create.to_s(:datetime_jp) %></td>
-                <td><%#= link_to @comments.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comments_path %></td>
-                                    <td><%#= @comments.comment %></td>
-                                    <td><%#= @comments.customer.name %></td>
-                                    
-                                             <td><%#= comment.comment %></td>
-                                    <td><%#= comment.customer.name %></td>
-                                    
-  <div>商品名　　　　<%= @comment.comment %></div>
-                                      <td><%= @comment.customer.name %></td>
-                                      <% end %>
+  
 
-  <div class="mx-auto" style="width: 200px">
-    <div style="text-align:center">
-							<div class="js-remove">削除</div>
-						</div>
+<%= form_with model: @comment, url: 'admin_comment', method: :get do |f| %>
+<% end %>
+    <td class="text-center">
+    <%= link_to "削除する！", comment_path(@comment),method: :delete, class:"btn dangerbtn-" %></td>
 
-        
-    <%= link_to "削除する",  edit_admin_customer_path(@comment.id) ,class: "btn btn-success" %>
-  </div>
-  </div>
+<%= link_to "削除する",  edit_admin_customer_path(@comment.id) ,class: "btn btn-success" %>

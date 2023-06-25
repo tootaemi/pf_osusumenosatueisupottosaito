@@ -26,18 +26,22 @@ Rails.application.routes.draw do
     registrations: "customer/registrations",
     sessions: 'customer/sessions'
   }
+  
   # # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
+  
 
 
   devise_scope :admin do
+      get 'admin/sign_up' => 'admiin/registrations#new'
       delete "admin/sign_out"  => "admin/sessions#destroy"
 end
 
-
+  delete 'customers/sign_out'  => 'customers/sessions#destroy'
 
   # devise_for :customers
   devise_scope :customer do
@@ -45,32 +49,39 @@ end
   post 'customers/guest_sign_out', to: 'customers/sessions#new'
   post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
 
-  get 'customer/sign_out' => 'customer/sessions#destroy'
+  # get 'customer/sign_out' => 'customers/sessions#destroy'
+  delete 'customers/sign_out' => 'customers/sessions#destroy'
   get 'customer/guest_sign_up', to: 'customers/sessions#new_guest'
   get 'customer/guest_sign_in',to: 'customers/registrations#new'
-  get "customer/sign_up" => "customer/registrations#new"
-  delete "customer/sign_out"  => "customer/sessions#destroy"
+  get 'customer/sign_up' => 'customer/registrations#new'
+  # delete 'customer/sign_out'  => 'customers/sessions#destroy'
   end
 
   scope module: :customer do
     root to: 'homes#top'
     post "/" => "homes#top"
+    # delete "/" => "homes#destroy"
+    delete '/'=> 'sign_out/#destroy'
+    
     # post "customer" => "customers#create"
     post "customer" => "customers#show"
+    get "customer/:id" => "customers#show"
     get "customer/edit" => "customers#edit"
     #patch  "customer/edit" => "customers#edit"
     patch "customer" => "customers#update"
     # root to: 'posts#index'
-    resources :posts
-
+    resources :posts, only:[:destroy]
+    
+    get "post" => "post#index"
+    get "post/new" => "posts#new"
+    post "post/new" => "posts#new"
+    # delete  "posts" => "posts#destroy"
+    patch "posts/id" => "posts#update"
     #, except: %w[index]
-
     resources :tags, only: %w[index show destroy]
     resources :customers
     get "customer" => "customers#show"
-    get "post/new" => "posts#new"
-    post "post/new" => "posts#new"
-    patch "posts/id" => "posts#update"
+
     resources :bookmarks
     post "bookmarks/:post_id/create" => "bookmarks#create"
     post "bookmarks/:post_id/destroy" => "bookmarks#destroy"
@@ -109,6 +120,10 @@ end
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
   resources :comments, only: [:create]
   end
+   resources :posts do
+    resources :comments, only: [:create, :destroy]
+  end
+  
   resources :comments, only: [:create, :destroy]
   resources :posts do
   resources :comments, only: %i[create], shallow: true
@@ -185,6 +200,8 @@ end
   resources :customers
   resources :comments, only: [:index, :show]
   #resources :comments
+  # delete 'customers/:id'=> 'customers/#destroy'
+  delete "sign_out" => "customers#destroy"
 end
 
 

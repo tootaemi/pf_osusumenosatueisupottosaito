@@ -18,10 +18,9 @@ def show
     @customer = Customer.new
     @posts = Post.all
     @post = Post.new
-    @comment = Comment.find(params[:id])
-
-  
-  # @customer = Customer.find(params[:id])
+    #@comments = Comment.where(id: params[:id])
+    @comments = Comment.find(params[:id])
+    #@customer = Customer.find(params[:id])
 end
 
 

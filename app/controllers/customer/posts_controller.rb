@@ -11,26 +11,22 @@ class Customer::PostsController < ApplicationController
   end
  end
 
-
-
-
-
  def index
   @posts = Post.all
   @customers = Customer.all
   @bookmarks = Bookmark.all
   @post = Post.new
+  @customer = Customer.new
   @customer = current_customer
 
   @tag_list = Tag.all
-    @post = current_customer.posts.new
+  @posts = current_customer.posts.new
 
  end
 
 
 def show
     @post = Post.find(params[:id])
-    @customer = Customer.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:customer)
     @bookmark_count = Bookmark.where(post_id: @post.id).count
@@ -49,24 +45,23 @@ end
     @post = current_customer.posts.build
   end
 
-
-  def create
     def create
-    @post = current_user.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
-    if @post.save
-      redirect_to @post
-    end
-    end
+      # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
+       @post = Post.new(post_params)
+        @post.customer_id = current_customer.id
+        if @post.save
+          redirect_to root_path(@post)
+        else
+            @posts = Post.all
+            render 'show'
+    # @post = current_customer.posts.build(post_params)
+    # if @post.save
+    #   redirect_back(fallback_location: root_path)
+    # else
+    #   redirect_back(fallback_location: root_path)
+    # end
+        end
     
-    @post = current_customer.posts.build(post_params)
-
-    if @post.save
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
-  end
-
 
 
 # def create
@@ -74,7 +69,7 @@ end
 #   @posts = Post.all
 #   @posts.save
 #   redirect_to post_path
-# end
+    end
 
 
     def edit
@@ -93,13 +88,17 @@ end
     end
   end
 
+
+
   def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to post_path(params[:post_id])
+    
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path
-    # @post.destroy
-    # @post.destroy
-    # redirect_to new_post_path
+    redirect_to post_path
+	    Post.find_by( params[:id]).destroy
+	    redirect_to post_path(@post)
   end
 
 
@@ -130,11 +129,6 @@ end
   #   # redirect_to new_post_path
   # end
 
-
-      # private
-      #   def post_params
-      #     params.require(:post).permit(:content, images: [])
-      #   end
 
         def find_post
           @post = Post.find(params[:id])
@@ -170,14 +164,21 @@ end
 #   end
 # end
 
-
+  def search
+    if params[:keyword].present?
+      @photos = Photo.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @keyword = params[:keyword]
+    else
+      @photos = Photo.all
+    end
+  end
 
 
 
 def search
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
-    @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
-    @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+    # @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
+    # @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
 end
 
 # ~
@@ -210,13 +211,7 @@ end
   def edit
   end
 
-  def update
-    if @post.update(post_params)
-      redirect_to new_post_path
-    else
-      render :edit
-    end
-  end
+
 
 
   private
@@ -234,8 +229,6 @@ end
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
     #.merge(user_id: current_customer.id)
    end
-
 end
-
   # before_action :find_post, only: [:edit, :update, :show, :destroy]
 

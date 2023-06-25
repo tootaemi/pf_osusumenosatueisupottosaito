@@ -1,0 +1,43 @@
+<div class="mx-auto" style="width: 1200px">
+ <div class="container">
+   <strong class="p-3 mb-2 bg-light text-dark">
+       <%= @customer.name %>さんの会員詳細情報編集
+   </strong>
+ </div>
+ </div>
+  <!--<div class="mx-auto" style="width: 800px">-->
+  <div class="container">
+    <%#= form_with model: @customer, url:admin_customer_path(@customer.id) do |f| %>
+    <%# end %>
+
+  </div>
+  <!--</div>-->
+      <%= form_with(model: @customer, url:admin_customer_path, local: true ,method: :patch) do |f| %>
+      </br>
+      <%#= form_with(model: @customer, url :admin_customer_path, local: true ,method: :put) do |f| %>
+  <div class="field">
+    　　　　<%= f.label :会員ID %>
+  　　　　　　　<%= @customer.id %>
+  </div>
+
+  <div class="field">
+      　　　　<%= f.label :氏名 %>
+      　　　　　　　　<%= f.text_field :last_name, autofocus: true, id:"inputName", placeholder:"山田"%><%= f.label :" " %>
+    　　<%= f.text_field :first_name, autofocus: true, id:"inputName", placeholder:"花子"%>
+      </div>
+      <div class="field">
+        　　　　<%= f.label :メールアドレス %>
+        　　<%= f.text_field :email, autofocus: true, id:"inputName", placeholder:"hoge@example.com"%>
+      </div>
+      <tr>
+       <div class="field">
+  　　　　　　　　　　　　　　<%= f.submit '変更を保存',class: "btn btn-success"%>
+  <% end %>
+  <td class="text-center"><%= link_to "削除する", admin_customer_path(@customer.id),method: :delete, class:"btn btn-danger" %></td>
+     </tr>
+     </div>
+     <td><%= link_to "削除", admin_customer_path(@customer.id), method: :delete %></td>
+     
+<%#= link_to "削除します", admin_path(@customer), method: :delete %>
+<%= link_to "消す",admin_customer_path(@customer), method: :delete %>
+<%= link_to "Delete", admin_path(@customer) ,method: :delete %>

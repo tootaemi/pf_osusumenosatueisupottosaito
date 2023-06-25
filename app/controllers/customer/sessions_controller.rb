@@ -40,10 +40,24 @@ class Customer::SessionsController < Devise::SessionsController
     p '------------'
     super
   end
+  
+  # def create
+  #   p "==================="
+  #   p params
+  #   p "==================="
+  #   customer = Customer.find_by(email: params[:session][:email])
+  #   if customer && customer.authenticate(params[:session][:password])
+  #     session[:customer_id] = customer.id
+  #     redirect_to root_path
+  #   else
+  #     render :new
+  #   end
+  # end
 
   # DELETE /resource/sign_out
   # def destroy
-  #   super
+  #   # remember_me
+  #   # super
   # end
 
   protected

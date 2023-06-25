@@ -1,19 +1,23 @@
 
 <%= link_to 'Tags List', tags_path %>
 
+<% @posts.each do |post| %>
+  <div>
+    <%= link_to post.customer, post_path(post) %>
+  </div>
+<% end %>
     <%= @post.post_tags.count %>
 
 
 
 <%# @posts.each do |post| %>
-  <%# end %>   
+        <%# end %>   
 
 <div class="XXXX">
   <p><%= current_customer.name %>さんの投稿一覧</p>
 
   <% @posts.each do |post| %>
-                         <%= image_tag post.image, size: "100x50" %>
-
+  
     <div class="YYYY" style="background-image: url(<%= post.image %>);">
       <%= simple_format(@post.create_customer.name) %>
       <span class="ZZZZ"><%= @post.create_customer.image %></span>
@@ -54,6 +58,12 @@
                     <td><%= post.introduction %></td>
                     </tr>
                     <% end %>
+
+
+                                         <td>
+
+           
+   </td>
 
                     <% @posts.each do |post| %>
   <div>

@@ -9,38 +9,38 @@ class Customer::CustomersController< ApplicationController
 #     redirect_to root_path
 #   end
 
-  
+
 #   def index
 #       @customer = Customer.find(params[:id])
 #   end
-  
+
 #   def new
 #       @customer = Customer.find(params[:id])
 #     @customer = Customer.all
 #   end
-   
+
 #   def create
 #     @customer = Customer.new(params[:id])
 #   end
-  
+
 #     private
 #   def customer_params
 #     params.require(:customer).permit(:last_name, :first_name)
 #   end
-  
-  
+
+
 # end
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
   def top
     # @customer = Customer.limit(4).order('id DESC')
     # @customers = Customer.page(params[:page]).per(8)
@@ -50,7 +50,7 @@ class Customer::CustomersController< ApplicationController
     @customers = Customer.all
     # @posts = Post.all
   end
-  
+
 
   def index
     @customer = current_customer
@@ -58,12 +58,13 @@ class Customer::CustomersController< ApplicationController
     @posts = Post.all
     @customer = Customer.new
     @customers = Customer.all
-    
+
   end
 
 
   def show
-    @customer = Customer.find(params[:id])
+    @bookmarks = Bookmark.where(id: params[:id])
+    # @customer = Customer.find(params[:id])
     @customer = current_customer
     @customers = Customer.where(id: params[:id])
     # @customers = Customer.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
@@ -76,8 +77,8 @@ class Customer::CustomersController< ApplicationController
     @post_new = Post.new
     # @customer = Customer.find(params[:id])
     @posts = @customer.posts
-    @bookmark_posts = @customer.bookmark_posts
-  
+    # @bookmark_posts = @customer.bookmark_ids
+
   end
 
   def edit
@@ -91,7 +92,7 @@ class Customer::CustomersController< ApplicationController
 
 
    #redirect_to customer_post_path(@customer.id)
-   
+
    def create
      # @customer = Customer.new(customer_params)
      @customers = Customer.all
@@ -142,6 +143,13 @@ class Customer::CustomersController< ApplicationController
 #         render 'edit'
 #         end
 # end
+
+    def destroy
+      # @customer = Customer.find(params[:id])
+      # @Customer.new(params[:id]).destroy
+      # redirect_to customers_sign_out_path
+    end
+
 
 
   def bookmarks

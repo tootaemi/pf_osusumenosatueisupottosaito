@@ -1,4 +1,5 @@
 class Admin::CustomersController < ApplicationController
+  
 
   def index
     # @customer = Customer.new
@@ -38,7 +39,30 @@ class Admin::CustomersController < ApplicationController
 
 	end
 
-  # end
+
+
+
+
+# app/controllers/outputs_controller.rb
+
+# def destroy
+#   @customer = Customer.find(params[:id])
+#   Customer.destroy
+#   redirect_to admin_path
+  
+  
+#   #@customer = customer_path.customer.find_by(customer_id: :@customer.id)
+#   #Customer.find_by(id: params[:id], customer_id: params[:customer_id]).destroy
+#   # 	redirect_to admin_path(params[:customerid])
+#     #@customer.customers.find(params[:id]).destroy!
+#     #Customer.find(params[:id]).destroy
+#     # @customer
+#     # current_customer.customer.find(params[:id]).destroy
+# end
+    def destroy
+      Customer.find(params[:id]).destroy
+      redirect_to admin_customers_path
+    end
 
 
 #   def update

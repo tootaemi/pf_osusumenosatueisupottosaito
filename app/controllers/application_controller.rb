@@ -22,11 +22,10 @@
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :encrypted_password])
   end
   
-  def configure_permitted_parameters
-    if resource_class == Customer
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email, :encrypted_password])
-      devise_parameter_sanitizer.permit(:sign_in,keys:[:email, :encrypted_password])
-    end
-  end
+  # def configure_permitted_parameters
+  #   if resource_class == Customer
+  #     devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email, :encrypted_password])
+  #   end
+  # end
  end
 

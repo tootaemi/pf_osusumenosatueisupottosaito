@@ -1,71 +1,53 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
-
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :validatable
-
+  # # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :trackable, :validatable
-
-
-  # devise :database_authenticatable, :registerable,
-        # :recoverable, :rememberable, :validatablerememberable
-        # :recoverable, :trackable, :validatable
-  # include DeviseTokenAuth::Concerns::Customer
-
-    # Include default devise modules. Others available are:
+  
+  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable
-         
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :validatable
+        # :recoverable, :rememberable, :trackable, :validatable,:Trackable
 
 
-  # Include default devise modules. Others available are:
-  # # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :validatable, :rememberable
+ # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  #ログアウト
+    devise :database_authenticatable, :registerable,
+        :recoverable, :validatable, :rememberable
 
-  # Include default devise modules. Others available are:
-  # # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :validatable
-  
-  # #ログアウト
-  #   devise :database_authenticatable, :registerable,
-  #       :recoverable, :validatable
-         
         # #ログイン
-        #   devise :database_authenticatable, :registerable,
-        # :recoverable,  :validatable, :rememberable
-        
-        
-        
-          devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-        
-         
+          # devise :database_authenticatable, :registerable,
+          # :recoverable,  :validatable, :rememberable
+          
+          
 
-  has_one :image, dependent: :destroy
+        #   devise :database_authenticatable, :registerable,
+        # :recoverable, :rememberable, :validatable
+
+
+  # has_one :image, dependent: :destroy
   # belongs_to :post
   has_one_attached :image
-  has_many :post_comments, dependent: :destroy
-  # has_many :posts, dependent: :destroy
-  # has_many :bookmarks, dependent: :destroy
+  # has_many :post_comments, dependent: :destroy
 
  # ここからが他のモデルとの関係性
   has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  # has_many :images, dependent: :destroy
+
+
   # userのidを入れて、bookmarksメソッドを入れて、それぞれのpostを出す
   # 下記の記述はuser.bookmarks.map(&:post)これをしているのと一緒
-  has_many :bookmark_posts, through: :bookmarks, source: :post
+  # has_many :bookmarks, through: :bookmarks, source: :post
+
+
+  # validates :customer_id, {presence: true}
+  # def customers
+  #   return Customer.find_by(id: self.customer_id)
+  # end
 
 
   def self.guest
@@ -78,7 +60,6 @@ class Customer < ApplicationRecord
     end
   end
 
-
   def get_image
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -86,9 +67,6 @@ class Customer < ApplicationRecord
     end
     image
   end
-
-
-
 
 
   # 引数に渡されたものが、userのものであるか？

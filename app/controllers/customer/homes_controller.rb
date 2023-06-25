@@ -2,10 +2,7 @@ class Customer::HomesController< ApplicationController
 
 
    # before_action :authorize
-
-    def top
-    end
-
+   
     def mypage
         @bookmarks = Bookmark.where(user_id: current_user.id)
     end
@@ -33,9 +30,9 @@ class Customer::HomesController< ApplicationController
  end
 
 
-  #   private
-  # def post_params
-  #   params.require(:home).permit(:image, :address, :introduction, :tag)
-  # end
+private
+  def home_params
+    params.require(:home).permit(:image, :address, :introduction, :hash_tags, :name)
+  end
 
 end

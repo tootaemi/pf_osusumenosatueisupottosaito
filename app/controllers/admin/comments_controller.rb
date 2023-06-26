@@ -19,8 +19,11 @@ def show
     @posts = Post.all
     @post = Post.new
     #@comments = Comment.where(id: params[:id])
-    @comments = Comment.find(params[:id])
-    #@customer = Customer.find(params[:id])
+    # @comments = Comment.find(params[:id])
+    # @posts = Post.find(params[:id])
+    @comment = Comment.all
+    #.order("created_at DESC")
+
 end
 
 

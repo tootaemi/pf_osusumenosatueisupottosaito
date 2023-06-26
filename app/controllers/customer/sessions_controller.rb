@@ -40,7 +40,7 @@ class Customer::SessionsController < Devise::SessionsController
     p '------------'
     super
   end
-  
+
   # def create
   #   p "==================="
   #   p params
@@ -56,8 +56,8 @@ class Customer::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   # def destroy
-  #   # remember_me
-  #   # super
+    # remember_me
+  #   super
   # end
 
   protected

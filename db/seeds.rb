@@ -8,7 +8,7 @@
 
   Admin.create!(
   email: "admin@gmail.com",
-  encrypted_password: "adminadmin"
+  password: "adminadmin"
   )
 
   # Item.create!(

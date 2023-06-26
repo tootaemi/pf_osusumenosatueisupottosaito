@@ -3,7 +3,7 @@ class Customer < ApplicationRecord
   # # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :trackable, :validatable
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -13,14 +13,16 @@ class Customer < ApplicationRecord
  # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   #ログアウト
-    devise :database_authenticatable, :registerable,
-        :recoverable, :validatable, :rememberable
+    # devise :database_authenticatable, :registerable,
+    #     :recoverable, :validatable, :rememberable
+  devise :database_authenticatable, :registerable,
+       :recoverable, :rememberable, :validatable
 
         # #ログイン
           # devise :database_authenticatable, :registerable,
           # :recoverable,  :validatable, :rememberable
-          
-          
+
+
 
         #   devise :database_authenticatable, :registerable,
         # :recoverable, :rememberable, :validatable
@@ -51,12 +53,9 @@ class Customer < ApplicationRecord
 
 
   def self.guest
-    find_or_create_by(email: "test@com") do |customer|
+    find_or_create_by(email: "test@test.com") do |customer|
       customer.password =  SecureRandom.urlsafe_base64
-      customer.password_confirmation = customer.password
-      customer.password_confirmation = customer.password
       customer.name = 'ゲストユーザー'
-      customer.email = 'test@test.com'
     end
   end
 

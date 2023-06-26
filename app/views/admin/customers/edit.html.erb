@@ -33,11 +33,8 @@
        <div class="field">
   　　　　　　　　　　　　　　<%= f.submit '変更を保存',class: "btn btn-success"%>
   <% end %>
-  <td class="text-center"><%= link_to "削除する", admin_customer_path(@customer.id),method: :delete, class:"btn btn-danger" %></td>
+  <td class="text-center">
+      <%= link_to "削除する", admin_customer_path(@customer.id),method: :delete, class:"btn btn-danger" %></td>
      </tr>
      </div>
-     <td><%= link_to "削除", admin_customer_path(@customer.id), method: :delete %></td>
-     
-<%#= link_to "削除します", admin_path(@customer), method: :delete %>
-<%= link_to "消す",admin_customer_path(@customer), method: :delete %>
-<%= link_to "Delete", admin_path(@customer) ,method: :delete %>
+     <%= link_to "消す",admin_customer_path(@customer), method: :delete %>

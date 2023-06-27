@@ -26,11 +26,19 @@ def show
 
 end
 
+  def create
+    @comment = current_customer.comments.new(comment_params)
+    if @comment.save
+      redirect_back(fallback_location: root_path)  #コメント送信後は、一つ前のページへリダイレクトさせる。
+    else
+      redirect_back(fallback_location: root_path)  #同上
+    end
+  end
 
 
 
   private
-    def post_comment_params
+    def comment_params
       params.require(:comment).permit(:id, :customer_id, :post_id, :comment)
     end
 

@@ -1,5 +1,16 @@
 index
 
+#検索拡張機能 
+<%= form_tag(customers_path, :method => "get") do %>
+ <%= text_field_tag :search %> 
+<%= submit_tag "Search" ,:customername => nil ,class: "button is-info"%> 
+<% end %> 
+
+<% @customers.each do |customer| %>
+<% end %> 
+
+
+
 <div class="mx-auto" style="width:500px">
  <div class="container">
    <span class="p-3 mb-2 bg-light text-dark">マイページ

@@ -93,3 +93,12 @@ end
   def bookmarked_by?(current_customer)
      bookmarks.where(customer_id: current_customer.id).exists?
   end
+
+
+  def self.search(search)
+    if search != ""
+      Post.where('title LIKE(?)', "%#{search}%")
+    else
+      Post.includes(:user)
+    end
+  end

@@ -215,3 +215,20 @@
     <%= f.submit "送信する" %>
   <% end %>
 </div>
+
+
+
+____________
+<tbody>
+  <tr>
+    <td><%= @post.customer.name %></td>
+    <td><%= @post.address %></td>
+    <td><%= @post.introduction %></td>
+    <td><%= link_to "編集", edit_post_path(@post) %></td>
+    <% if @post.bookmarked_by?(current_customer) %>
+      <td><%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %></td>
+    <% else %>
+      <td><%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %></td>
+    <% end %>
+  </tr>
+</tbody>

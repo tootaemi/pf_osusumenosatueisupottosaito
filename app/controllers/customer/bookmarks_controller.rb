@@ -5,6 +5,7 @@ class Customer::BookmarksController < ApplicationController
       @post = Post.new
       @posts = Post.all
       @customers = Customer.all
+      @bookmarks = Bookmark.where(customer: current_customer.id)
       #@bookmarked_bys = @bookmark.all
     end
     
@@ -42,10 +43,10 @@ end
     # @bookmark.destroy
     # redirect_to post_path
 
-    post = Post.find(params[:post_id])
-    bookmark = current_customer.bookmarks.find_by(post_id: post.id)
-    bookmark.destroy
-    redirect_to posts_path(@post)
+    # post = Post.find(params[:post_id])
+    # bookmark = current_customer.bookmarks.find_by(post_id: post.id)
+    # bookmark.destroy
+    # redirect_to posts_path(@post)
     
   end
 

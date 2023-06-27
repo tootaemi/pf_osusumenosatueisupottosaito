@@ -1,3 +1,11 @@
+<%= form_with url: search_posts_path, local: true, method: :get do |form| %>
+  <%= form.text_field :keyword, placeholder: "投稿を検索する" %>
+  <%= form.submit "検索" %>
+<% end %>
+
+
+
+
 
 <%= link_to 'Tags List', tags_path %>
 

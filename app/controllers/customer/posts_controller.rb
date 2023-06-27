@@ -1,5 +1,6 @@
 class Customer::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :update, :destroy]
+  
   # before_action :ensure_customer, only: [:edit, :update, :destroy]
 
  def top
@@ -21,6 +22,9 @@ class Customer::PostsController < ApplicationController
 
   @tag_list = Tag.all
   @posts = current_customer.posts.new
+  
+  #@posts = current_user.posts.all  #投稿一覧を表示させるために全取得
+  #@post = current_user.posts.new   #投稿一覧画面で新規投稿を行うので、formのパラメータ用にPostオブジェクトを取得
 
  end
 
@@ -37,8 +41,11 @@ def show
     @posts = customer_path
     @posts= Post.all
     @hash_tags = @hash_tag
-end
 
+    @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
+    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+  end
+  
 
   def new
     @post = Post.new
@@ -60,7 +67,14 @@ end
     # else
     #   redirect_back(fallback_location: root_path)
     # end
-        end
+     @post = current_user.posts.new(post_params)
+    if @post.save
+      redirect_back(fallback_location: root_path)  #コメント送信後は、一つ前のページへリダイレクトさせる。
+    else
+      redirect_back(fallback_location: root_path)  #同上
+    end
+      end
+    end
     
 
 
@@ -69,7 +83,7 @@ end
 #   @posts = Post.all
 #   @posts.save
 #   redirect_to post_path
-    end
+    # end
 
 
     def edit
@@ -92,13 +106,14 @@ end
 
   def destroy
     Comment.find(params[:id]).destroy
+    redirect_to post_path(@post)
+
     redirect_to post_path(params[:post_id])
     
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to post_path
 	    Post.find_by( params[:id]).destroy
-	    redirect_to post_path(@post)
   end
 
 
@@ -166,35 +181,31 @@ end
 
 
 
-def search
-  @section_title = "「#{params[:search]}」の検索結果"
-  @posts = if params[:search].present?
-             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
-                        "%#{params[:search]}%", "%#{params[:search]}%"])
-                 .paginate(page: params[:page], per_page: 12).recent
-           else
-             Post.none
-           end
-end
+# def search
+#   @section_title = "「#{params[:search]}」の検索結果"
+#   @posts = if params[:search].present?
+#             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
+#                         "%#{params[:search]}%", "%#{params[:search]}%"])
+#                 .paginate(page: params[:page], per_page: 12).recent
+#           else
+#             Post.none
+#           end
+# end
 
+ def search
+    @posts = Post.search(params[:keyword])
 
-
-  def search
     if params[:keyword].present?
       @photos = Photo.where('caption LIKE ?', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
       @photos = Photo.all
     end
-  end
-
-
-
-def search
+    
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
     # @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
     # @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
-end
+ end
 
 # ~
 # ~
@@ -221,12 +232,8 @@ end
   #   end
   # end
 
-
-
   def edit
   end
-
-
 
 
   private
@@ -236,14 +243,12 @@ end
     redirect_to new_post_path unless @post
   end
 
-
-
-
   private
    def post_params
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
     #.merge(user_id: current_customer.id)
    end
+   
 end
   # before_action :find_post, only: [:edit, :update, :show, :destroy]
 

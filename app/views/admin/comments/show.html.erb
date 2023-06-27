@@ -2,32 +2,52 @@
 <div class="row">
   <table class='table table-hover table-inverse'>
             <thead>
+
+                <div class="w-10">
+    <table>
+      <th  class="bg-light">コメント投稿日時<td>
+            <td><%#= @comment.start_date.strftime('%Y年%m月%d日') %></td>
+       <td><%#= @comment.end_date.strftime('%Y年%m月%d日') %></td>
+
+
+          				<td><%= @comments.#day&.started_at&.strftime('%"%Y/%m/%d %H:%M:%S"/%d')
+          				strftime("%Y/%m/%d %H:%M:%S") %></td>
+ </th>
+      <th class="bg-light">コメント内容          <td>
+<%= @comments.comment %>  </td>
+</th>
+      <th class="bg-light">名前                                    <td><%#= @comment.customer.name %></td></th>
+   </table>
+
+<%= form_with model: @comment, url: 'admin_comments', method: :get do |f| %>
+<% end %>
+
                     <tr>
                         <th  class="bg-light">コメント投稿日時</th>
                         <th class="bg-light">コメント内容</th>
                         <th class="bg-light">名前</th>
 
                         <th colspan="3"></th>
+             <tr>
+				<td><%#= link_to @comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path(comment) %></td-->
+                <td><%#= @comment.comment %></td>
+                <td><%#= @comment.customer.name %></td>
+              </tr>
                     </tr>
              </thead>
               <tr>
-                              <% @comments.each do |comment| %>
+				<td><%#= @comments.create.strftime("%Y/%m/%d %H:%M:%S") %></td-->
+                <td><%#= @comment.create.strftime('%Y/%m/%d') %></td>
 
-                <td><%= @comment.create.strftime('%Y/%m/%d') %></td>
-                <td><%= @comment.comment %></td>
-                <td><%= @comment.customer.name %></td>
               </tr>
-              <% end %>
-
     </table>
         </div>
-  <!--     
-  
-  
-
 <%= form_with model: @comment, url: 'admin_comment', method: :get do |f| %>
 <% end %>
     <td class="text-center">
     <%= link_to "削除する！", comment_path(@comment),method: :delete, class:"btn dangerbtn-" %></td>
 
-<%= link_to "削除する",  edit_admin_customer_path(@comment.id) ,class: "btn btn-success" %>
+<%= link_to "削除する",  edit_admin_customer_path(@comment) ,class: "btn btn-success" %>
+
+
+

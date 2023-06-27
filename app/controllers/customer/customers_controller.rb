@@ -59,6 +59,7 @@ class Customer::CustomersController< ApplicationController
     @customer = Customer.new
     @customers = Customer.all
 
+#@customers = Customer.paginate(page: params[:page], per_page: 5).search(params[:search])
   end
 
 

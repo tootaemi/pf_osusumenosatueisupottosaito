@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     registrations: "customer/registrations",
     sessions: 'customer/sessions'
   }
+  
+  
 
   # # 管理者用
   # URL /admin/sign_in ...
@@ -53,6 +55,8 @@ resources :tags do
     get 'posts', to: 'posts#search'
   end
   
+  
+  
   resources :posts do
   resources :bookmarks
 end
@@ -91,6 +95,12 @@ end
       end
   end
 end
+
+  resources :posts do
+    collection do
+      get 'search'
+    end
+  end
 
 
 resources :posts, only: [:new, :create, :edit, :show, :update, :destroy] do

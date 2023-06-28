@@ -44,7 +44,7 @@ def show
 
     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
     @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
-  end
+end
   
 
   def new
@@ -56,9 +56,9 @@ def show
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
        @post = Post.new(post_params)
         @post.customer_id = current_customer.id
-        if @post.save
+    if @post.save
           redirect_to root_path(@post)
-        else
+    else
             @posts = Post.all
             render 'show'
     # @post = current_customer.posts.build(post_params)
@@ -73,7 +73,7 @@ def show
     else
       redirect_back(fallback_location: root_path)  #同上
     end
-      end
+    end
     end
     
 
@@ -192,14 +192,21 @@ def show
 #           end
 # end
 
+
+
+
+
+
  def search
-    @posts = Post.search(params[:keyword])
+   @posts = Post.all
+   @Tags = Tag.all
+    @customers = Customer.search(params[:keyword])
 
     if params[:keyword].present?
-      @photos = Photo.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @photos = Tag.where('caption LIKE ?', "%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
-      @photos = Photo.all
+      @posts = Post.all
     end
     
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
@@ -242,6 +249,7 @@ def show
     @post = @posts.find_by(id: params[:id])
     redirect_to new_post_path unless @post
   end
+end
 
   private
    def post_params
@@ -249,6 +257,5 @@ def show
     #.merge(user_id: current_customer.id)
    end
    
-end
   # before_action :find_post, only: [:edit, :update, :show, :destroy]
 

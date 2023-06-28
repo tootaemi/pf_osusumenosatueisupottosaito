@@ -55,7 +55,11 @@ resources :tags do
     get 'posts', to: 'posts#search'
   end
   
-  
+    resources :posts do
+    collection do
+      get 'search'
+    end
+  end
   
   resources :posts do
   resources :bookmarks
@@ -90,21 +94,19 @@ end
       post 'tag/:id' => 'tags#create', as: 'tag'
       delete 'tag/:id' => 'tags#destroy', as: 'unlike'
       resources :comments, only: [:create, :destroy]
-      collection do
-        get 'search'
-      end
+   
   end
 end
 
-  resources :posts do
-    collection do
-      get 'search'
-    end
-  end
+  # resources :posts do
+  #   collection do
+  #     get 'search'
+  #   end
+  # end
 
 
 resources :posts, only: [:new, :create, :edit, :show, :update, :destroy] do
-  get :search, on: :collection
+  # get :search, on: :collection
 end
 
  namespace :admin do

@@ -34,7 +34,7 @@ class Customer < ApplicationRecord
  # ここからが他のモデルとの関係性
   has_many :posts, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :comments#, dependent: :destroy
 
   # has_many :images, dependent: :destroy
 

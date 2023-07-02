@@ -45,7 +45,7 @@
                   <% if post.image.attached? %>
                   <%# if @post.image.attached? %>
 
-					<%= image_tag post.image, size: "450x450" %>
+					<%= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
 					<% else %>
 					<%= image_tag 'no_image', size: "450x450" %>
 					<% end %>

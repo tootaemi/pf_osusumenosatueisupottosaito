@@ -1,124 +1,75 @@
-<div class="content-wrapper">
-    <div class="content-block">
-        <div class="content">
-         <div class="user-about">
-
-
-         <div class="profile">
-            <div class="name-history">
-             </div>
-         </div>
-       </div>
-        </div>
-    </div>
-</div>
-      <%= link_to tag.name, tag_path(tag) %>
-   <div class="container">
-  <div class="row align-items-center" style="height:50px">
-    <div class="col">
-    </div>
+<div class="row">
+  <div class="col-md-6">
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image, class: "img-fluid" %>
+    <% else %>
+      <%= image_tag 'no_image', class: "img_fluid" %>
+    <% end %>
   </div>
-</div>
-
-<!--<div class="mx-auto" style="width: 400px">-->
-  <div>
-  <% if @post.image.attached? %>
-    <%= image_tag @post.image, size: "450x450" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "450x450" %>
-  <% end %>
-    </div>
-<!--</div>-->
-  <div>写真の住所　<%= @post.address %></div>
+  <div class="col-md-6">
+    <div>写真の住所　<%= @post.address %></div>
     <div>写真の紹介文　<%= @post.introduction %></div>
-  <div>タグ　　　<%= @post.hash_tags %></div>
+    <div>タグ　　　<%= @post.hash_tags %></div>
     <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
     <p>投稿者　<%= @post.customer.name %></p>
   </div>
-  </br>
+</div>
 
-<!--  <%# if current_customer.present? %> -->
-<!--  # ログインユーザー-->
-<!--  <%# if @post.bookmarked_by?(current_customer) %>-->
-<!--    # 当該のspot_idの投稿にいいねを押している場合-->
-<!--    <%#= link_to post_bookmarks_path(@post), method: :delete, remote: true do %>-->
-<!--      <span class="fas fa-heart unlike" id="unlike-<%#= @post.id %>"></span>-->
-<!--    <%# end %>-->
-<!--  <%# else %>-->
-<!--    # 当該のspot_idの投稿にいいねを押していない場合-->
-<!--    <%#= link_to post_bookmarks_path(@post), method: :post, remote: true do %>-->
-<!--      <span class="far fa-heart like" id="like-<%#= @post.id %>"></span>-->
-<!--    <%# end %>-->
-<!--  <%# end %>-->
-<!--<%# else %>-->
-<!--  # ゲスト-->
-<!--  <%# if cookies.nil? %>-->
-<!--    # cookieが保存されていない(対象のブラウザでどの投稿にもいいねが押されていない)場合-->
-<!--    <%#= link_to post_bookmarks_path(post), method: :post, remote: true do %>-->
-<!--      <span class="far fa-heart like" id="like-<%#= @post.id %>"></span>-->
-<!--    <%# end %>-->
-<!--  <%# else %>-->
-<!--    # cookieが保存されている(対象のブラウザでいずれかの投稿にいいねが押されている)場合-->
-    <%# arr = cookies.split(",").map(&:to_i) %>
-    <%# if Array.include?(@post.id) %>
-<!--      # 保存されたcookieの中に当該のspot_idが含まれている(いいねが押されている)場合-->
-<!--      <span class="fas fa-heart unlike" id="unlike-<%#= @post.id %>"></span>-->
-    <%# else %>
-<!--      # 保存されたcookieの中に当該のspot_idが含まれていない(いいねが押されていない)場合-->
-<!--      <%#= link_to post_bookmarks_path(@post), method: :post, remote: true do %>-->
-<!--        <span class="far fa-heart like" id="like-<%#= @post.id %>"></span>-->
-      <%# end %>
-<!--    <%# end %>-->
-<!--  <%# end %>-->
-<!--<%# end %>-->
-
-<div class="like-btn">
-    <% if Bookmark.find_by(customer_id: @current_customer, post_id: @post.id) %>
-
-      <%=link_to("/bookmarks/#{@post.id}/destroy", {method: :post}) do %>
-        <span class="fa fa-heart like-btn-unlike"></span>
+<div class="row">
+  <div class="col-12">
+    <div class="like-btn">
+      <% if Bookmark.find_by(customer_id: @current_customer, post_id: @post.id) %>
+        <%=link_to post_bookmarks_path(@post), method: :delete, remote: false do %>
+          <span class="fa fa-heart like-btn-unlike"></span>
+        <% end %>
+      <% else %>
+        <%= link_to post_bookmarks_path(@post), method: :post, remote: false do %>
+          <span class="fa fa-heart-o like-btn"></span>
+        <% end %>
       <% end %>
+    </div>
+  
+    <div class="like-btn">
+      <h3>いいね件数：<%= @bookmark_count %></h3>
+    </div>
+  </div>
+</div>
 
-    <% else %>
-
-      <%= link_to("/bookmarks/#{@post.id}/create", {method: :post}) do %>
-        <span class="fa fa-heart like-btn"></span>
-      <% end %>
-
+<div class="row">
+  <div class="col-md-4">
+    <%= form_with model: [@post, @comment] do |f| %>
+      <%= f.hidden_field :post_id, value: @post.id %>
+      <div class="form-group">
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "送信する", class: "btn btn-success btn-block" %>
+      </div>
     <% end %>
   </div>
-<div class="like-btn">
+  <div class="col-md-8">
+    <h3>コメント件数：<%= @post.comments.count %></h3>
 
-  <h3>いいね件数：<%= @bookmark_count %></h3>
-    <% if Bookmark.find_by(customer_id: @current_customer, post_id: @post.id) %>
-      <%=link_to("/bookmarks/#{@post.id}/destroy", {method: :post}) do %>
-      <% end %>
-      <% end %>
-
-
-
-
-
-<div>
-  <p>コメント件数：<%= @post.comments.count %></p>
-  <% @comments.each do |comment| %>
-  <%= comment.customer.name %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-    <p><span>コメント内容: </span><%= comment.comment%></p>
-  <% if comment.customer == current_customer %>
-
-  <td class="text-center">  <p><%=link_to "消去", comment_path(comment.id), method: :delete %></p>
-  </td>
-  <p><%=link_to "消去する", posts_path(@post.id), method: :delete %></p>
+    <% @comments.each do |comment| %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th><%= comment.customer.name %></th>
+            <td>
+              <%= comment.created_at.strftime('%Y/%m/%d') %>
+              <% if comment.customer == current_customer %>
+                <%=link_to "消去", comment_path(comment), method: :delete, remote: false, class: "btn btn-xs btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>コメント内容: </th>
+            <td><%= comment.comment %></td>
+          </tr>
+        </tbody>
+      </table>
     <% end %>
-    <% end %>
-
-</div>
-<div>
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
+  </div>
 </div>
 
 <% if customer_signed_in? && current_customer.id == @post.customer_id %>
@@ -129,106 +80,3 @@
     <td class="text-center">
         <%= link_to "削除する", comment_path,method: :delete, class:"btn dangerbtn-" %></td>
 <% end %>
-
-
-
-<h1>投稿詳細ページ</h1>
-
-<%= @post.introduction %>
-  <div>
-  <%= image_tag @post.get_image %>
-  <p>ユーザーネーム：<%= @post.customer.name %></p>
-  <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.customer == current_customer %>
-    <%= link_to "削除", post_path(@post), method: :delete %>
-  <% end %>
-</div>
-
-  <% if @post.bookmarked_by?(current_customer) %>
-    <p>
-      <%= link_to post_bookmarks_path(@post), method: :delete do %>
-        ♥<%= @post.bookmarks.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_bookmarks_path(@post), method: :post do %>
-        ♡<%= @post.bookmarks.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-
-
-
-
-
-
-
-<% if bookmarks_url(current_customer) %>
-    # 一致するレコードが存在する＝すでにいいね済みの場合はdestroyアクションへ
-    <%= link_to bookmark_path(@post.id), method: :delete do %>
-        <span style="color:red;">❤︎</span>
-    <% end %>
-<% else %>
-    # 一致するレコードが存在しない＝まだいいねしていない場合はcreateアクションへ
-    <%= link_to bookmarks_path(@post.id), method: :post do %>
-        <span>❤︎</span>
-    <% end %>
-<% end %>
-
-
-
-
-  <% if @post.bookmarked_by?(current_customer) %>
-    <p>
-      <%= link_to post_bookmarks_path(@post), method: :delete do %>
-        ♥<%= @post.bookmarks.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_bookmarks_path(@post), method: :post do %>
-        ♡<%= @post.bookmarks.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-
-
-
-
-
-<div>
-  <% @comments.each do |comment| %>
-  <%= comment.customer.name %>
-  <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
-  <% if comment.customer == current_customer %>
-  <%#= link_to "削除◎", post_path, method: :delete %>
-    <% if comment.customer == current_customer %>
-<% end %>
-  <%= link_to "削除。", comment_path(@customer), method: :delete %>
-  <% end %>
-  <% end %>
-</div>
-<div>
-  <%= form_with model: [@post, @comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
-
-
-
-____________
-<tbody>
-  <tr>
-    <td><%= @post.customer.name %></td>
-    <td><%= @post.address %></td>
-    <td><%= @post.introduction %></td>
-    <td><%= link_to "編集", edit_post_path(@post) %></td>
-    <% if @post.bookmarked_by?(current_customer) %>
-      <td><%= link_to "ブックマークを外す", post_bookmarks_path(@post), method: :delete %></td>
-    <% else %>
-      <td><%= link_to "ブックマーク", post_bookmarks_path(@post), method: :post %></td>
-    <% end %>
-  </tr>
-</tbody>

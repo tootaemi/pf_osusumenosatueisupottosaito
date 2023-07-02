@@ -5,14 +5,15 @@
 
                 <div class="w-10">
     <table>
-      <th  class="bg-light">コメント投稿日時<td>
-            <td><%#= @comment.start_date.strftime('%Y年%m月%d日') %></td>
-       <td><%#= @comment.end_date.strftime('%Y年%m月%d日') %></td>
+      <td  class="bg-light">コメント投稿日時</td>
+          <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path(comment) %></td-->
+
+          <td><%= @comment.start_date.strftime('%Y年%m月%d日') %></td>
+          <td><%#= @comment.end_date.strftime('%Y年%m月%d日') %></td>
 
 
-          				<td><%= @comments.#day&.started_at&.strftime('%"%Y/%m/%d %H:%M:%S"/%d')
-          				strftime("%Y/%m/%d %H:%M:%S") %></td>
- </th>
+          				<td><%= @comments#.day&.started_at&.strftime('%"%Y/%m/%d %H:%M:%S"/%d')
+          				#strftime("%Y/%m/%d %H:%M:%S") %></td>
       <th class="bg-light">コメント内容          <td>
 <%= @comments.comment %>  </td>
 </th>

@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
 
+    
   attribute :hash_tags
   attribute :sent_tags
 
@@ -119,3 +120,7 @@ class Post < ApplicationRecord
 
 
 end
+
+
+
+

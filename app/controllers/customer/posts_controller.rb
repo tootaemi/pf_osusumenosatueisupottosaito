@@ -25,7 +25,7 @@ class Customer::PostsController < ApplicationController
     # @posts = Post.page(params[:page]).per(10)
   # @posts = @customer.posts.page(params[:page])
   # @posts = Post.page(params[:page])
-    
+
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
     keyword = params[:keyword]
     if keyword.present?
@@ -39,10 +39,15 @@ class Customer::PostsController < ApplicationController
     @keyword = keyword
     #@customer = Customer.find(params[:hash_tags])
     # @posts = @customer.posts.search.where(indicater_reply_edit: "承認").order("worked_on ASC")
+  @posts = Post.all
+  @keyword = params[:keyword]
+  @posts = params[:keyword].present? ? Tag.find(params[:keyword]).posts : Post.all
     end
+    
 
 
 def show
+
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:customer)
@@ -54,6 +59,8 @@ def show
     @posts = customer_path
     @posts= Post.all
     @hash_tags = @hash_tag
+    @comment = Comment.where(id: params[:id])
+
 
     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
     @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
@@ -63,34 +70,30 @@ end
   def new
     @post = Post.new
     @post = current_customer.posts.build
+    @postnew = Post.new
   end
+  
 
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
        @post = Post.new(post_params)
         @post.customer_id = current_customer.id
-    if @post.save
-          redirect_to root_path(@post)
-    else
-            @posts = Post.all
-            render 'show'
-    # @post = current_customer.posts.build(post_params)
-    # if @post.save
-    #   redirect_back(fallback_location: root_path)
-    # else
-    #   redirect_back(fallback_location: root_path)
-    # end
-     @post = current_user.posts.new(post_params)
-    if @post.save
-      redirect_back(fallback_location: root_path)  #コメント送信後は、一つ前のページへリダイレクトさせる。
-    else
-      redirect_back(fallback_location: root_path)  #同上
-    end
-    end
+      @post.save
+      redirect_to root_path(@post)
+    @posts = Post.all
+    @postnew = Post.new(post_params)
+     @post = current_customer.posts.new(post_params)
     end
 
 
 
+
+
+
+  
+
+  
+  
 # def create
 #   @post = Post.new(post_params)
 #   @posts = Post.all
@@ -234,11 +237,50 @@ def hashtag
   # @posts = @tag.posts
 end
 
-def update
-end
 
-def create
-end
+
+
+
+
+  def hashtag
+    if params[:name].nil?
+      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    else
+      name = params[:name]
+      name = name.downcase
+      @hashtag = Hashtag.find_by(hashname: name)
+      @post = @hashtag.posts
+      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    end
+  end
+
+
+
+  def update
+    @post = Post.find(params[:id])
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to @post, notice: "Post  was successfully updated." }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
+  end
+
+
+
+
+
+
 
 # ~
 # ~
@@ -287,6 +329,7 @@ end
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
     #.merge(user_id: current_customer.id)
    end
+
 
 end
 

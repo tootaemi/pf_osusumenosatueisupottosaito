@@ -16,38 +16,16 @@ class Customer::BookmarksController < ApplicationController
 
 
 
-def create
-  @bookmarke = Bookmark.new(customer_id: current_customer.id, post_id: params[:post_id])
-  @bookmark
-  redirect_to post_path(params[:post_id]) 
-
-    # bookmark = current_customer.bookmarks.build(post_id: params[:post_id])
-    # @bookmark = Bookmark.new(customer_id: current_customer.id, post_id: params[:post_id])
-    # bookmark_path
-    # redirect_to posts_path
-    # redirect_to "/posts/#{@bookmark.post_id}"
-    
-    post = Post.find(params[:post_id])
-    bookmark = current_customer.bookmarks.new(post_id: post.id)
-    bookmark.save
-    # redirect_to post_path(post)
-
-end
+  def create
+    @bookmarke = current_customer.bookmarks.find_or_create_by(post_id: params[:post_id])
+  
+    redirect_back(fallback_location: root_url)
+  end
 
   def destroy
-    bookmark = Bookmark.find_by(post_id: params[:post_id], customer_id: current_customer.id)
-    bookmark
-    redirect_to posts_path(@post)
-    
-    @bookmark = Bookmark.find_by(customer_id: current_customer.id, post_id: params[:post_id])
-    # @bookmark.destroy
-    # redirect_to post_path
-
-    # post = Post.find(params[:post_id])
-    # bookmark = current_customer.bookmarks.find_by(post_id: post.id)
-    # bookmark.destroy
-    # redirect_to posts_path(@post)
-    
+    @bookmark = current_customer.bookmarks.find_by(post_id: params[:post_id])
+    @bookmark.destroy if @bookmark
+    redirect_back(fallback_location: root_url)
   end
 
   private

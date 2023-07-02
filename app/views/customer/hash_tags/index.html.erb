@@ -1,0 +1,12 @@
+<h2>ハッシュタグ一覧</h2>
+<% @hashtags.each do |hashtag| %>
+    <%
+        name = hashtag["name"]
+        count = hashtag["count"]
+        id = hashtag["id"]
+
+    %>
+    <p>
+        <%= link_to "##{name}(#{count})", hashtag_path(id) %>
+    </p>
+<% end %>

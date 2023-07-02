@@ -80,7 +80,20 @@ class Customer::CustomersController< ApplicationController
     @posts = @customer.posts
     # @bookmark_posts = @customer.bookmark_ids
 
+  
+    # @customer = Customer.find(params[:id])
+    # @name = @customer.name
+    # @collections = @customer.collections
+    # @count_now = Collection.where(customer_id: @customer.id, status_id: 2).count
+    # @count_sell = Collection.where(customer_id: @customer.id, status_id: 3).count
+    # @count_total = Collection.where(customer_id: @customer.id).count
   end
+
+  def search
+    @collections = Collection.search(params[:keyword])
+  end
+  
+  
 
   def edit
     @customer = Customer.find(params[:id])

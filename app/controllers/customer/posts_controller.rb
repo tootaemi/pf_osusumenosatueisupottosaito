@@ -1,6 +1,6 @@
 class Customer::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :update, :destroy]
-  
+  # before_action :find_post, only: [:edit, :update, :show, :destroy]
   # before_action :ensure_customer, only: [:edit, :update, :destroy]
 
  def top
@@ -12,21 +12,34 @@ class Customer::PostsController < ApplicationController
   end
  end
 
- def index
-  @posts = Post.all
+    def index
   @customers = Customer.all
   @bookmarks = Bookmark.all
-  @post = Post.new
   @customer = Customer.new
   @customer = current_customer
-
   @tag_list = Tag.all
-  @posts = current_customer.posts.new
-  
-  #@posts = current_user.posts.all  #投稿一覧を表示させるために全取得
-  #@post = current_user.posts.new   #投稿一覧画面で新規投稿を行うので、formのパラメータ用にPostオブジェクトを取得
-
- end
+  @bookmarks = Bookmark.all
+  @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
+  # @customer = Customer.find(params[:id])
+    @posts = Post.limit(10).order('id DESC')
+    # @posts = Post.page(params[:page]).per(10)
+  # @posts = @customer.posts.page(params[:page])
+  # @posts = Post.page(params[:page])
+    
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    keyword = params[:keyword]
+    if keyword.present?
+      #@posts = @posts.each(params[:post_tag]).page(params[:page])
+      @posts = Post.search(keyword)
+      #@posts = Array[:items][:data][0][:price][:product].page(:params[:page]).per(10)
+      #@posts = @posts.search(params[:keyword]).page(params[:page])
+    else
+      # @posts = @posts.page(params[:page])
+    end
+    @keyword = keyword
+    #@customer = Customer.find(params[:hash_tags])
+    # @posts = @customer.posts.search.where(indicater_reply_edit: "承認").order("worked_on ASC")
+    end
 
 
 def show
@@ -45,7 +58,7 @@ def show
     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
     @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
 end
-  
+
 
   def new
     @post = Post.new
@@ -75,7 +88,7 @@ end
     end
     end
     end
-    
+
 
 
 # def create
@@ -109,7 +122,7 @@ end
     redirect_to post_path(@post)
 
     redirect_to post_path(params[:post_id])
-    
+
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to post_path
@@ -182,6 +195,8 @@ end
 
 
 # def search
+#     @tag = Tag.all
+
 #   @section_title = "「#{params[:search]}」の検索結果"
 #   @posts = if params[:search].present?
 #             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
@@ -193,13 +208,9 @@ end
 # end
 
 
-
-
-
-
- def search
-   @posts = Post.all
-   @Tags = Tag.all
+def search
+  @posts = Post.all
+  @Tags = Tag.all
     @customers = Customer.search(params[:keyword])
 
     if params[:keyword].present?
@@ -208,11 +219,26 @@ end
     else
       @posts = Post.all
     end
-    
+
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
-    # @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
-    # @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
- end
+    #@tag = Tags.find(params[:tag_id])  #クリックしたタグを取得
+    #@posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+    @customers = Customer.all
+end
+
+
+def hashtag
+    @Tags = Tag.all
+  # @tag = Tag.find(params[:hash_tags])
+      @tag = Tag.new
+  # @posts = @tag.posts
+end
+
+def update
+end
+
+def create
+end
 
 # ~
 # ~
@@ -249,13 +275,18 @@ end
     @post = @posts.find_by(id: params[:id])
     redirect_to new_post_path unless @post
   end
+
+def hash_tags
+  @tag = Tag.find(params[:tag_id])
+  @posts = @tag.posts
 end
+
 
   private
    def post_params
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
     #.merge(user_id: current_customer.id)
    end
-   
-  # before_action :find_post, only: [:edit, :update, :show, :destroy]
+
+end
 

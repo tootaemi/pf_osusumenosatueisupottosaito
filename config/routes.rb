@@ -61,9 +61,12 @@ resources :tags do
     end
   end
   
+  
   resources :posts do
   resources :bookmarks
 end
+
+ get '/post/hashtag/:name', to: "posts#hashtag"
 
        post 'posts/:id/bookmarks'=> 'posts#create', as: 'create_post_bookmarks'
      delete 'posts/:id/bookmarks'=> 'posts#destroy', as: 'destroy_post_bookmarks'

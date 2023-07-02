@@ -3,10 +3,6 @@
   <%= form.submit "検索" %>
 <% end %>
 
-
-
-
-
 <%= link_to 'Tags List', tags_path %>
 
 <% @posts.each do |post| %>
@@ -14,24 +10,8 @@
     <%= link_to post.customer, post_path(post) %>
   </div>
 <% end %>
-    <%= @post.post_tags.count %>
+    <%#= @post.hash_tags.count %>
 
-
-
-<%# @posts.each do |post| %>
-        <%# end %>   
-
-<div class="XXXX">
-  <p><%= current_customer.name %>さんの投稿一覧</p>
-
-  <% @posts.each do |post| %>
-  
-    <div class="YYYY" style="background-image: url(<%= post.image %>);">
-      <%= simple_format(@post.create_customer.name) %>
-      <span class="ZZZZ"><%= @post.create_customer.image %></span>
-    </div>
-  <% end %>
-</div>
 
 
 
@@ -55,9 +35,18 @@
                    <% @posts.each do |post| %>
                   <tr>
                      <td>
-                       <%= link_to customer_path(post.customer) do %>
-                       <%= image_tag post.image, size: "100x50" %>
+     <% @posts.each do |post| %>
+                  <%= link_to post_path(post) do %>
+                  <% if post.image.attached? %>
+                  <%# if @post.image.attached? %>
+
+					<%= image_tag post.image, size: "450x450" %>
+					<% else %>
+					<%= image_tag 'no_image', size: "450x450" %>
+					<% end %>
+					<% end %>
                        <% end %>
+
                      </td>
                      <td><%= link_to post_path(post), method: :get do %>
                   <%= post.address %>
@@ -66,27 +55,19 @@
                     <td><%= post.introduction %></td>
                     </tr>
                     <% end %>
-
-
                                          <td>
-
-           
    </td>
-
-                    <% @posts.each do |post| %>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image %>
-    <% end %>
-    <p>ユーザーネーム：<%= post.customer.name %></p>
-    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>
-    </div>
-<% end %>
 </tbody>
 </table>
+</div>
+</tbody>
                     </div>
-                    </tbody>
+                      </div>
 
-                      </div>
-                      </div>
-                    
+<!--<div class="mx-auto" style="width: 250px">-->
+<!--      <p class="text-center">-->
+<!--<%#= paginate @posts %>-->
+<!--      </p>-->
+<!--</div>-->
+
+

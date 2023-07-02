@@ -1,88 +1,24 @@
-<% @posts.each do |post| %>
-    <%= post.address %>
-    <%= post.customer.name %>
-<% end %>
-
-<%= form_with url: search_posts_path, local: true, method: :get do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する" %>
-  <%= form.submit "検索" %>
-<% end %>
-
-#タグリスト
-<% @Tags.each do |tag| %>
-  <span>
-    <%= link_to tag.tag_name, tags_path(post_tag_id: tag.id) %>
-    <%= "(#{tag.posts.count})" %></span>
-</br>
-  <% end %>
-
-#タグによって絞り込んだ投稿一覧
-<%= "タグが ─ " %>
-<strong>
-<%= "#{@tag}" %>
-<%= " ─ の投稿一覧" %></strong>
-</br>
-<% @posts.each do |post| %>
-  <%= link_to post.hash_tags, post %>
-</br>
-
-  <% end %>
-
-
-<% Post.where(['shop_name LIKE ? OR nearest LIKE ?',
-            "%#{params[:search]}%", "%#{params[:search]}%"]) %>
-
-
-
-
-
-
-<!--<h1>Customer search</h1>-->
-<!--<%= form_with url: search_posts_path, method: :get, local: true do |f| %>-->
-<!--  <%= f.text_field :name %>-->
-<!--  <%= f.submit :search %>-->
-<!--<% end %>-->
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.introduction %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-
-
-<%= form_with(url: search_posts_path, local: true, method: :get) do |f| %>
-<%# input.search__input{name: "keyword", placeholder: 'キーワードから探す'} %>
-  <%#= button{type: 'submit'} %>
-    <.icon>
-      <%#= image_tag 'icon/icon-search 1.png', class: 'icon-image' %></.icon>
-  <% end %>
-
-
-検索機能
-
-<%= form_with url: search_posts_path, local: true, method: :get do |form| %>
-    <%= form.text_field :keyword %>
-    <%= form.submit "検索" %>
-  <% end %>
-
-
-   ## クラス名などは省略してあります
-  <h2>検索結果 "<%= @keyword %>"</h2>
-  <!--<ul>-->
     <%# @images.each do |image| %>
-  <!--    <li>-->
-        <%#= link_to image_path(image.id) do %>
-          <%#= image_tag image.image.variant(gravity: :center, resize:"640x640^", crop:"640x640+0+0"), if photo.image.attached? %>
-        <%# end %>
-  <!--    </li>-->
-    <%# end %>
-  <!--</ul>-->
+    <div class="d-flex justify-content-end">
+  <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+    <div class="input-group">
+      <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
+        <span class="input-group-btn input-group-append">
+          <%= button_tag type: "submit", class: "btn btn-secondary search-btn" do %>
+            <i class="fas fa-search"></i> 検索</submit>
+          <% end %>
+        </span>
+    </div>
+        
+  <% end %>
+</div>
+
+       <%#= select_tag :tag_id,
+      #   options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
+      #     {
+      #       prompt: "タグで絞り込み検索",
+      #       onchange: "submit(this.form);"
+      #     }
+      # %#>
+      
+    <% end %>

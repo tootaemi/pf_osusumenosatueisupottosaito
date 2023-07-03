@@ -1,54 +1,29 @@
-<h2>コメント詳細</h2>
 <div class="row">
-  <table class='table table-hover table-inverse'>
-            <thead>
-
-                <div class="w-10">
+  <div class="col-md-6">
+    <div class="p-3 mb-2 bg-light text-dark">
+<h2>コメント詳細</h2>
+    </div>
     <table>
-      <td  class="bg-light">コメント投稿日時</td>
-          <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path(comment) %></td-->
-
-          <td><%= @comment.start_date.strftime('%Y年%m月%d日') %></td>
-          <td><%#= @comment.end_date.strftime('%Y年%m月%d日') %></td>
-
-
-          				<td><%= @comments#.day&.started_at&.strftime('%"%Y/%m/%d %H:%M:%S"/%d')
-          				#strftime("%Y/%m/%d %H:%M:%S") %></td>
-      <th class="bg-light">コメント内容          <td>
-<%= @comments.comment %>  </td>
-</th>
-      <th class="bg-light">名前                                    <td><%#= @comment.customer.name %></td></th>
-   </table>
-
-<%= form_with model: @comment, url: 'admin_comments', method: :get do |f| %>
-<% end %>
-
-                    <tr>
-                        <th  class="bg-light">コメント投稿日時</th>
-                        <th class="bg-light">コメント内容</th>
-                        <th class="bg-light">名前</th>
-
-                        <th colspan="3"></th>
-             <tr>
-				<td><%#= link_to @comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path(comment) %></td-->
-                <td><%#= @comment.comment %></td>
-                <td><%#= @comment.customer.name %></td>
+      <tr>
+        <td>コメント投稿日時</td>
+        <td>
+            <td>　　　　<%= @comment.created_at.strftime('%Y/%m/%d %H:%M:%S') if @comment.created_at %></td>
+         </td>
+        </tr>
+            <tr>
+              <td>コメント内容</td>
+              <td>
+            <td>　　　　<%= @comment.comment %></td>
+               </td>
               </tr>
+                  <tr>
+                    <td>名前</td>
+                    <td>
+            <td>　　　　<%= @customer.name %></td>
+                    </td>
                     </tr>
-             </thead>
-              <tr>
-				<td><%#= @comments.create.strftime("%Y/%m/%d %H:%M:%S") %></td-->
-                <td><%#= @comment.create.strftime('%Y/%m/%d') %></td>
-
-              </tr>
-    </table>
-        </div>
-<%= form_with model: @comment, url: 'admin_comment', method: :get do |f| %>
-<% end %>
-    <td class="text-center">
-    <%= link_to "削除する！", comment_path(@comment),method: :delete, class:"btn dangerbtn-" %></td>
-
-<%= link_to "削除する",  edit_admin_customer_path(@comment) ,class: "btn btn-success" %>
-
-
-
+                    </br>
+                    <td>　　　　　　<%= link_to "コメント削除", admin_comment_path(@comment),method: :delete, class:"btn btn-danger" %>
+                    </table>
+    </div>
+    </div>

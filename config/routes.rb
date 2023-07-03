@@ -108,6 +108,6 @@ end
   namespace :admin do
     root to: 'homes#top'
     resources :customers
-    resources :comments, only: [:index, :show]
+    resources :comments, only: [:index, :show, :destroy]
   end
 end

@@ -35,15 +35,16 @@ Rails.application.routes.draw do
     get "customer/:id" => "customers#show"
     get "customer/edit" => "customers#edit"
     patch "customer" => "customers#update"
-    resources :posts, only:[:destroy]
-    get "post" => "post#index"
-    get "post/new" => "posts#new"
-    post "post/new" => "posts#new"
-    patch "posts/id" => "posts#update"
+    resources :posts#, only:[:destroy]
+    # get "post" => "post#index"
+    # get "post/new" => "posts#new"
+    # post "post/new" => "posts#new"
+    # patch "posts/id" => "posts#update"
+    post "posts/:id/edit" => "posts/#edit"
     resources :tags, only: %w[index show destroy]
     resources :customers
     get "customer" => "customers#show"
-    
+
     # resource :bookmarks, only: [:create, :destroy]
     # resources :posts
     # get '/post/hashtag/:name' => 'posts#hashtag'
@@ -101,6 +102,7 @@ Rails.application.routes.draw do
 
 
 resources :posts, only: [:new, :create, :edit, :show, :update, :destroy] do
+
   # get :search, on: :collection
 end
 

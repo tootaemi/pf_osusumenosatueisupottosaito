@@ -6,9 +6,9 @@
  </div>
 <div class="mx-auto" style="width: 400px">
    <%#= form_with model: @post do |f| %>
- <%= form_with model: @post, local: true do |f|  %>
+ <%#= form_with model: @post, local: true do |f|  %>
  <%#= form_with model: @post do |f| %>
- <%#= form_with model: @post, url:post_path ,local: false do |f| %>
+ <%= form_with model: @post, url:post_path ,local: false do |f| %>
 <table>
   <div class="inputImage">
     <%= f.label :写真 %>
@@ -36,7 +36,7 @@
                     <%= f.submit "保存",class: "btn btn-success" %>
     </div>
      <% end %>
-     
+
      <%# if customer_signed_in? && current_customer.id == @post.customer_id %>
      <!--       <li>-->
              <%#= link_to '編集', "/posts/#{@post.id}/edit", method: :get %>

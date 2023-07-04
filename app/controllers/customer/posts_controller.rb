@@ -1,5 +1,6 @@
 class Customer::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :update, :destroy]
+
   # before_action :find_post, only: [:edit, :update, :show, :destroy]
   # before_action :ensure_customer, only: [:edit, :update, :destroy]
 
@@ -41,7 +42,15 @@ class Customer::PostsController < ApplicationController
     # @posts = @customer.posts.search.where(indicater_reply_edit: "承認").order("worked_on ASC")
   @posts = Post.all
   @keyword = params[:keyword]
-  @posts = params[:keyword].present? ? Tag.find(params[:keyword]).posts : Post.all
+  tag = params[:keyword].present? ? Tag.find_by(tag_name: params[:keyword]) : nil
+  if params[:keyword].present?
+    keyword = params[:keyword].gsub(/[#＃]/,"")
+    tag = Tag.find_by(tag_name: keyword)
+    @posts = tag.nil? ? Post.all : tag.posts 
+  else
+    @posts = Post.all
+  end
+  
     end
     
 

@@ -54,7 +54,7 @@ class Post < ApplicationRecord
 
   def to_sent_tags
     if self.hash_tags.present?
-      self.sent_tags = self.hash_tags.gsub(/[[:space:]]/, '').split("#").select{|s| s.present? }
+      self.sent_tags = self.hash_tags.gsub(/[[:space:]]/, '').split(/＃/).select{|s| s.present? }
     else
       self.sent_tags = []
     end

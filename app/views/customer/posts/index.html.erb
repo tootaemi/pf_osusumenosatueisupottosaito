@@ -1,19 +1,8 @@
-<%= form_with url: search_posts_path, local: true, method: :get do |form| %>
-  <%= form.text_field :keyword, placeholder: "投稿を検索する" %>
-  <%= form.submit "検索" %>
-<% end %>
-
-<%= link_to 'Tags List', tags_path %>
-
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to post.customer, post_path(post) %>
-  </div>
-<% end %>
-    <%#= @post.hash_tags.count %>
-
-
-
+<!--<%# @posts.each do |post| %>-->
+<!--  <div>-->
+<!--    <%#= link_to post.customer, post_path(post) %>-->
+<!--  </div>-->
+<!--<%# end %>-->
 
 <div class='container px-5 px-sm-0'>
   <div class='row'>
@@ -32,7 +21,6 @@
               </thead>
                   <tbody>
                 <tbody>
-                   <% @posts.each do |post| %>
                   <tr>
                      <td>
      <% @posts.each do |post| %>
@@ -45,7 +33,6 @@
 					<%= image_tag 'no_image', size: "450x450" %>
 					<% end %>
 					<% end %>
-                       <% end %>
 
                      </td>
                      <td><%= link_to post_path(post), method: :get do %>

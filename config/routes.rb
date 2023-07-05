@@ -50,12 +50,17 @@ Rails.application.routes.draw do
     # get '/post/hashtag/:name' => 'posts#hashtag'
     # get '/post/hashtag' => 'posts#hashtag'
 
-    resources :customers do
-      member do
-        get :bookmarks
-      end
-    end
+    # resources :customers do
+    #   member do
+    #     get :bookmarks
+    #   end
+    # end
+    
     resources :tags do
+      get 'posts', to: 'posts#search'
+    end
+    
+       resources :customers do
       get 'posts', to: 'posts#search'
     end
 
@@ -64,6 +69,10 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
+      
+   
+  
+    
 
     resources :posts do
       resource :bookmarks, only: [:create, :destroy]

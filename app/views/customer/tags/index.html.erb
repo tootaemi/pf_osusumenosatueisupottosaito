@@ -1,55 +1,11 @@
-<%= link_to 'Top', root_path %>
-
-<h2>Tags --></h2>
-<ul>
-  <% @tags.each do |tag| %>
-    <li>
-      <%# タグの名前と、関連付く記事数を表示 %>
-      <%= link_to "#{tags_path} ( Posts: #{tag.posts.count} )", tag_path(tag) %>
-    </li>
-  <% end %>
-</ul>
-       
-       
-           <div class="d-flex justify-content-end">
-  <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
-    <div class="input-group">
-      <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
-        <span class="input-group-btn input-group-append">
-          <%= button_tag type: "submit", class: "btn btn-secondary search-btn" do %>
-            <i class="fas fa-search"></i> 検索</submit>
-          <% end %>
-        </span>
-    </div>
-        
-  <% end %>
-</div>
-       
 <div class="d-flex justify-content-end">
   <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
-   <%= select_tag :tag_id,
-        options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
-          {
-            prompt: "タグで絞り込み検索",
-            onchange: "submit(this.form);"
-          }
-      %>
-        
-  <% end %>
+  <div class="input-group">
+    <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "タグを入力" %>
+    <span class="input-group-btn input-group-append">
+      <input type="submit" value="検索" data-disable-with="検索">
+      </input>
+    </span>
+  </div>
+      <% end %>
 </div>
-      
-
-#タグによって絞り込んだ投稿一覧
-<strong>
-<%= "#{@tag}" %>
-</strong>
-</br>
-<% @posts.each do |post| %>
-  <%= link_to post.hash_tags, post %>
-</br>
-  <% end %>
-<% Tag.where(['shop_name LIKE ? OR nearest LIKE ?',
-            "%#{params[:search]}%", "%#{params[:search]}%"]) %>
-
-
-      <%=link_to tag.name, search_posts_path(keyword: tag.name) %>

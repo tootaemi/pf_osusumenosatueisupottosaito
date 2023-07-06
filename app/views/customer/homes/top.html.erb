@@ -24,17 +24,107 @@
                   <div>写真の紹介文　<%= post.introduction %></div>
                   <div>タグ　　　<%= post.hash_tags %></div>
                   <p>投稿者　<%= post.customer.name %></p>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+          </tbody>
+  </div>
+</div>
+                                    <% end %>
+
+                  <div class="mx-auto" style="width: 100px">
+                  <p class="text-center">
+                  <%= paginate @posts %>
+</div>
+
+
+
+
+
+<div class="container">
+		<p class='p-top__item'>
+		          <h3> おすすめの撮影スポットサイト</h3>
+
+        <h5>写真好きの写真好きによる
+        </br>
+        写真好きの為のサイトです📸</h5>
+		</p>	<div class="col-lg-8 mx-auto">
+		<div class="row">
+		        <table class='table table-hover table-inverse'>
+          <tbody>
+            <tbody>
+              <tr>
+                <td>
+                  <% @posts.each do |post| %>
+                  <%= link_to post_path(post) do %>
+                  <% if post.image.attached? %>
+                  <%= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
+                  <% else %>
+                  <%= image_tag 'no_image', size: "450x450" %>
+                  <% end %>
+                  <% end %>
+                  
+                  
+          
+                  
+                  <div>写真の住所　<%= post.address %></div>
+                  <div>写真の紹介文　<%= post.introduction %></div>
+                  <div>タグ　　　<%= post.hash_tags %></div>
+                  <p>投稿者　<%= post.customer.name %></p>
+                                    <% end %>
+
                   </td>
                   </tr>
                   </tbody>
                   </table>
-                  </div>
-                  </tbody>
-                  </div>
-                  </div>
-                  <% end %>
-                  <!--<div class="mx-auto" style="width: 100px">-->
-                  <!--<p class="text-center">-->
-                  <!--<%#= paginate @posts %>-->
-                  <!--</p>-->
-<!--</div>-->
+		  
+		</div>
+	</div>
+</div>
+
+
+
+<div class="mx-auto" style="width: 400px">
+	<div class='p-top'>
+		<p class='p-top__item'>
+		          <h3> おすすめの撮影スポットサイト</h3>
+
+        <h5>写真好きの写真好きによる
+        </br>
+        写真好きの為のサイトです📸</h5>
+		</p>
+	</div>
+</div>
+<div class="container">
+        
+	<div class="col-lg-8 mx-auto">
+		<div class="row">
+			<% @posts.each do |post| %>
+			<div class="col-3">
+				<%= link_to post_path(post) do %>
+				<div>
+				<p>
+				  
+				          <% if post.image.attached? %>
+					<%= image_tag post.image, size: "90x90" %>
+					<%= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
+					<% else %>
+					<%= image_tag 'no_image', size: "90x90" %>
+					<% end %>
+				</p>
+				</div>
+				<% end %>
+			</div>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+<div class="mx-auto" style="width: 100px">
+  <p class="text-center">
+    <%= paginate @posts %>
+    </p>
+    </div>
+  

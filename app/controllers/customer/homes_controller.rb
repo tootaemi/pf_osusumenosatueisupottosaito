@@ -18,6 +18,7 @@ class Customer::HomesController< ApplicationController
     @customers = Customer.all
     @posts = Post.all
     @post = Post.new
+    @posts = @posts.page(params[:page])
   end
 
 

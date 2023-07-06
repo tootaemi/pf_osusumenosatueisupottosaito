@@ -7,22 +7,25 @@
       <tr>
         <td>　　　　 　    会員ID</td>
         <td>
-          <td><%= @customer.id %></td>
-         </td>
-        </tr>
-            <tr>
-              <td>　　 　　　名前</td>
+          <td>　　　　<%= @customer.id %></td>
+        </td>
+       </tr>
+      <tr>
+        <td>　　 　　　名前</td>
+        <td>
+          <td>　　　　<%= @customer.name %></td>
+        </td>
+      </tr>
+          <tr>
+            <td>　　　　　メールアドレス</td>
+            <td>
+              <td>　　　　<%= @customer.email %></td>
+            </td>
+          </tr>
               <td>
-                <td><%= @customer.name %></td>
-               </td>
-              </tr>
-                  <tr>
-                    <td>　　　　　メールアドレス</td>
-                    <td>
-                      <td><%= @customer.email %></td>
-                    </td>
-                    </tr>
-                    <td><%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %></td>
-    </table>
+                </br>
+              　　　　　　　　　　　　<%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
+            　</td>
+      </table>
   </div>
 </div>

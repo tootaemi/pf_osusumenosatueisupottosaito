@@ -8,22 +8,23 @@
       </br>
       <div class="field">
         <%= f.label :会員ID %>
-        <%= @customer.id %>
+        　　　　　　　　　　<%= @customer.id %>
       </div>
       <div class="field">
-        <%= f.label :氏名　　　　　 %>
-        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山田"%>
+        <%= f.label :氏名　　　 %>
+      　　　　　　　<%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山田"%>
       </div>
       <div class="field">
         <%= f.label :メールアドレス%>
-        <%= f.text_field :email, autofocus: true, id:"inputName", placeholder:"hoge@example.com"%>
+  　　　　　<%= f.text_field :email, autofocus: true, id:"inputName", placeholder:"hoge@example.com"%>
         </div>
         <tr>
+          </br>
           <div class="field">
             <%= f.submit '変更を保存',class: "btn btn-success"%>
             <% end %>
             <td class="text-center">
-              <%= link_to "削除する", admin_customer_path(@customer.id),method: :delete, class:"btn btn-danger" %></td>
+              　　　　　　<%= link_to "削除する", admin_customer_path(@customer.id),method: :delete, class:"btn btn-danger" %></td>
          </tr>
            </div>
         </div>

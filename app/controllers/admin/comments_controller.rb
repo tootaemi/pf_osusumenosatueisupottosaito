@@ -9,6 +9,7 @@ def index
     @post = Post.new
     #@comments = Comment.page(params[:page]).per(10)
     @comment = Comment.all.order("created_at DESC")
+    @comments = @comments.page(params[:page])
 end
 
 def show

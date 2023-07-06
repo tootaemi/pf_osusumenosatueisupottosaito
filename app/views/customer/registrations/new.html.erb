@@ -1,42 +1,42 @@
 <div class="mx-auto" style="width: 1000px">
+  <h2>
     <div class="container">
-      <span class="p-3 mb-2 bg-light text-dark">ログイン
+      <span class="p-3 mb-2 bg-light text-dark">新規会員登録
+  </h2>
       </span>
     </div>
     </br>
-<h2>新規会員登録</h2>
-<%= form_with model: @customer, url: customer_registration_path do |f| %>
-<%= render "customer/shared/error_messages", resource: resource %>
-<div class="field">
-    <%= f.label :ユーザーネーム %><br>
-    <%= f.text_field :name %>
-</div>
-    <div class="field">
-      <%= f.label :メールアドレス %><br/>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_with model: @customer, url: customer_registration_path do |f| %>
+    <div class="mx-auto" style="width: 500px">
+      <%= render "customer/shared/error_messages", resource: resource %>
+      <div class="field">
+        <%= f.label :ユーザーネーム, class: "col-lg-4" %>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
+      </div>
+      <div class="row form-group">
+        <%= f.label :メールアドレス, class: "col-lg-4" %>　
+        <%= f.email_field :email, autofocus: true, class: "col-lg-4" %>
+      </div>
+      <div class="field">
+        <%= f.label :パスワード%>
+        <% if @minimum_password_length %>(<%= @minimum_password_length %> 文字以上)
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password",  class: "col-lg-4" %>
+      </div>
+      <div class="field">
+        <%= f.label :パスワード（確認用） %>　
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-lg-4"  %>
+      </div>
+      <div class="actions">
+      </br>
+          　　　　　　　　　　<%= f.submit "新規登録" ,class: "btn btn-primary"%>
+      </div>
+      <% end %>
     </div>
-    <div class="field">
-      <%= f.label :パスワード%>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %>文字以上)</em>
-      <% end %><br/>
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-    <div class="field">
-      <%= f.label :パスワードの確認 %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-    <div class="actions">
-        <span class="mb-2 bg-light text-dark">
-        </span>
-      <%= f.submit "新規登録" %>
-    </div>
-    <% end %>
     </br>
     <div class="container">
       <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方
       </span>
     </div>
     <%= link_to "こちら", new_customer_session_path %>からログインしてください。
-<%#= render "customer/shared/links" %>
     </div>

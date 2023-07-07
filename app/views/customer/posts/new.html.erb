@@ -1,37 +1,31 @@
-
 <div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">新規投稿📷
-   </span>
- </div>
- </div>
-
+  <div class="container">
+    <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
+  </div>
+</div>
 <div class="mx-auto" style="width: 400px">
-  <%= form_with model:@post do |f| %>
-  <%#= form_with model: @post, url: root_path, local: true do |f|  %>
-  
+    <%#= form_with model:@post do |f| %>
+    <%= form_with model: @post, url:posts_path(@post) do |f| %>
+
     <div class="inputImage">
-      <%= f.label :写真 %>
-      <%= f.file_field :image, placeholder: "写真", accept: "image/*" %>
+      <%= f.label :写真 %>&emsp;
+    <%= f.file_field :image, placeholder: "写真", accept: "image/*" %>
     </div>
-    
     <div class="field">
-      <%= f.label :写真の住所 %>
-      <%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%>
+      <%= f.label :写真の住所 %> &emsp;
+      　<%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%>
     </div>
-    
     <div class="field">
-      <%= f.label :写真の紹介文 %>
+      <%= f.label :写真の紹介文 %> &emsp;    
       <%= f.text_area :introduction, placeholder:"ここに説明文を記述します。", size:"30x5" %>
     </div>
-  
     <div class="field">
-      <%= f.label :タグ %>
-      <%= f.text_field :hash_tags, autofocus: true, id:"inputTag", placeholder: "＃山形県 ＃水族館 ＃クラゲ" %>
-      </div>
-      <div class="actions">
-                      <%= f.submit "新規登録",class: "btn btn-success" %>
-      </div>
-       <% end %>
-</div>
-
+      <%= f.label :タグ %>&emsp;
+      　　　　<%= f.text_field :hash_tags, autofocus: true, id:"inputPrice", placeholder: "＃山形県 ＃水族館 ＃クラゲ"  %>
+    </div>
+    </br>
+    <div class="actions">&emsp;
+    　　　　　　　　　　<%= f.submit "新規登録",class: "btn btn-success" %>
+    </div>
+    <% end %>
+    </div>

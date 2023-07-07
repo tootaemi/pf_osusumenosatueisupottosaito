@@ -23,7 +23,24 @@ class Customer::PostsController < ApplicationController
   @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
   # @customer = Customer.find(params[:id])
     @posts = Post.limit(10).order('id DESC')
-    # @posts = Post.page(params[:page]).per(10)
+    # @posts = @posts.page(params[:page])
+  @posts = Post.page(params[:page]).per(10)
+  # @posts = @posts.page(params[:page])
+  # @posts = Post.all.page(params[:page])
+  @posts = Post.all.page(params[:page]).per(10)
+  @posts = Post.page(params[:page])
+      
+      
+  @posts = Post.all.page(params[:page]).per(10)
+
+
+
+  @posts = Post.new(params[:search])
+  
+  # @post　= Post.paginates_per.page(5).per(10)
+  # @posts = Post.paginates_per.page(params[:page]).per(10)
+  # @posts = @posts.page(params[:page])
+
   # @posts = @customer.posts.page(params[:page])
   # @posts = Post.page(params[:page])
 
@@ -46,13 +63,13 @@ class Customer::PostsController < ApplicationController
   if params[:keyword].present?
     keyword = params[:keyword].gsub(/[#＃]/,"")
     tag = Tag.find_by(tag_name: keyword)
-    @posts = tag.nil? ? Post.all : tag.posts 
+    @posts = tag.nil? ? Post.all : tag.posts
   else
     @posts = Post.all
   end
-  
+
     end
-    
+
 
 
 def show
@@ -73,6 +90,9 @@ def show
 
     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
     @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+
+  @post = Post.find(params[:id])
+    @posts = @post.post_tags.page(params[:page])
 end
 
 
@@ -81,7 +101,7 @@ end
     @post = current_customer.posts.build
     @postnew = Post.new
   end
-  
+
 
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
@@ -99,10 +119,10 @@ end
 
 
 
-  
 
-  
-  
+
+
+
 # def create
 #   @post = Post.new(post_params)
 #   @posts = Post.all

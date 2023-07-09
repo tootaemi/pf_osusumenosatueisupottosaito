@@ -1,63 +1,26 @@
-<% if @customer.email == 'guestda@example.com'%>
-      <p>ゲストユーザーはユーザー情報の編集ができません。</p>
+<% if @customer.email == "test@test.com"%>
+      　<p>ゲストユーザーはユーザー情報の編集ができません。</p>
       <% else %>
+         <div class="container">
+      <span class="p-3 mb-2 bg-light text-dark">会員情報編集</span>
+    </div>
+      <%= form_with(model:@customer, url:customer_path, local: true ,method: :patch) do |f| %>
+    <%#= form_with(model:@customer, url:customer_path(@customer), local: true ,method: :patch) do |f| %>
+    <%#= form_with model: @customer, url:customers_path(@customer) do |f| %>
+    </br>
+    <div class="field">
+      　　<%= f.label :名前 %>&emsp;
+    　　　　<%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
+    </div>
+    <div class="field">
+      　　<%= f.label :メールアドレス %>&emsp;
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%>
+    </div>
+    </br>
+    <div>
+      　　　　　　　　　　　<%= f.submit '変更を保存',class: "btn btn-success"%>
+
+
+      　　　　　　　　　　　<% end %>
+    </div>
     <% end %>
-
-  <%= form_with model: @customer, url:customer_path(@customer.id) do |f| %>
-  <div class="inputImage">商品画像　　&emsp;
-    <%= f.file_field :image, placeholder: "商品画像", accept: "image/*" %>
-    </div>
-    <div class="field">
-      <%= f.label :商品名 %>    　　&emsp; 
-      <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"いちごのショートケーキ（ホール）"%>
-    </div>
-    <div class="field">
-      <%= f.label :商品説明 %>　     &emsp;
-      <%= f.text_area :introduction, placeholder:"栃木県産のとちおとめを贅沢に使用しています。", size:"30x5" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :税抜価格 %>   　 &emsp;
-      <%= f.text_field :price, autofocus: true, id:"inputPrice", placeholder: "2500" %>円
-    </div>
-    
-    <label><%= f.radio_button :is_active, false %> 販売停止中
-    </label>
-    <div><%= f.submit '変更を保存',class: "btn btn-success"%>
-    <% end %>
-     </div>
-
-
-<div class="mx-auto" style="width: 1000px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">新規投稿編集ページ
-   </span>
- </div>
- </div>
-<div class="mx-auto" style="width: 400px">
- <%= form_with model: @post, local: true do |f|  %>
-<table>
-  <div class="inputImage">
-    <%= f.label :写真 %>
-    <%= f.file_field :image, placeholder: "写真", accept: "image/*" %>
-  </div>
-  <div class="field">
-      <%= f.label :写真の住所 %>
-        <%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%>
-    </div>
-
-    <div class="field">
-       <%= f.label :写真の紹介文 %>
-       <%= f.text_area :introduction, placeholder:"ここに説明文を記述します。", size:"30x5" %>
-       </div>
-       <div class="field">
-      <%= f.label :タグ %>
-      <%= f.text_field :hash_tags, autofocus: true, id:"inputTag", placeholder: "＃山形県  ＃冬  ＃雪道  ＃信号待ちにいい感じの写真が撮れたので投稿します" %>
-    </div>
-    <div class="actions">
-                    <%= f.submit "保存",class: "btn btn-success" %>
-    </div>
-     <% end %>
-</table>
-</div>
-

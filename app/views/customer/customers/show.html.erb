@@ -1,150 +1,31 @@
-<div class="mx-auto" style="width:500px">
- <div class="container">
-   <span class="p-3 mb-2 bg-light text-dark">マイページ
-   </span>
- </div>
- </br>
-<%= link_to "いいねした投稿", bookmarks_posts_path(@customers) %>
-
- <div class="mx-auto" style="width:750px">
- <div class="container">
- <p class="text-left">
-<th>登録情報</th>
-<div class="container-left">
-       <div class="row">
-    <!--<table class='table table-hover table-inverse'>-->
-    		<table class="table col table-bordered">
-    <!--<table class="table table-bordered">-->
-
-      <div class="table-secondary">
-            <tr><td class="bg-light">氏名</td>
-            <td><%= current_customer.name %></td></tr>
-            <tr><td class="bg-light">メールアドレス</td>
-            <td><%= current_customer.email %></td></tr>
-      </div>
-    </table>
-    <!--</table>-->
-
-    <%= link_to "編集する", customer_edit_path(current_customer) ,class: "btn btn-success" %>
+<div class="mx-auto" style="width:900px">
+	<div class="container">
+		<span class="p-3 mb-2 bg-light text-dark">
+			 <th>
+			 	<p><%= current_customer.name %>さんの詳細ページ</p>
+			 </th>
+			 <div class="container">
+			 	<p class="text-left">
+			 		<th>登録情報</th>
+			 		<div class="container-left">
+			 			<div class="row">
+			 				<table class="table col table-bordered">
+			 					<div class="table-secondary">
+			 						<tr>
+			 							<td class="bg-light">名前</td>
+			 							<td><%= current_customer.name %></td></tr>
+			 							<tr>
+			 								<td class="bg-light">メールアドレス</td>
+			 								<td><%= current_customer.email %></td></tr>
+			 					</div>
+			 				</table>
+			 			</div>
+			 		</div>
+			 	</br>
+			 	　　　　　　　　　　　　　　　　<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
+			 	</p>
+			 </div>
+		</span>
+	</div>
 </div>
-</div>
-</br>
-</p>
-</div>
-</div>
-
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <%#= render 'users/info', user: @user,book: @book %>
-      </div>
-      <div class='col-md-8 offset-md-1'>
-        <h2>
-            <%= current_customer.name %>さんの投稿一覧
-        </h2>
-                                   </div>
-                              </tbody>
-                              </div>
-                              </div>
-
-
-<!--    <div class='container px-5 px-sm-0'>-->
-<!--      <div class='row'>-->
-<!--        <div class='col-md-3'>-->
-<!--          </div>-->
-<!--          <div class='col-md-8 offset-md-1'>-->
-
-<!--            <table class='table table-hover table-inverse'>-->
-<!--                  <tbody>-->
-<!--</div>-->
-<!--<% @posts.each do |post| %>-->
-<!--<div class="col-3">-->
-<!--  <%= link_to post_path(post) do %>-->
-<!--  <div>-->
-<!--    <p>-->
-<!--        <tr>-->
-<!--      <% if post.image.attached? %>-->
-<!--      <%= image_tag post.image, size: "200x200" %>-->
-<!--      <% else %>-->
-<!--      <%= image_tag 'no_images', size: "200x200" %>-->
-<!--      <% end %>-->
-<!--      <td><%= post.address %></td>-->
-<!--    <td><%= post.introduction %></td>-->
-<!--    <td><%= post.tags %></td>-->
-<!--    <td><%= post.customer.name %></td>-->
-<!--    <td><%= post.address %></td>-->
-<!--    <td><%= post.introduction %></td>-->
-<!--    <td><%= post.tags %></td>-->
-<!--    <td><%= post.customer.name %></td>-->
-
-<!--    <td><%= link_to "詳細", post_path(post) %></td>-->
-<!--    <% if post.customer == current_customer %>-->
-<!--      <td><%= link_to "編集", edit_post_path(post) %></td>-->
-<!--      <td><%= link_to "削除", post_path(post), method: :delete %></td>-->
-<!--    <% else %>-->
-<!--      <td></td>-->
-<!--      <td></td>-->
-<!--    <% end %>-->
-<!--  </tr>-->
-<!--<% end %>-->
-<!--      <% end %>-->
-<!--           </p>-->
-<!--      </div>-->
-<!--      </div>-->
-<!--                        </tbody>-->
-<!--                        </table>-->
-<!--                        </div>-->
-<!--                        </div>-->
-                        </div>
-
-
-
-<!--h1 投稿詳細-->
-　
-<!--p= @post.content-->
-　
-<!--br-->
-　
-<!--= "タグ: "-->
-<!--- @post_tags.each do |tag|-->
-<!--  span-->
-<!--    = link_to tag.tag_name, tag_posts_path(tag_id: tag.id)-->
-<!--    = "(#{tag.posts.count})"-->
-　
-<!--hr-->
-　
-<!--= link_to 'ホーム', root_path-->
-
-
-
-<!-- ユーザーの詳細 -->
-<div>
-  <h3><%= @customer.name %></h3>
-  <% if @customer.id == current_customer.id %>
-  <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p>
-  <% end %>
-</div>
-
-<!-- ユーザーの投稿一覧 -->
-<% @posts.each do |post| %>
-  <div>
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post_image.get_image %>
-    <% end %>
-    <p>投稿ユーザー画像：<%= image_tag post_image.customer.get_profile_image(100,100) %></p>
-    <p>説明：<%= post_image.introduction %></p>
-    <p>ユーザーネーム：<%= post_image.customer.name %></p>
-    <p><%= link_to "#{post.comments.count} コメント", post_path(post.id) %></p>  </div>
-<% end %>
-
-<h3>いいね</h3> 
-<% @bookmarks.each do |bookmark| %>
-  <p> <%= @post.image %></p>
-
-<h3>投稿</h3> 
-<% @posts.each do |post| %>
-
-<p><%= @post.image %></p>
-
-<% end %>
-<% end %>
+ 

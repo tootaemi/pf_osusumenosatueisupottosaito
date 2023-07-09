@@ -3,13 +3,13 @@ class Customer::HomesController< ApplicationController
 
    # before_action :authorize
    
-    def mypage
-        @bookmarks = Bookmark.where(user_id: current_user.id)
-    end
+    # def mypage
+    #     @bookmarks = Bookmark.where(user_id: current_user.id)
+    # end
 
+    def top
+  @posts = Post.limit(8).order('id DESC')
 
-
-  def top
     # @customers = Customer.all.order("id DESC")
     # @customers = Customer.limit(4).order('id DESC')
    #@customer = current_customer.id
@@ -19,7 +19,7 @@ class Customer::HomesController< ApplicationController
     @posts = Post.all
     @post = Post.new
     @posts = @posts.page(params[:page])
-  end
+    end
 
 
  def index

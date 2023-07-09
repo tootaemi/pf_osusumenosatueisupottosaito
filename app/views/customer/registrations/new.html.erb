@@ -15,7 +15,9 @@
       </div>
       <div class="row form-group">
         <%= f.label :メールアドレス, class: "col-lg-4" %>　
-        <%= f.email_field :email, autofocus: true, class: "col-lg-4" %>
+        <%#= f.email_field :email, autofocus: true, class: "col-lg-4" %>
+        <%= f.email_field :email, autofocus: true, id:"inputName", placeholder:"sample@example.com"%>
+
       </div>
       <div class="field">
         <%= f.label :パスワード%>

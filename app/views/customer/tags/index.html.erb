@@ -3,9 +3,15 @@
   <div class="input-group">
     <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "タグを入力" %>
     <span class="input-group-btn input-group-append">
-      <input type="submit" value="検索" data-disable-with="検索">
-      </input>
+      <input type="submit" value="検索" data-disable-with="検索"></input>
     </span>
   </div>
-      <% end %>
+  <% end %>
 </div>
+
+
+  <%= form_with url: search_posts_path, local: true, method: :get do |form| %>
+    <%= form.text_field :keyword %>
+    <%= form.submit "検索" %>
+  <% end %>
+  

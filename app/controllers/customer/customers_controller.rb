@@ -118,7 +118,15 @@ class Customer::CustomersController< ApplicationController
     end
    end
 
-
+def update
+      @customer = current_customer
+    @customer = Customer.find(params[:id])
+    if @customer.update(customer_params)
+      redirect_to customer_path(@customer)
+    else
+      render :edit
+    end
+end
 #  def update
 #   @customer = Customer.find(params[:id])
 #    if @customer.update(customer_params)
@@ -176,7 +184,23 @@ private
     @customer = Customer.find(params[:id])
   end
 
+ def destroy_confirm
+    @customer = current_customer
+ end
 
+  def destroy_customer
+    @customer = current_customer
+    if @customer.email == 'test@test.com"'
+      reset_session
+      redirect_to :root
+    else
+      @customer.update(is_valid: false)
+      reset_session
+      redirect_to :root
+    end
+  end
+  
+  
   private
    def customer_params
     params.require(:customer).permit(:name, :email, :encrypted_password)

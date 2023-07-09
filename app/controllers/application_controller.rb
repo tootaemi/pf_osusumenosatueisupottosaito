@@ -4,7 +4,7 @@
    
   # ログイン後のリダイレクト先
    def after_sign_in_path_for(resource)
-     admin_customers_path(resource)
+    root_path(resource)
    end
    
   # ログアウト後のリダイレクト先
@@ -21,6 +21,15 @@
   def configure_sign_in_params
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name, :encrypted_password])
   end
+  
+  
+  def guest_sign_in
+    customer = Customer.guest
+    sign_in customer
+    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+
+  
   
   # def configure_permitted_parameters
   #   if resource_class == Customer

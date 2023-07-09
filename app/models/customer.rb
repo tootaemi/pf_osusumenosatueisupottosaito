@@ -37,6 +37,7 @@ class Customer < ApplicationRecord
   has_many :comments#, dependent: :destroy
 
   # has_many :images, dependent: :destroy
+  
 
 
   # userのidを入れて、bookmarksメソッドを入れて、それぞれのpostを出す
@@ -48,6 +49,15 @@ class Customer < ApplicationRecord
   # def customers
   #   return Customer.find_by(id: self.customer_id)
   # end
+
+
+# def self.guest
+#     find_or_create_by!(name: "ゲストユーザー",
+#                       email: "test@test.com",
+#                       is_valid: true) do |customer|
+#       user.password = SecureRandom.urlsafe_base64
+#     end
+# end
 
 
   def self.guest

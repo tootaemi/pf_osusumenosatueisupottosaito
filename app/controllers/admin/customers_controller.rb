@@ -16,6 +16,8 @@ class Admin::CustomersController < ApplicationController
 
   def edit
     @customer = Customer.find(params[:id])
+    @customer = Customer.find(1)
+
   end
 
 

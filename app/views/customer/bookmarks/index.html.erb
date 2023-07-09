@@ -1,143 +1,19 @@
-<%# if current_customer.own?(post) %>
-   <%#= render 'crud_menus', post: post %>
-<%# else  %>
-   <%#= render 'bookmark_area', post: post %>
-<%#  end %>
-
-<div class="mx-auto" style="width: 1000px">
-	<div class="container">
-	  <span class="p-3 mb-2 bg-light text-dark">
-	      <h3><%= current_customer.name %>さんのいいね一覧</h3>
-	      <%# @posts.each do |post|%>
-<%# if @post.image.attached? %>
-<%#= image_tag @post.image, size: "90x90" %>
-<%# else %>
-<%#= image_tag 'no_image', size: "90x90" %>
-<%# end %>
-<%# end %>
-	  </span>
-	</div>
-</div>
-
-
-<div class="container mt-5">
-	<div class="row justify-content-center">
-		<div class="col-12">
-			<div class="text-left">
-				<!--<div class=".container-md">-->
-				<!--<div class="row-md">-->
-				<table class="col-lg table-bordered">
-					<thead class="bg-light">
-						<tr>
-						  <td class="text-left">写真</td>
-							<td class="text-left">住所</td>
-							<td class="text-left">紹介文</td>
-							<td class="text-left">投稿者名</td>
-							<td class="text-left">タグ</td>
-							<td class="text-left">投稿日</td>
-						</tr>
-					</thead>
-					<% @posts.each do |post| %>
-					<tbody>
-					  	<tr>
-					  	  <td>
-                   <%= link_to post_path(post) do %>
-                  <% if post.image.attached? %>
-					<%= image_tag post.image, size: "90x90" %>
-					<% else %>
-					<%= image_tag 'no_image', size: "90x90" %>
-					<% end %>
-					<% end %>
-							  <%= post.address %><br/>
-								<%= post.introduction %><br/>
-					 　<%= post.customer.name %></br>
-								<%= post.hash_tags %></br>
-								<%= post.created_at.strftime('%Y/%m/%d') %>
-							</td>
-						</tr>
-					</tbody>
-					<% end %>
-				</table>
-
-			</div>
-		</div>
-	</div>
-</div>
-
-<table>
+<h2><%= current_customer.name %>さんのいいね一覧</h2>
+<% @bookmarks.each do |bookmark| %>
 <tbody>
-<% if @post.bookmarks %>
-<%# if @post.bookmarks(current_customer) %>
-<td><%= link_to "ブックマークを外す", post_bookmarks_path(@posts), method: :delete %></td>
-<% else %>
-<td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
-<% end %>
+	<thead>
+		<tr>
+			<div>
+				<th><%= image_tag bookmark.post.image,size: "90x90" if bookmark.post.image.present? %></th>
+				<th><%= bookmark.post.address %></th>
+				<th><%= bookmark.post.introduction %></th>
+				<th><%= bookmark.post.hash_tags %></th>
+				<th><%= bookmark.post.created_at.strftime('%Y/%m/%d') %></th>
+				<th><%= bookmark.post.customer.name %></th>
+			</div>
+		</tr>
+	</thead>
 </tbody>
-</table>
-
-
-<% @posts.each do |post| %>
-                <% if @post.bookmarks %>
-
-<%# if post.bookmarks(current_customer) %>
-  <%= link_to post_bookmarks_path(post), method: :delete do %>♥<%= post.bookmarks.count %>
-  <% end %>
-<% else %>
-  <%= link_to post_bookmarks_path(post), method: :post do %>♡<%= post.bookmarks.count %>
-  <% end %>
 <% end %>
-#<% end %>
+<%= paginate @bookmarks %>
 
-
-
-<table>
-    <tbody>
-        <% @posts.each do |post| %>
-            <tr>
-                <% if post.customer == current_customer %>
-                    <td><%= link_to "編集", edit_post_path(post) %></td>
-                    <td><%= link_to "削除", post_path(post), method: :delete %></td>
-                <% else %>
-                    <td></td>
-                    <td></td>
-                <% end %>
-                <% if @post.bookmarks %>
-                    <td><%= link_to "ブックマークを外す", post_bookmarks_path(post), method: :delete %></td>
-                <% else %>
-                    <td><%= link_to "ブックマーク", post_bookmarks_path(post), method: :post %></td>
-
-                <% end %>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<%#= paginate @orders %>
-
-
-
-_________________________
-
-<table>
-  <caption>ブックマーク一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.post.customer.name %></td>
-        <td>
-          <%= link_to post_path(bookmark.post) do %>
-            <%= bookmark.post.address %>
-          <% end %>
-        </td>
-        <td><%= bookmark.post.introduction %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>

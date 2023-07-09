@@ -14,29 +14,23 @@ class Customer::PostsController < ApplicationController
  end
 
     def index
-  @customers = Customer.all
-  @bookmarks = Bookmark.all
-  @customer = Customer.new
-  @customer = current_customer
-  @tag_list = Tag.all
-  @bookmarks = Bookmark.all
-  @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
-  # @customer = Customer.find(params[:id])
-    @posts = Post.limit(10).order('id DESC')
-    # @posts = @posts.page(params[:page])
-  @posts = Post.page(params[:page]).per(10)
+      @customers = Customer.all
+      @bookmarks = Bookmark.all
+      @customer = Customer.new
+      @customer = current_customer
+      @tag_list = Tag.all
+      @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
+      # @customer = Customer.find(params[:id])
+      @posts = Post.limit(10).order('id DESC')
+      # @posts = @posts.page(params[:page])
+      # @post = Posts.page(params[:page]).per(10)
+  
   # @posts = @posts.page(params[:page])
   # @posts = Post.all.page(params[:page])
-  @posts = Post.all.page(params[:page]).per(10)
+  @post = Post.all.page(params[:page]).per(10)
   @posts = Post.page(params[:page])
-      
-      
-  @posts = Post.all.page(params[:page]).per(10)
-
-
-
   @posts = Post.new(params[:search])
-  
+
   # @post　= Post.paginates_per.page(5).per(10)
   # @posts = Post.paginates_per.page(params[:page]).per(10)
   # @posts = @posts.page(params[:page])
@@ -67,13 +61,15 @@ class Customer::PostsController < ApplicationController
   else
     @posts = Post.all
   end
+    @posts = current_customer.posts
+
+ @post = Post.new
+    @posts = Post.page(params[:page]).per(8)
 
     end
 
 
-
 def show
-
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments.includes(:customer)
@@ -89,9 +85,20 @@ def show
 
 
     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
-    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+    # @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
 
-  @post = Post.find(params[:id])
+    @posts = @post.post_tags.page(params[:page])
+
+
+    @post = Post.where(params[:id])
+    # @comments = @post.comments.includes(:customer)
+
+    # @customer = Customer.find(params[:id])
+    # @post = Post.find(params[:id])
+
+
+     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
+    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
     @posts = @post.post_tags.page(params[:page])
 end
 
@@ -105,22 +112,16 @@ end
 
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
-       @post = Post.new(post_params)
+      
+      @post = Post.new(post_params)
+      # @post = Post.find(post_params)
         @post.customer_id = current_customer.id
+      @posts = Post.all
       @post.save
-      redirect_to root_path(@post)
-    @posts = Post.all
+      redirect_to root_path(@post.id)
     @postnew = Post.new(post_params)
      @post = current_customer.posts.new(post_params)
     end
-
-
-
-
-
-
-
-
 
 
 # def create
@@ -133,15 +134,19 @@ end
 
     def edit
       @post = Post.find(params[:id])
+      # @post = Post.find(1)
       # @post = Post.find(post_params)
       @post.customer.name
     end
 
   def update
+    @post = current_post
     @post = Post.find(params[:id])
     if @post.update(post_params)
       @post.save_tags(params[:post][:tag])
-      redirect_to post_path(@post)
+          redirect_to root_path
+
+      # redirect_to posts_path(@post.id)
     else
       render :edit
     end
@@ -264,14 +269,6 @@ def hashtag
   # @tag = Tag.find(params[:hash_tags])
       @tag = Tag.new
   # @posts = @tag.posts
-end
-
-
-
-
-
-
-  def hashtag
     if params[:name].nil?
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     else
@@ -281,7 +278,7 @@ end
       @post = @hashtag.posts
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     end
-  end
+end
 
 
 
@@ -304,12 +301,7 @@ end
     @post.destroy
     redirect_to posts_path
   end
-
-
-
-
-
-
+  
 
 # ~
 # ~
@@ -335,9 +327,6 @@ end
   #     @users = User.none
   #   end
   # end
-
-  def edit
-  end
 
 
   private

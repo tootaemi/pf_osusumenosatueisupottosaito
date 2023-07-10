@@ -1,19 +1,21 @@
 <h2><%= current_customer.name %>さんのいいね一覧</h2>
+<%# if @bookmarks.present? %>
 <% @bookmarks.each do |bookmark| %>
-<tbody>
-	<thead>
-		<tr>
-			<div>
-				<th><%= image_tag bookmark.post.image,size: "90x90" if bookmark.post.image.present? %></th>
-				<th><%= bookmark.post.address %></th>
-				<th><%= bookmark.post.introduction %></th>
-				<th><%= bookmark.post.hash_tags %></th>
-				<th><%= bookmark.post.created_at.strftime('%Y/%m/%d') %></th>
-				<th><%= bookmark.post.customer.name %></th>
-			</div>
-		</tr>
-	</thead>
-</tbody>
-<% end %>
-<%= paginate @bookmarks %>
 
+		<tbody>
+			<thead>
+				<tr>
+					<div>
+						<th><%= image_tag bookmark.post.image,size: "90x90" if bookmark.post.image.present? %></th>
+						<th><%= bookmark.post.address %></th>
+						<th><%= bookmark.post.introduction %></th>
+						<th><%= bookmark.post.hash_tags %></th>
+						<th><%= bookmark.post.created_at.strftime('%Y/%m/%d') %></th>
+						<th><%= bookmark.post.customer.name %></th>
+					</div>
+				</tr>
+			</thead>
+		</tbody>
+	<% end %>
+	<%# end %>
+<%= paginate @bookmarks %>

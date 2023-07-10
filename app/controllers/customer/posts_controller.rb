@@ -24,7 +24,7 @@ class Customer::PostsController < ApplicationController
       @posts = Post.limit(10).order('id DESC')
       # @posts = @posts.page(params[:page])
       # @post = Posts.page(params[:page]).per(10)
-  
+
   # @posts = @posts.page(params[:page])
   # @posts = Post.all.page(params[:page])
   @post = Post.all.page(params[:page]).per(10)
@@ -78,14 +78,15 @@ def show
     # @customer = Customer.find(params[:id])
     @customer = Customer.where(id: params[:id])
     # @post = Post.find(params[:id])
+
     @posts = customer_path
     @posts= Post.all
     @hash_tags = @hash_tag
     @comment = Comment.where(id: params[:id])
 
 
-    @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
-    # @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+  @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
+    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
 
     @posts = @post.post_tags.page(params[:page])
 
@@ -94,11 +95,9 @@ def show
     # @comments = @post.comments.includes(:customer)
 
     # @customer = Customer.find(params[:id])
-    # @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
 
 
-     @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
-    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
     @posts = @post.post_tags.page(params[:page])
 end
 
@@ -112,7 +111,7 @@ end
 
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
-      
+
       @post = Post.new(post_params)
       # @post = Post.find(post_params)
         @post.customer_id = current_customer.id
@@ -301,7 +300,7 @@ end
     @post.destroy
     redirect_to posts_path
   end
-  
+
 
 # ~
 # ~
@@ -328,6 +327,9 @@ end
   #   end
   # end
 
+
+  # def bookmark
+  # end
 
   private
   def ensure

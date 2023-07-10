@@ -1,6 +1,7 @@
 class Customer::CustomersController< ApplicationController
   before_action :authenticate_customer!
   before_action :set_customer, only: [:bookmarks]
+  
 #   def withdraw; end
 
 #   def withdraw
@@ -174,15 +175,11 @@ end
 
 
 
-  def bookmarks
-    @bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:post_id)
-    @bookmark_posts = Post.find(bookmarks)
-  end
 
-private
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
+
+
+
+
 
  def destroy_confirm
     @customer = current_customer
@@ -198,6 +195,19 @@ private
       reset_session
       redirect_to :root
     end
+  end
+  
+  
+  def bookmarks
+    bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:post_id)
+
+    @bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:post_id)
+    @bookmark_posts = Post.find(bookmarks)
+  end
+
+private
+  def set_customer
+    @customer = Customer.find(params[:id])
   end
   
   

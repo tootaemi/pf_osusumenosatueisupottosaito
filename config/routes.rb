@@ -27,8 +27,6 @@ Rails.application.routes.draw do
   #   resources :searches, only: :index
   # end
 
-
-
   devise_scope :customer do
     # get 'customer', to: redirect("/customer/sign_up")
     post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
@@ -79,17 +77,20 @@ Rails.application.routes.draw do
       end
     end
 
+resources :customers do
+  member do
+    get :bookmarks
+  end
+end
+
+
     resources :comments, only: :destroy
     resources :bookmarks, only: :index
 
-
-    get '/post/hashtag/:name', to: "posts#hashtag"
-
+    # get '/post/hashtag/:name', to: "posts#hashtag"
     post 'posts/:id/bookmarks'=> 'posts#create', as: 'create_post_bookmarks'
     delete 'posts/:id/bookmarks'=> 'posts#destroy', as: 'destroy_post_bookmarks'
-
-    post "/customer/posts/:id/edit" => "customer/posts#edit"
-
+    post "customer/posts/:id/edit" => "customer/posts#edit"
   end
 
   # resources :posts do

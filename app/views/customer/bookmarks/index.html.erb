@@ -1,8 +1,8 @@
 <h2><%= current_customer.name %>さんのいいね一覧</h2>
-<%# if @bookmarks.present? %>
+<% if @bookmarks.present? %>
 <% @bookmarks.each do |bookmark| %>
-
-		<tbody>
+<% p bookmark %>
+<tbody>
 			<thead>
 				<tr>
 					<div>
@@ -17,5 +17,5 @@
 			</thead>
 		</tbody>
 	<% end %>
-	<%# end %>
+	<% end %>
 <%= paginate @bookmarks %>

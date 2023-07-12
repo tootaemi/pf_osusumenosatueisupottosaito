@@ -16,8 +16,8 @@
 <%= link_to @post.introduction, post_path(@post.id) %>
 
 
-<%= link_to image_tag( post.image.variant(resize: '100x100') ), post_path(post.id) %>
-<%= link_to post.customer.name, customer_path(post.customer.id) %>
+<%#= link_to image_tag( post.image.variant(resize: '100x100') ), post_path(post.id) %>
+<%#= link_to post.customer.name, customer_path(post.customer.id) %>
 <i class="fa fa-heart unlike-btn"></i>
-<%= post.bookmarks.length %>
-<%= link_to post.title, post_path(post.id) %>
+<%#= post.bookmarks.length %>
+<%#= link_to post.introduction, post_path(post.id) %>

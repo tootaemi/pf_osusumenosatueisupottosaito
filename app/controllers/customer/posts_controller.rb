@@ -31,7 +31,7 @@ class Customer::PostsController < ApplicationController
   @posts = Post.page(params[:page])
   @posts = Post.new(params[:search])
 
-  # @post　= Post.paginates_per.page(5).per(10)
+  # @post= Post.paginates_per.page(5).per(10)
   # @posts = Post.paginates_per.page(params[:page]).per(10)
   # @posts = @posts.page(params[:page])
 
@@ -66,6 +66,17 @@ class Customer::PostsController < ApplicationController
  @post = Post.new
     @posts = Post.page(params[:page]).per(8)
 
+
+
+     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+
+    if params[:keyword]
+      @posts = @posts.search(params[:keyword]).page(params[:page])
+    else
+      @posts = @posts.page(params[:page])
+    end
+    @keyword = params[:keyword]
+
     end
 
 
@@ -91,7 +102,6 @@ def show
     @posts = @post.post_tags.page(params[:page])
 
 
-    @post = Post.where(params[:id])
     # @comments = @post.comments.includes(:customer)
 
     # @customer = Customer.find(params[:id])
@@ -249,8 +259,9 @@ def search
   @Tags = Tag.all
     @customers = Customer.search(params[:keyword])
 
+
     if params[:keyword].present?
-      @photos = Tag.where('caption LIKE ?', "%#{params[:keyword]}%")
+      @photos = Tag.where('caption LIKE ?',"%#{params[:keyword]}%")
       @keyword = params[:keyword]
     else
       @posts = Post.all
@@ -260,7 +271,30 @@ def search
     #@tag = Tags.find(params[:tag_id])  #クリックしたタグを取得
     #@posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
     @customers = Customer.all
+
+
+
+    if params[:name].present?
+      @customerrs = Customer.where('post LIKE ?', "%#{params[:post]}%")
+    else
+      @customers = Customer.none
+    end
+
+
+
+  if (params[:keyword])[0] == '#'
+    @posts = Tag.search(params[:keyword]).order('created_at DESC')
+  else
+    @posts = Post.search(params[:keyword]).order('created_at DESC')
+  end
 end
+
+
+
+    def bookmarks
+      @posts = current_customer.bookmarks_posts
+    end
+
 
 
 def hashtag
@@ -277,6 +311,7 @@ def hashtag
       @post = @hashtag.posts
       @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     end
+
 end
 
 
@@ -328,10 +363,7 @@ end
   # end
 
 
-  # def bookmark
-  # end
-
-  private
+private
   def ensure
     @post = current_customer.posts
     @post = @posts.find_by(id: params[:id])
@@ -344,12 +376,10 @@ def hash_tags
 end
 
 
-  private
-   def post_params
+private
+  def post_params
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
     #.merge(user_id: current_customer.id)
-   end
-
+  end
 
 end
-

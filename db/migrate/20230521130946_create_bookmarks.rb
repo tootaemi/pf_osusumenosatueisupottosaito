@@ -5,7 +5,7 @@ class CreateBookmarks < ActiveRecord::Migration[6.1]
       t.integer :post_id, null: false, default: ""
       t.timestamps null: false
     end
+       add_index :bookmarks, [:customer_id, :post_id], unique: true
+
   end
 end
-
-

@@ -3,22 +3,11 @@ class Post < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-
-    
   attribute :hash_tags
   attribute :sent_tags
-
+  
   validates :address, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 2000 }
-
-
-
-
-
-  #   def bookmarked_by?(user)
-  #   bookmarks.where(user_id: user).exists?
-  # end
-
 
   # def bookmarkd_by?(customer)
   #   bookmarks.exists?(customer_id: customer.id)
@@ -28,6 +17,7 @@ class Post < ApplicationRecord
 # def bookmarkd?(customer)
 #   bookmarks.where(customer_id: customer.id).exists?
 # end
+
 
 
   has_one_attached :image
@@ -95,31 +85,48 @@ class Post < ApplicationRecord
   end
 
 
+# def bookmarked_by?(customer)
+#   bookmarks.exists?(customer_id: customer.id)
+# end
+
+
+
   def self.search(search)
     # Attendance.where(indicater_reply_edit: Time.local(2019,1)..Time.local(2025,12))
 
     # Post.where(indicater_reply_edit: Time.local(2019,1)..Time.local(2025,12))
     # def self.search
     Post.where('introduction LIKE ?', '%'+ search + '%')
-    
+
     #if search != "#"
      # Post.where('title LIKE(?)', "%#{search}%")
     #else
      # Post.includes(:customer)
     #end
     
-   
-  
+    
+    if search != nil
+      Post.where('title LIKE(?) or text LIKE(?)' , "%#{post}%",  "%#{post}%")
+    else
+      Post.all
+    end
   end
+    
+    
 
+
+def self.search(keyword)
+    where("introduction LIKE ?", "%#{sanitize_sql_like(keyword)}%")
+end
+
+
+end
 
 # def self.search(keyword)
 #     where("hash_tag_name LIKE ? or address LIKE ? or detailed_description LIKE ?", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%")
 # end
 
 
-
-end
 
 
 

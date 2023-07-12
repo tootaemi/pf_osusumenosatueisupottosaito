@@ -14,11 +14,11 @@
     <p>投稿者　<%= @post.customer.name %></p>
   </div>
 </div>
-
 <div class="row">
   <div class="col-12">
     <div class="like-btn">
-      <% if Bookmark.find_by(customer_id: @current_customer, post_id: @post.id) %>
+
+      <% if current_customer.bookmark?(@post.id) %>
         <%=link_to post_bookmarks_path(@post), method: :delete, remote: false do %>
           <span class="fa fa-heart like-btn-unlike"></span>
         <% end %>
@@ -28,13 +28,12 @@
         <% end %>
       <% end %>
     </div>
-  
+
     <div class="like-btn">
       <h3>いいね件数：<%= @bookmark_count %></h3>
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col-md-4">
     <%= form_with model: [@post, @comment] do |f| %>
@@ -71,7 +70,6 @@
     <% end %>
   </div>
 </div>
-
 <% if customer_signed_in? && current_customer.id == @post.customer_id %>
        <li>
     <%= link_to "編集", edit_post_path(@post.id), class: "YYYY" %>

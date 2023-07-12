@@ -1,34 +1,27 @@
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <%#= render 'customers/info', customer: @customer %>
-      </div>
-      <div class='col-md-8 offset-md-1'>
-      	<h2> ユーザー　一覧</h2>
-        <table class='table table-hover table-inverse'>
-
-                  <tbody>
-                <tbody>
-                  <tr>
-                    <td>
-                       
-					<div>会員ID　<%= @customer.id %></div>
-					<div>名前　<%= @customer.name %></div>
-					<div>メールアドレス　　　<%=@customer.email %></div>
-					 <p>パスワード　<%= @customer.encrypted_password %></p>
-
-   </td>
-                    </tr>
-
-                    </tbody>
-                    </table>
-                    </div>
-                    </tbody>
-
-                      </div>
-                      </div>
-<!--                      <div class="mx-auto" style="width: 100px">-->
-<!--	<p class="text-center">-->
-<!--	<%#= paginate @customers %>-->
-<!--	</p>-->
-<!--</div>-->
+<h1 class="users-heading">ユーザー一覧</h1>
+<div class="container">
+	<div class="row">
+		<table class='table table-hover table-inverse'>
+			<thead>
+				<tr>
+					<th class="bg-light">会員ID</th>
+					<th class="bg-light">名前</th>
+					<th class="bg-light">メールアドレス</th>
+				 </tr>
+			</thead>
+					<tbody class="col-md-6">
+						<% @customers.each do |customer| %>
+						<tr>
+							<td><%= customer.id %></td>
+							<td><%= link_to customer.name, admin_customer_path(customer.id)%></td>
+							<td><%= customer.email %></td>
+						</tr>
+							<% end %>
+					 </tbody>
+		</table>
+	 </div>
+</div>
+							<!--<div class="mx-auto" style="width: 95px">-->
+							<!--	<%#= paginate @customers %>-->
+							<!--	</div>-->
+							

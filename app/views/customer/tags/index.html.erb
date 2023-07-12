@@ -1,11 +1,10 @@
 <div class="d-flex justify-content-end">
   <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
   <div class="input-group">
-    <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "タグを入力" %>
+    <%= f.text_field :hash_tag, value: @hash_tag, class: "form-control search-control", placeholder: "タグを入力" %>
     <span class="input-group-btn input-group-append">
       <input type="submit" value="検索" data-disable-with="検索"></input>
     </span>
   </div>
   <% end %>
 </div>
-  

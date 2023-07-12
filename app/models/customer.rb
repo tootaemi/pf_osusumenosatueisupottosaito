@@ -1,30 +1,8 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :trackable, :validatable
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-        # :recoverable, :rememberable, :trackable, :validatable,:Trackable
-
-
- # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  #ログアウト
-    # devise :database_authenticatable, :registerable,
-    #     :recoverable, :validatable, :rememberable
   devise :database_authenticatable, :registerable,
        :recoverable, :rememberable, :validatable
-
-        # #ログイン
-          # devise :database_authenticatable, :registerable,
-          # :recoverable,  :validatable, :rememberable
-
-        #   devise :database_authenticatable, :registerable,
-        # :recoverable, :rememberable, :validatable
-
 
   # has_one :image, dependent: :destroy
   # belongs_to :post
@@ -32,12 +10,40 @@ class Customer < ApplicationRecord
   # has_many :post_comments, dependent: :destroy
 
  # ここからが他のモデルとの関係性
-  has_many :posts, dependent: :destroy
-  has_many :bookmarks, dependent: :destroy
+  has_many :posts#, dependent: :destroy
+  has_many :bookmarks#, dependent: :destroy
   has_many :comments#, dependent: :destroy
 
   # has_many :images, dependent: :destroy
-  
+
+
+
+#userオブジェクトのidとpostやlikeオブジェクトのuser_idが同じかどうかを判断
+  def mine?(object)
+   object.user_id == id
+ end
+
+#bookmarks_postsテーブルにpostオブジェクトを追加する。
+#いいねを押したときに、いいねしたユーザーといいねされた投稿の情報が保存される。
+ def bookmark(post)
+   bookmarks.create(post_id: post.id)
+ end
+
+#likes_postsテーブルから引数のpostオブジェクトに該当するレコードを削除する。
+ def unlike(post)
+   bookmarks.find_by(post_id: post.id).destroy
+ end
+
+#likes_postsテーブルに引数のpostオブジェクトに該当するレコードがあるかを判断する。
+ def bookmark?(post)
+   bookmarks.where(post_id: post).exists?
+ end
+
+ def full_name
+   "#{last_name} #{first_name}"
+ end
+
+
 
 
   # userのidを入れて、bookmarksメソッドを入れて、それぞれのpostを出す
@@ -58,6 +64,10 @@ class Customer < ApplicationRecord
 #       user.password = SecureRandom.urlsafe_base64
 #     end
 # end
+
+
+
+
 
 
   def self.guest
@@ -81,14 +91,7 @@ class Customer < ApplicationRecord
     id == bookmark?
   end
 
-  # 引数に渡されたboardがブックマークされているか？
-  def bookmark?(post)
-    bookmark_posts.include?(post)
-  end
 
-def bookmarked_by?(post_id)
-  bookmarks.where(post_id: post_id).exists?
-end
 
 # # board_idを入れてブックマークしてください
 #   def bookmark?(post)
@@ -110,9 +113,9 @@ end
        all #全て表示させる
      end
     end
-   
 
 
 
-    
+
+
 end

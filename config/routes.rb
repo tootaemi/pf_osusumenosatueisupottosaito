@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   scope module: :customer do
     root to: 'homes#top'
     # post "/" => "homes#top"
-    
+
     # resources :customers
     # patch 'customers/:id' => 'customers#update'
 
@@ -67,7 +67,7 @@ Rails.application.routes.draw do
     end
 
     resources :posts do
-      resources :bookmarks, only: [:create, :destroy]
+      resource :bookmarks, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
       # resources :comments, only: %i[create destroy]
 
@@ -88,8 +88,6 @@ end
     resources :bookmarks, only: :index
 
     # get '/post/hashtag/:name', to: "posts#hashtag"
-    post 'posts/:id/bookmarks'=> 'posts#create', as: 'create_post_bookmarks'
-    delete 'posts/:id/bookmarks'=> 'posts#destroy', as: 'destroy_post_bookmarks'
     post "customer/posts/:id/edit" => "customer/posts#edit"
   end
 

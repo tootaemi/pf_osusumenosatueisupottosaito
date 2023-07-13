@@ -57,8 +57,9 @@ Rails.application.routes.draw do
     # end
 
     resources :tags do
-      get 'posts', to: 'posts#search'
     end
+    get 'tag_search', to: 'posts#hashtags', as: 'tag_search'
+
 
     resources :customers do
       post 'tag/:id' => 'tags#create', as: 'tag'
@@ -87,7 +88,8 @@ end
     resources :comments, only: :destroy
     resources :bookmarks, only: :index
 
-    # get '/post/hashtag/:name', to: "posts#hashtag"
+ #get '/item/hashtag/:name', to: "items#hashtag"
+# get 'post/hashtag/:name', to: "posts#hashtag"
     post "customer/posts/:id/edit" => "customer/posts#edit"
   end
 

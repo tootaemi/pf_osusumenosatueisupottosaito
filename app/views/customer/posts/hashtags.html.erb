@@ -1,0 +1,74 @@
+<h1>投稿一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>写真</th>
+      <th>写真の住所</th>
+      <th>写真の紹介文</th>
+            <th>タグ</th>
+                  <th>投稿日</th>
+      <th>投稿者</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+      
+        <tr>
+            
+      <td>
+            <%= link_to post_path(post) do %>
+
+        <% if post.image.attached? %>
+        <%= image_tag post.image, size: "300x200" %>
+        <% else %>
+        <%= image_tag 'no_image', size: "300x200" %>
+        <% end %>
+      </td>
+      <td><%= post.address %></td>
+      <td><%= post.introduction %></td>
+      <td><%= post.hash_tags %></td>
+						<td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+						<td><%= post.customer.name %></td>
+                <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+            <% end %>
+
+    
+    <tbody>
+			<thead>
+				<tr>
+					<div>
+						<th>
+						  
+					</div>
+				</tr>
+			</thead>
+		</tbody>
+    
+  </tbody>
+</table>
+
+<br>
+
+<h2>ハッシュタグ一覧</h2>
+<% @hashtags.each do |hashtag| %>
+    <%#
+        name = hashtag["tag_name"]
+        count = hashtag["count"]
+        id = hashtag["id"]
+    %>
+    <p>
+        <%#= link_to "##{name}(#{count})", hashtag_path(id) %>
+      <%= link_to "##{hashtag.tag_name}(#{Post.joins(:tags).where("tags.tag_name like ?", "%"+hashtag.tag_name+"%").count})", tag_path(hashtag.id) %>
+   </p>
+<% end %>
+
+<%= link_to 'Back', posts_path %>
+<p id="notice"><%= notice %></p>

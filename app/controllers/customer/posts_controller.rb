@@ -212,36 +212,8 @@ end
           return redirect_to root_path,alert:'権限がありません'if @post.user != current_user
         end
 
-
-
-
-
-
-  # def create
-  #   @post = Post.new(post_params)
-  #   @posts = Post.all
-  #   @post.save
-  #   redirect_to customer_post_path(@post.id)
-  #   #@post.save ? (redirect_to customer_post_path(@post)) : (render :new)
-  # end
-
-
-
-# def create
-#   @post = Post.new(post_params)
-#   @post.user_id = current_user.id
-#   if @post.save
-#       redirect_to post_path(@post)
-#   else
-#       @posts = Post.all
-#       render 'index'
-#   end
-# end
-
-
-
 # def search
-#     @tag = Tag.all
+#     # @tag = Tag.all
 
 #   @section_title = "「#{params[:search]}」の検索結果"
 #   @posts = if params[:search].present?
@@ -251,13 +223,13 @@ end
 #           else
 #             Post.none
 #           end
-# end
+# # end
 
 
 def search
   @posts = Post.all
-  @Tags = Tag.all
-    @customers = Customer.search(params[:keyword])
+  @tags = Tag.all
+  @customers = Customer.search(params[:keyword])
 
 
     if params[:keyword].present?
@@ -272,8 +244,6 @@ def search
     #@posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
     @customers = Customer.all
 
-
-
     if params[:name].present?
       @customerrs = Customer.where('post LIKE ?', "%#{params[:post]}%")
     else
@@ -282,11 +252,11 @@ def search
 
 
 
-  if (params[:keyword])[0] == '#'
-    @posts = Tag.search(params[:keyword]).order('created_at DESC')
-  else
-    @posts = Post.search(params[:keyword]).order('created_at DESC')
-  end
+  # if (params[:tag])[0] == '#'
+  #   @posts = Tag.search(params[:tag]).order('created_at DESC')
+  # else
+  #   @posts = Post.search(params[:tag]).order('created_at DESC')
+  # end
 end
 
 
@@ -297,20 +267,27 @@ end
 
 
 
-def hashtag
-    @Tags = Tag.all
+# def hashtag
+def hashtags
+  # @tag = Tag.find(params[:tag_id])
+  # @tag = Tag.find_by(tag_name: params[:hash_tags])
+  
+  #  @Tags = Tag.all
   # @tag = Tag.find(params[:hash_tags])
-      @tag = Tag.new
+  #    @tag = Tag.new
   # @posts = @tag.posts
-    if params[:name].nil?
-      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
-    else
-      name = params[:name]
-      name = name.downcase
-      @hashtag = Hashtag.find_by(hashname: name)
-      @post = @hashtag.posts
-      @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
-    end
+
+  if params[:hashtags].nil?
+#    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    @hashtags = Tag.all.group(:tag_name)
+  else
+    name = params[:hashtags]
+    name = name.downcase
+    @hashtag = Tag.find_by(tag_name: name)
+    @posts = @hashtag.posts
+#    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    @hashtags = Tag.all.group(:tag_name)
+  end
 
 end
 
@@ -335,6 +312,8 @@ end
     @post.destroy
     redirect_to posts_path
   end
+
+
 
 
 # ~
@@ -370,10 +349,8 @@ private
     redirect_to new_post_path unless @post
   end
 
-def hash_tags
-  @tag = Tag.find(params[:tag_id])
-  @posts = @tag.posts
-end
+
+
 
 
 private

@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/52d99e1ee3.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,24 +14,65 @@
       <div class="header-content">
         <ul class="flex">
           <% if admin_signed_in? %>
-            <li><%= link_to 'ユーザー一覧',  admin_customers_path %></li>
-            <li><%= link_to 'コメント一覧',    admin_comments_path %></li>
-            <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+           <li class="navbar-nav ml-auto">
+             <%= link_to root_path, class: "nav-link text-dark", method: :get do %>
+          <i class="fa-solid fa-users"></i>ユーザー一覧
+           </li>
+           <% end %>
+  
+            <li class="navbar-nav ml-auto">
+             <%= link_to admin_comments_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-pen"></i>コメント一覧
+           </li>
+           <% end %>
+           
+            <%= link_to destroy_admin_session_path, class: "nav-link text-dark", method: :delete do %>
+           <i class="fas fa-sign-out-alt"></i>ログアウト
+           <% end %>
 
           <% elsif customer_signed_in? %>
           <p>ようこそ、<%= current_customer.name %>さん!</p>
-            <li><%= link_to 'トップページ', root_path %></li>
-            <li><%= link_to '新規投稿', new_post_path %></li>
-            <li><%= link_to 'マイページ', customers_path %></li>
-            <li><%= link_to 'いいね一覧', bookmarks_path %></li>
-            <li><%= link_to 'キーワード検索', search_posts_path %></li>
-            <li><%= link_to 'タグ検索', tags_path %></li>
-            <li><%= link_to 'ログアウト', destroy_customer_session_path, method: :delete %></li>
-            </li>
+          <nav class="navbar navbar-dark bg-dark">
+  <a href="root_path" class="fas fa-home">トップページ</a>
+</nav>
+           <li class="navbar-nav ml-auto">
+             <%= link_to root_path, class: "nav-link text-dark", method: :get do %>
+             <i class="fas fa-home"></i>トップページ
+           </li>
+           <% end %>
+           <%= link_to new_post_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-camera"></i>新規投稿
+           <% end %>
+           <%= link_to customers_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-face-smile"></i>マイページ
+           <% end %>
+           <%= link_to bookmarks_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-heart"></i>いいね一覧
+           <% end %>
+           <%= link_to search_posts_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-magnifying-glass"></i>キーワード検索
+           <% end %>
+           <%= link_to tags_path, class: "nav-link text-dark", method: :get do %>
+           <i class="fa-solid fa-hashtag"></i>タグ検索
+           <% end %>
+           <%= link_to destroy_customer_session_path, class: "nav-link text-dark", method: :delete do %>
+           <i class="fas fa-sign-out-alt"></i>ログアウト
+           <% end %>
+           </li>
           <% else %>
             <li><%= link_to 'ゲストログイン', customer_guest_sign_in_path, method: :post %></li>
-            <li><%= link_to '会員登録', new_customer_registration_path %></li>
+                 <%= link_to new_customer_registration_path, class: "nav-link text-dark", method: :get do %>
+              <i class="fa-solid fa-user"></i>ゲストログイン
+              <% end %>
+            
+              <li><%= link_to '会員登録', new_customer_registration_path %></li>
+               <%= link_to new_customer_registration_path, class: "nav-link text-dark", method: :get do %>
+              <i class="fas fa-user-plus"></i>会員登録
+              <% end %>
             <li><%= link_to 'ログイン', new_customer_session_path %></li>
+                <%= link_to new_customer_session_path, class: "nav-link text-dark", method: :get do %>
+              <i class="fas fa-sign-in-alt"></i>ログイン
+              <% end %>
           <% end %>
         </ul>
       </div>
@@ -44,10 +85,8 @@
   </body>
 </html>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
  </head>
-
-
 
 
 
@@ -59,7 +98,7 @@
 
 <html>
   <head>
-    <title>Bookers2</title>
+    <title>osusumenosatueisupottosaito</title>
     <body>
       <header>
   <body>
@@ -68,7 +107,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
        <%= link_to root_path, class: "nav-link text-light", method: :get do %>
-             <span>Bookers</span>
+             <span>osusumenosatueisupottosaito</span>
             <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -80,14 +119,14 @@
            
             <li class="navbar-nav ml-auto">
               <% if customer_signed_in? %>
-              <%= link_to customer_path(current_customer.id), class: "nav-link text-light", method: :get do %>
+              <%= link_to customers_path(current_customer.id), class: "nav-link text-light", method: :get do %>
               <i class="fas fa-home"></i>Home
               </li>
               <% end %>
               <%= link_to customers_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-users"></i>Users
               <% end %>
-              <%= link_to posts_path, class: "nav-link text-light", method: :get do %>
+              <%= link_to bookmarks_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-book-open"></i>Books
               <% end %>
               <%= link_to destroy_customer_session_path, class: "nav-link text-light", method: :delete do %>
@@ -100,7 +139,7 @@
               <%= link_to about_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-link"></i>About
               <% end %>
-              <%= link_to new_user_registration_path, class: "nav-link text-light", method: :get do %>
+              <%= link_to new_customer_registration_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-user-plus"></i>Sign up
               <% end %>
               <%= link_to new_customer_session_path, class: "nav-link text-light", method: :get do %>

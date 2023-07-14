@@ -17,9 +17,12 @@ Rails.application.routes.draw do
 
   devise_scope :customer do
     post 'customers/guest_sign_out', to: 'customers/sessions#new'
-    post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
-    get 'customer/guest_sign_up', to: 'customers/sessions#new_guest'
-    get 'customer/guest_sign_in',to: 'customers/registrations#new'
+    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+    get 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+    get 'customers/guest_sign_up', to: 'customers/sessions#new_guest'
+    get 'customers/guest_sign_in',to: 'customers/registrations#new'
+    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+    get 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
   end
     # post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
 
@@ -27,10 +30,7 @@ Rails.application.routes.draw do
   #   resources :searches, only: :index
   # end
 
-  devise_scope :customer do
-    # get 'customer', to: redirect("/customer/sign_up")
-    post 'customer/guest_sign_in', to: 'customer/sessions#new_guest'
-  end
+
 
   scope module: :customer do
     root to: 'homes#top'

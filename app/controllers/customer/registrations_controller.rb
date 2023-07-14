@@ -6,13 +6,13 @@ class Customer::RegistrationsController < Devise::RegistrationsController
 
   # before_action :configure_sign_up_params, only: [:create]
   before_action :configure_sign_in_params, only: [:update]
-  before_action :ensure_normal_user, only: :edit
+  # before_action :ensure_normal_user, only: :edit
 
-  def ensure_normal_user
-    if resource.email == "testt@test.com"
- redirect_to customer_path(@customer.id), alert: 'ゲストユーザーの更新・削除はできません。'
-    end
-  end
+#   def ensure_normal_user
+#     if resource.email == "testt@test.com"
+# redirect_to customer_path(@customer.id), alert: 'ゲストユーザーの更新・削除はできません。'
+#     end
+#   end
 
 
 

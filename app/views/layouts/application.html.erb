@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+    <title>osusumenosatueisupottosaito</title>
+
 <html>
   <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -32,48 +34,48 @@
 
           <% elsif customer_signed_in? %>
           <p>ようこそ、<%= current_customer.name %>さん!</p>
-          <nav class="navbar navbar-dark bg-dark">
-  <a href="root_path" class="fas fa-home">トップページ</a>
-</nav>
-           <li class="navbar-nav ml-auto">
-             <%= link_to root_path, class: "nav-link text-dark", method: :get do %>
-             <i class="fas fa-home"></i>トップページ
-           </li>
+                    <nav class="navbar navbar-dark bg-dark">
+
+          <%= link_to root_path, class: "nav-link text-light", method: :get do %>
+          <i class="fas fa-home"></i>トップページ
            <% end %>
-           <%= link_to new_post_path, class: "nav-link text-dark", method: :get do %>
+
+           <%= link_to new_post_path, class: "nav-link text-light", method: :get do %>
            <i class="fa-solid fa-camera"></i>新規投稿
            <% end %>
-           <%= link_to customers_path, class: "nav-link text-dark", method: :get do %>
+           <%= link_to customers_path, class: "nav-link text-light", method: :get do %>
            <i class="fa-solid fa-face-smile"></i>マイページ
            <% end %>
-           <%= link_to bookmarks_path, class: "nav-link text-dark", method: :get do %>
+           <%= link_to bookmarks_path, class: "nav-link text-light", method: :get do %>
            <i class="fa-solid fa-heart"></i>いいね一覧
            <% end %>
-           <%= link_to search_posts_path, class: "nav-link text-dark", method: :get do %>
+           <%= link_to search_posts_path, class: "nav-link text-light", method: :get do %>
            <i class="fa-solid fa-magnifying-glass"></i>キーワード検索
            <% end %>
-           <%= link_to tags_path, class: "nav-link text-dark", method: :get do %>
+           <%= link_to tags_path, class: "nav-link text-light", method: :get do %>
            <i class="fa-solid fa-hashtag"></i>タグ検索
            <% end %>
-           <%= link_to destroy_customer_session_path, class: "nav-link text-dark", method: :delete do %>
+               <%= link_to destroy_customer_session_path, class: "nav-link text-light", method: :delete do %>
            <i class="fas fa-sign-out-alt"></i>ログアウト
            <% end %>
+          
            </li>
           <% else %>
-            <li><%= link_to 'ゲストログイン', customer_guest_sign_in_path, method: :post %></li>
-                 <%= link_to new_customer_registration_path, class: "nav-link text-dark", method: :get do %>
+                 <%= link_to customer_guest_sign_in_path, class: "nav-link text-light", method: :get do %>
               <i class="fa-solid fa-user"></i>ゲストログイン
               <% end %>
-            
-              <li><%= link_to '会員登録', new_customer_registration_path %></li>
-               <%= link_to new_customer_registration_path, class: "nav-link text-dark", method: :get do %>
+              <%= link_to new_customer_registration_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-user-plus"></i>会員登録
               <% end %>
-            <li><%= link_to 'ログイン', new_customer_session_path %></li>
-                <%= link_to new_customer_session_path, class: "nav-link text-dark", method: :get do %>
+                <%= link_to new_customer_session_path, class: "nav-link text-light", method: :get do %>
               <i class="fas fa-sign-in-alt"></i>ログイン
               <% end %>
           <% end %>
+          
+          
+               
+          </nav>
+          
         </ul>
       </div>
     </header>
@@ -87,107 +89,3 @@
 
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
  </head>
-
-
-
-
-
-
-
-
-
-<html>
-  <head>
-    <title>osusumenosatueisupottosaito</title>
-    <body>
-      <header>
-  <body>
- 
- 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-       <%= link_to root_path, class: "nav-link text-light", method: :get do %>
-             <span>osusumenosatueisupottosaito</span>
-            <% end %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-     <div class="collapse navbar-collapse"id="navbarNavDropdown">
-       <ul class="navbar-nav ml-auto"></ul>
-         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container">
-           
-            <li class="navbar-nav ml-auto">
-              <% if customer_signed_in? %>
-              <%= link_to customers_path(current_customer.id), class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-home"></i>Home
-              </li>
-              <% end %>
-              <%= link_to customers_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-users"></i>Users
-              <% end %>
-              <%= link_to bookmarks_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-book-open"></i>Books
-              <% end %>
-              <%= link_to destroy_customer_session_path, class: "nav-link text-light", method: :delete do %>
-              <i class="fas fa-sign-out-alt"></i>Log out
-              <% end %>
-              <% else %>
-              <%= link_to root_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-home"></i>Home
-              <% end %>
-              <%= link_to about_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-link"></i>About
-              <% end %>
-              <%= link_to new_customer_registration_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-user-plus"></i>Sign up
-              <% end %>
-              <%= link_to new_customer_session_path, class: "nav-link text-light", method: :get do %>
-              <i class="fas fa-sign-in-alt"></i>Log in
-              <% end %>
-              <% end %>
-              </div>
-              </div>
-              </div>
-              </nav>
-              </header>
-              </body>
-              </html>
-              <p id="notice"><%= notice %></p>
-              <%= yield %>
-              </head>
-               
-              
-                <head>
-                  <%= csrf_meta_tags %>
-                  <%= csp_meta_tag %>
-                  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-                  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-                  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-                  
-                  </head>
-                  <body>
-                    <main>
-                      <div class='container px-5 px-sm-0'>
-                        <div class='row'>
-                          <div class='col-md-3'>
-                            
-                          </main>
-                          <footer>
-                            <div class='container mt-5'>
-                              <div class='row'>
-                                <div class='mx-auto'>
-                                  <p>CopyRight Infratop.inc</p>
-                                  </div>
-                                  </div>
-                                  </div>
-                                  </footer>
-                                  </body>
-                                  </div>
-                                  </div>
-                                  </div>
-                                      
-                                        
-                                        
-                                        
-                              

@@ -18,7 +18,7 @@
   <div class="col-12">
     <div class="like-btn">
 
-      <% if current_customer.bookmark?(@post.id) %>
+      <% if current_customer && current_customer.bookmark?(@post.id) %>
         <%=link_to post_bookmarks_path(@post), method: :delete, remote: false do %>
           <span class="fa fa-heart like-btn-unlike"></span>
         <% end %>

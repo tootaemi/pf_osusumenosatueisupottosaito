@@ -64,7 +64,7 @@ def bookmarked_by?(post)
   bookmarks.where(post_id: post_tag_ids).exists?
 end
 
-def bookmarked_by?(current_customer)
+def bookmarked_by_c?(current_customer)
   bookmarks.where(customer_id: current_customer.id).exists?
 end
 

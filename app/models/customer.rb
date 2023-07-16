@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+
   # Include default devise modules. Others available are:
   # # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,13 +16,14 @@ class Customer < ApplicationRecord
   has_many :comments#, dependent: :destroy
 
   # has_many :images, dependent: :destroy
+  
 
 
 
 #userオブジェクトのidとpostやlikeオブジェクトのuser_idが同じかどうかを判断
   def mine?(object)
    object.user_id == id
- end
+  end
 
 #bookmarks_postsテーブルにpostオブジェクトを追加する。
 #いいねを押したときに、いいねしたユーザーといいねされた投稿の情報が保存される。

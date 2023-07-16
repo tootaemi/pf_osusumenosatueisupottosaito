@@ -1,21 +1,49 @@
 <h2><%= current_customer.name %>さんのいいね一覧</h2>
 <% if @bookmarks.present? %>
-<% @bookmarks.each do |bookmark| %>
-<% p bookmark %>
-<tbody>
-			<thead>
-				<tr>
-					<div>
-						<th><%= image_tag bookmark.post.image,size: "90x90" if bookmark.post.image.present? %></th>
-						<th><%= bookmark.post.address %></th>
-						<th><%= bookmark.post.introduction %></th>
-						<th><%= bookmark.post.hash_tags %></th>
-						<th><%= bookmark.post.created_at.strftime('%Y/%m/%d') %></th>
-						<th><%= bookmark.post.customer.name %></th>
-					</div>
-				</tr>
-			</thead>
-		</tbody>
-	<% end %>
-	<% end %>
-<%= paginate @bookmarks %>
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="text-left">
+				<table class="col-lg table-bordered">
+					<thead class="bg-light">
+						<tbody>
+							<tr>
+								<td class="text-left">写真</td>
+								<td class="text-left">写真の住所</td>
+								<td class="text-left">写真の紹介文</td>
+								<td class="text-left">タグ</td>
+								<td class="text-left">投稿日</td>
+								<td class="text-left">投稿者</td>
+							</tr>
+							<tr>
+								<% @bookmarks.each do |bookmark| %>
+
+								<td>
+									<%= image_tag bookmark.post.image,size: "100x100" if bookmark.post.image.present? %>
+								</td>
+								<td>
+									<%= bookmark.post.address %>
+								</td>
+								<td>
+									<%= bookmark.post.introduction %>
+								</td>
+								<td>
+									<%= bookmark.post.hash_tags %>
+								</td>
+								<td>
+									<%= bookmark.post.created_at.strftime('%Y/%m/%d') %>
+								</td>
+								<td>
+									<%= bookmark.post.customer.name %>
+								</td>
+							</tr>
+						</tbody>
+					</thead>
+				 <% end %>
+				 </table>
+			 </div>
+			</div>
+		</div>
+	</div>
+<% end %>

@@ -1,4 +1,4 @@
-<div class="mx-auto" style="width: 1000px">
+<!--<div class="mx-auto" style="width: 500px">-->
   <h2>
     <div class="container">
       <span class="p-3 mb-2 bg-light text-dark">ログイン
@@ -6,12 +6,23 @@
     </div>
   </h2>
   </br>
+  
+  <div class="container">
+	<h2>新着商品</h2>
+	<div class="col-lg-8 mx-auto">
+		<div class="row">
+			<div class="col-3">
+       </div>
+    </div>
+     </div>
+
+  
   <div class="container">
     <span class="p-3 mb-2 bg-light text-dark">
       会員の方はこちらからログイン
     </span>
   </div>
-  <div class="mx-auto" style="width: 850px">
+  <div class="mx-auto">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mx-auto" style="width: 500px">
     </br>
@@ -38,4 +49,5 @@
     </div>
     </br>
     <%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。
+    
     </div>

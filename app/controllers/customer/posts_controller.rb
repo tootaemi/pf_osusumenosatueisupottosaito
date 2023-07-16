@@ -16,7 +16,7 @@ class Customer::PostsController < ApplicationController
       @customer = Customer.new
       @customer = current_customer
       @tag_list = Tag.all
-      @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
+      # @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
       # @customer = Customer.find(params[:id])
       @posts = Post.limit(8).order('id DESC')
       # @posts = @posts.page(params[:page])
@@ -58,10 +58,11 @@ class Customer::PostsController < ApplicationController
   else
     @posts = Post.all
   end
-    @posts = current_customer.posts
+    # @posts = current_customer.posts
 
  @post = Post.new
     @posts = Post.page(params[:page]).per(8)
+
 
 
 
@@ -94,18 +95,24 @@ def show
 
 
   @comments = @post.comments  #投稿詳細に関連付けてあるコメントを全取得
-    @comment = current_customer.comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
-
+     if @comment.nil?
+      @comments = []
+     else
+      @comments = @post.comments
+     end
     @posts = @post.post_tags.page(params[:page])
-
-
     # @comments = @post.comments.includes(:customer)
-
     # @customer = Customer.find(params[:id])
     @post = Post.find(params[:id])
-
-
     @posts = @post.post_tags.page(params[:page])
+
+
+    # @comment = Comment.new
+    # @comments = @tweet ? @tweet.comments.includes(:user) : []
+
+   @comment = Comment.new
+   # @comment = current_customer.Comment.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
+
 end
 
 
@@ -172,35 +179,6 @@ end
 	    Post.find_by( params[:id]).destroy
   end
 
-
-
-  # def create
-  #   @message = @group.messages.new(message_params)
-  #   if @message.save
-  #     redirect_to group_messages_path(@group), notice: 'メッセージが送信されました'
-  #   else
-  #     @messages = @group.messages.includes(:user)
-  #     flash.now[:alert] = 'メッセージを入力してください。'
-  #     render :index
-  #   end
-  # end
-
-
-  # def create
-  #     @post = current_customer
-  #         @posts = Post.all
-
-  #     # @post = Post.create
-  #     # params.require(:post).permit(:content, images: [])
-  # @post.save
-  #       redirect_to posts_path,notice:'投稿に成功しました'
-  #   # @post = Post.new(post_params)
-  #   current_customer = current_customer
-  #   # @post.save
-  #   # redirect_to new_post_path
-  # end
-
-
         def find_post
           @post = Post.find(params[:id])
         end
@@ -208,19 +186,6 @@ end
         def force_redirect_unless_my_post
           return redirect_to root_path,alert:'権限がありません'if @post.user != current_user
         end
-
-# def search
-#     # @tag = Tag.all
-
-#   @section_title = "「#{params[:search]}」の検索結果"
-#   @posts = if params[:search].present?
-#             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
-#                         "%#{params[:search]}%", "%#{params[:search]}%"])
-#                 .paginate(page: params[:page], per_page: 12).recent
-#           else
-#             Post.none
-#           end
-# # end
 
 
 def search
@@ -263,8 +228,6 @@ end
     end
 
 
-
-# def hashtag
 def hashtags
   # @tag = Tag.find(params[:tag_id])
   # @tag = Tag.find_by(tag_name: params[:hash_tags])
@@ -292,7 +255,6 @@ def hashtags
 end
 
 
-
   def update
     @post = Post.find(params[:id])
     respond_to do |format|
@@ -314,43 +276,12 @@ end
   end
 
 
-
-
-# ~
-# ~
-# def search
-#   @section_title = "「#{params[:search]}」の検索結果"
-#   @posts = if params[:search].present?
-#             Post.where(['shop_name LIKE ? OR nearest LIKE ?',
-#                         "%#{params[:search]}%", "%#{params[:search]}%"])
-#                 .paginate(page: params[:page], per_page: 12).recent
-#           else
-#             Post.none
-#           end
-# end
-# ~
-# ~
-
-
-
-  # def search
-  #   if params[:name].present?
-  #     @users = User.where('name LIKE ?', "%#{params[:name]}%")
-  #   else
-  #     @users = User.none
-  #   end
-  # end
-
-
 private
   def ensure
     @post = current_customer.posts
     @post = @posts.find_by(id: params[:id])
     redirect_to new_post_path unless @post
   end
-
-
-
 
 
 private

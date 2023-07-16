@@ -1,37 +1,32 @@
-<div class="mx-auto" style="width: 600px">
-	<div class='p-top'>
-	  <p class='p-top__item'>
-    <h1>おすすめの撮影スポットサイト</h1>
     <div class="text-center">
-      <h6>写真好きの写真好きによる</br>
+      <h1>おすすめの撮影スポットサイト</h1>
+      <p>写真好きの写真好きによる</br>
       写真好きの為のサイトです📸
-    </p>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <% @posts.each do |post| %>
-  <div class="col-3">
-    <%= link_to post_path(post) do %>
-    <div>
-      <p>
-        <% if post.image.attached? %>
-        <%= image_tag post.image, size: "300x200" %>
-        <%#= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
-        <% else %>
-        <%= image_tag 'no_image', size: "300x200" %>
-        <% end %>
       </p>
     </div>
+    <div class="row">
+      <% @posts.each do |post| %>
+      <div class="col-3">
+        <%= link_to post_path(post) do %>
+        <div>
+          <p>
+            <% if post.image.attached? %>
+            <%#= image_tag post.image, size: "80x80" %>
+            <%= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
+            <% else %>
+            <%= image_tag 'no_image', size: "80x80" %>
+          <% end %>
+           </p>
+        </div>
+      <% end %>
+      </div>
     <% end %>
-  </div>
-  <% end %>
-</div>
-<div class="mx-auto" style="width: 100px">
-  <p class="text-center">
-    <%= paginate @posts %>
-  </p>
-</div>
-<p class="text-right">
-  <%= link_to "全ての写真を見る>", posts_path %>
-  </p>
+    </div>
+    <!--<div class="mx-auto" style="width: 100px">-->
+    <!--  <p class="text-center">-->
+    <!--    <%#= paginate @posts %>-->
+    <!--  </p>-->
+    <!--</div>-->
+    <p class="text-right">
+      <%= link_to "全ての写真を見る>", posts_path %>
+    </p>

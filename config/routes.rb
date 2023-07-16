@@ -16,14 +16,16 @@ Rails.application.routes.draw do
   }
 
   devise_scope :customer do
-    post 'customers/guest_sign_out', to: 'customers/sessions#new'
-    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
-    get 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
-    get 'customers/guest_sign_up', to: 'customers/sessions#new_guest'
-    get 'customers/guest_sign_in',to: 'customers/registrations#new'
-    post 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
-    get 'customers/guest_sign_in', to: 'customers/sessions#new_guest'
+    post 'customers/guest_sign_out', to: 'customer/sessions#new'
+    post 'customers/guest_sign_in', to: 'customer/sessions#new_guest'
+    get 'customers/guest_sign_in', to: 'customer/sessions#new_guest'
+    get 'customers/guest_sign_up', to: 'customer/sessions#new_guest'
+    get 'customers/guest_sign_in',to: 'customer/registrations#new'
+    get 'customers/guest_sign_in', to: 'customer/sessions#new_guest'
+    delete 'customer/guest_sign_out', to: 'customer/sessions#destroy'
+
   end
+
     # post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
 
   # namespace :departments do

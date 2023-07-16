@@ -1,13 +1,9 @@
-<div class="mx-auto" style="width:900px">
-	<div class="container">
-			 <th>
+<div class="mx-auto" style="width:450px">
+			 
 			 	<p><%= current_customer.name %>さんの詳細ページ</p>
-			 </th>
+			 
 			 <div class="container">
-			 	<p class="text-left">
-			 		<th>登録情報</th>
 			 		<div class="container-left">
-			 			<div class="row">
 			 				<table class="table col table-bordered">
 			 					<div class="table-secondary">
 			 						<tr>
@@ -18,12 +14,11 @@
 			 								<td><%= current_customer.email %></td></tr>
 			 					</div>
 			 				</table>
-			 			</div>
 			 		</div>
 			 	</br>
 			 	　　　　　　　　　　　　　　　　<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
-			 	</p>
 			 </div>
-	</div>
 </div>
+ 
+ 
  

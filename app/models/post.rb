@@ -5,6 +5,7 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   
+  
   attribute :hash_tags
   attribute :sent_tags
   

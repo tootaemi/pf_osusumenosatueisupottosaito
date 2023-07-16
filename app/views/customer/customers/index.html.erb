@@ -1,30 +1,24 @@
-<div class="mx-auto" style="width:500px">
+<div class="mx-auto" style="width:450px">
 	<div class="container">
-		<span class="p-3 mb-2 bg-light text-dark">
-			<th><%= current_customer.name %>さんのマイページ</th></br>
+		<th><%= current_customer.name %>さんのマイページ</th></br>
 		<div class="container">
 			<p class="text-left">
 				<div class="container-left">
-					<div class="row">
-						<table class="table col table-bordered">
-							<div class="table-secondary">
-								<tr>
-									<td class="bg-light">名前</td>
-									<td><%= current_customer.name %></td>
-								</tr>
-								<tr>
-									<td class="bg-light">メールアドレス</td>
-									<td><%= current_customer.email %></td>
-								</tr>
-								</div>
-							</table>
+					<table class="table col table-bordered">
+						<div class="table-secondary">
+							<tr>
+								<td class="bg-light">名前</td>
+								<td><%= current_customer.name %></td>
+							</tr>
+							<tr>
+								<td class="bg-light">メールアドレス</td>
+								<td><%= current_customer.email %></td>
+							</tr>
 						</div>
-					</div>
-				</br>
+					</table>
+				</div>
 			     　　　　　　　　 <%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
-			  </p>
-			</div>
+			</p>
 		</div>
-		</span>
-  </div>
+	</div>
 </div>

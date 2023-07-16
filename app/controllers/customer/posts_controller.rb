@@ -1,9 +1,6 @@
 class Customer::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :update, :destroy]
 
-  # before_action :find_post, only: [:edit, :update, :show, :destroy]
-  # before_action :ensure_customer, only: [:edit, :update, :destroy]
-
  def top
   @post = Post.find(params[:id])
   if @post.save
@@ -21,7 +18,7 @@ class Customer::PostsController < ApplicationController
       @tag_list = Tag.all
       @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
       # @customer = Customer.find(params[:id])
-      @posts = Post.limit(10).order('id DESC')
+      @posts = Post.limit(8).order('id DESC')
       # @posts = @posts.page(params[:page])
       # @post = Posts.page(params[:page]).per(10)
 
@@ -271,21 +268,24 @@ end
 def hashtags
   # @tag = Tag.find(params[:tag_id])
   # @tag = Tag.find_by(tag_name: params[:hash_tags])
-  
+
   #  @Tags = Tag.all
   # @tag = Tag.find(params[:hash_tags])
   #    @tag = Tag.new
   # @posts = @tag.posts
 
   if params[:hashtags].nil?
-#    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+   @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     @hashtags = Tag.all.group(:tag_name)
   else
     name = params[:hashtags]
     name = name.downcase
     @hashtag = Tag.find_by(tag_name: name)
-    @posts = @hashtag.posts
-#    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
+    if @hashtag.nil?
+      @posts = []
+    else
+      @posts = @hashtag.posts
+    end
     @hashtags = Tag.all.group(:tag_name)
   end
 

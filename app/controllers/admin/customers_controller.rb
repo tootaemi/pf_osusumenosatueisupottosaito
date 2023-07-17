@@ -3,7 +3,8 @@ class Admin::CustomersController < ApplicationController
     def index
       @customers = Customer.all
       @customer = Customer.new
-      #.page(params[:page]).per(10)
+      # @customer = Customer.all.order("created_at DESC")
+      @customers = Customer.all.page(params[:page]).per(10)
     end
 
     def show

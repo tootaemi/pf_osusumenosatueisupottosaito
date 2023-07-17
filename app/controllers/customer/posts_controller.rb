@@ -17,24 +17,10 @@ class Customer::PostsController < ApplicationController
       @customer = current_customer
       @tag_list = Tag.all
       # @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
-      # @customer = Customer.find(params[:id])
       @posts = Post.limit(8).order('id DESC')
-      # @posts = @posts.page(params[:page])
-      # @post = Posts.page(params[:page]).per(10)
-
-  # @posts = @posts.page(params[:page])
-  # @posts = Post.all.page(params[:page])
-  @post = Post.all.page(params[:page]).per(10)
-  @posts = Post.page(params[:page])
-  @posts = Post.new(params[:search])
-
-  # @post= Post.paginates_per.page(5).per(10)
-  # @posts = Post.paginates_per.page(params[:page]).per(10)
-  # @posts = @posts.page(params[:page])
-
-  # @posts = @customer.posts.page(params[:page])
-  # @posts = Post.page(params[:page])
-
+      @post = Post.all.page(params[:page]).per(10)
+      @posts = Post.page(params[:page])
+      @posts = Post.new(params[:search])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
     keyword = params[:keyword]
     if keyword.present?
@@ -62,21 +48,14 @@ class Customer::PostsController < ApplicationController
 
  @post = Post.new
     @posts = Post.page(params[:page]).per(8)
-
-
-
-
      @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-
     if params[:keyword]
       @posts = @posts.search(params[:keyword]).page(params[:page])
     else
       @posts = @posts.page(params[:page])
     end
     @keyword = params[:keyword]
-
     end
-
 
 def show
     @post = Post.find(params[:id])
@@ -136,15 +115,6 @@ end
      @post = current_customer.posts.new(post_params)
     end
 
-
-# def create
-#   @post = Post.new(post_params)
-#   @posts = Post.all
-#   @posts.save
-#   redirect_to post_path
-    # end
-
-
     def edit
       @post = Post.find(params[:id])
       # @post = Post.find(1)
@@ -164,8 +134,6 @@ end
       render :edit
     end
   end
-
-
 
   def destroy
     Comment.find(params[:id]).destroy
@@ -211,17 +179,7 @@ def search
     else
       @customers = Customer.none
     end
-
-
-
-  # if (params[:tag])[0] == '#'
-  #   @posts = Tag.search(params[:tag]).order('created_at DESC')
-  # else
-  #   @posts = Post.search(params[:tag]).order('created_at DESC')
-  # end
 end
-
-
 
     def bookmarks
       @posts = current_customer.bookmarks_posts
@@ -229,14 +187,6 @@ end
 
 
 def hashtags
-  # @tag = Tag.find(params[:tag_id])
-  # @tag = Tag.find_by(tag_name: params[:hash_tags])
-
-  #  @Tags = Tag.all
-  # @tag = Tag.find(params[:hash_tags])
-  #    @tag = Tag.new
-  # @posts = @tag.posts
-
   if params[:hashtags].nil?
    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     @hashtags = Tag.all.group(:tag_name)
@@ -251,7 +201,12 @@ def hashtags
     end
     @hashtags = Tag.all.group(:tag_name)
   end
+  # @hashtags = Hashtag.all.page(params[:page]).per(10)
+  #@hashtags = Hashtag.all.page(params[:page]).per(10)
+  @hashtags = @hashtags.all.page(params[:page])
 
+  # @hashtags = Hashtag.all.page(params[:page]).per(10)
+     
 end
 
 

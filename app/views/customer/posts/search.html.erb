@@ -11,3 +11,26 @@
 </div>
 
 <%= params[:search] %>
+
+
+
+<div class="d-flex justify-content-end">
+  <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+    <div class="input-group">
+      <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
+        <span class="input-group-btn input-group-append">
+      <!--     <input type="submit" value="検索" data-disable-with="検索">-->
+      <!--</input>-->
+      
+           <input type="submit" value="検索" data-disable-with="検索">  </input>
+                   <i class="fas fa-search"></i>検索
+        
+
+           <%= button_tag type: "　", class: "btn btn-secondary" do %>
+          <% end %>
+        </span>
+    </div>
+
+  
+  <% end %>
+</div>

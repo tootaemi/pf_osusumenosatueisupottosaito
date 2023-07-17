@@ -10,6 +10,11 @@ class Admin::HomesController < ApplicationController
       @customer = Customer.new
       @customers = Customer.all
       @posts = Post.all
+  # @customers = @customers.page(params[:page])
+  # @customers = Customer.limit(8).order('id DESC')
+  @customers = Customer.all.page(params[:page]).per(10)
+      
+      
     end
     
     private

@@ -14,6 +14,21 @@
         <div class="header-content">
           <ul class="flex">
 
+
+
+
+    <!-- コード追加　Bootstrap CSS読み込みコード-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- コード追加　Bootstrap JavaScript読み込みコード-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+
+
+
+
+
             <% if admin_signed_in? %>
             <nav class="navbar navbar-dark bg-dark">
               <li class="navbar-nav ml-auto">

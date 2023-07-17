@@ -18,9 +18,11 @@
 							</tr>
 							<tr>
 								<% @bookmarks.each do |bookmark| %>
-
 								<td>
+									<%# if bookmark.create_customer.image.attached? %>
+									<%# if current_customer && current_customer.bookmark?(@bookmark) %>
 									<%= image_tag bookmark.post.image,size: "100x100" if bookmark.post.image.present? %>
+									<%#= image_tag bookmark.customer.image,size: "100x100" if bookmark.post.image.present? %>
 								</td>
 								<td>
 									<%= bookmark.post.address %>

@@ -5,26 +5,20 @@
     </div>
     <table>
       <tr>
-        <td>　　　　 　    会員ID</td>
-        <td>
-          <td>　　　　<%= @customer.id %></td>
-        </td>
+        <td>会員ID</td>
+          <td><%= @customer.id %></td>
        </tr>
       <tr>
-        <td>　　 　　　名前</td>
-        <td>
-          <td>　　　　<%= @customer.name %></td>
-        </td>
+        <td>名前</td>
+          <td><%= @customer.name %></td>
       </tr>
           <tr>
-            <td>　　　　　メールアドレス</td>
-            <td>
-              <td>　　　　<%= @customer.email %></td>
-            </td>
+            <td>メールアドレス</td>
+              <td><%= @customer.email %></td>
           </tr>
               <td>
                 </br>
-              　　　　　　　　　　　　<%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
+                　　　　　　　　　　<%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
             　</td>
       </table>
   </div>

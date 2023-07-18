@@ -1,5 +1,4 @@
 class Admin::HomesController < ApplicationController
-    
     def index
       @customers = Customer.all
     end

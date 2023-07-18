@@ -1,5 +1,4 @@
-<h1 class="users-heading">ユーザー一覧</h1>
-<div class="container">
+<h1>ユーザー一覧</h1>
 	<div class="row">
 		<table class='table table-hover table-inverse'>
 			<thead>
@@ -9,7 +8,7 @@
 					<th class="bg-light">メールアドレス</th>
 				 </tr>
 			</thead>
-					<tbody class="col-md-6">
+					<!--<tbody class="col-md-6">-->
 						<% @customers.each do |customer| %>
 						<tr>
 							<td><%= customer.id %></td>
@@ -17,7 +16,7 @@
 							<td><%= customer.email %></td>
 						</tr>
 							<% end %>
-					 </tbody>
+					 <!--</tbody>-->
 		</table>
 	 </div>
 </div>

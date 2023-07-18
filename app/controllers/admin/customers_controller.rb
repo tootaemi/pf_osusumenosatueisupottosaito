@@ -3,7 +3,6 @@ class Admin::CustomersController < ApplicationController
     def index
       @customers = Customer.all
       @customer = Customer.new
-      # @customer = Customer.all.order("created_at DESC")
       @customers = Customer.all.page(params[:page]).per(10)
     end
 
@@ -13,7 +12,6 @@ class Admin::CustomersController < ApplicationController
     
     def edit
       @customer = Customer.find(params[:id])
-      @customer = Customer.find(1)
     end
     
     def update

@@ -1,7 +1,7 @@
 class Customer::HomesController< ApplicationController
   
     def top
-      @posts = Post.limit(10).order('id DESC')
+      @posts = Post.limit(8).order('id DESC')
       #@customers = Customer.all.order("id DESC")
       @customer = Customer.new
       @customers = Customer.all
@@ -16,7 +16,7 @@ class Customer::HomesController< ApplicationController
   @customers = Customer.all
   @post = Post.new
   @customer = current_customer
-  @bookmarks = Bookmark.where(user_id: current_user.id)
+  @bookmarks = Bookmark.where(customer_id: current_customer.id)
  end
 
 

@@ -18,7 +18,7 @@ class Customer::PostsController < ApplicationController
       @tag_list = Tag.all
       # @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
       @posts = Post.limit(8).order('id DESC')
-      @post = Post.all.page(params[:page]).per(10)
+      @post = Post.all.page(params[:page]).per(8)
       @posts = Post.page(params[:page])
       @posts = Post.new(params[:search])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
@@ -109,9 +109,9 @@ end
       # @post = Post.find(post_params)
         @post.customer_id = current_customer.id
       @posts = Post.all
-      @post.save！
-      # redirect_to root_path(@post.id)
-      redirect_to customer_path(current_customer.id)
+      @post.save
+      redirect_to root_path(@post.id)
+      # redirect_to customer_path(current_customer.id)
       
     @postnew = Post.new(post_params)
      @post = current_customer.posts.new(post_params)

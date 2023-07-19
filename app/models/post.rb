@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  
   belongs_to :customer
   has_many :bookmarks, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -67,6 +68,14 @@ end
 def bookmarked_by_c?(current_customer)
   bookmarks.where(customer_id: current_customer.id).exists?
 end
+
+
+# def  bookmarked_by?(customer)
+# #現在ログインしているユーザーによっていいねされてる？
+#     bookmarks.exists?(customer_id: customer.id)
+# #いいねは存在してる？(いいねを既に押してるか、押していないか)
+# end
+
 
 def self.search(search)
   Post.where('introduction LIKE ?', '%'+ search + '%')

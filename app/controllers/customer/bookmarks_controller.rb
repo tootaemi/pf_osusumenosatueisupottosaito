@@ -1,6 +1,6 @@
 class Customer::BookmarksController < ApplicationController
   before_action :posts_path
-  
+
   def index
     @post = Post.new
     @posts = Post.all
@@ -9,32 +9,77 @@ class Customer::BookmarksController < ApplicationController
     #@bookmarked_bys = @bookmark.all
     @bookmarks = @bookmarks.page(params[:page]).per(8)
   end
-  
+
   def show
     @bookmark = Bookmark.find(params[:id])
     @customer = Customer.find(params[:id])
   end
-  
+
+
+
   def create
-    post = Post.find(params[:post_id])
-    current_customer.bookmark(post)
-    redirect_back fallback_location: root_path
-    # Bookmark.create(customer_id: current_customer.id, post_id: params[:id])
-    # redirect_to posts_path
+    @post = Post.find(params[:post_id])
+    if current_customer.nil?
+      # ログインしていない場合(ゲスト)
+      if cookies[:bookmark_post_id].nil?
+        #cookieがブラウザに保存されていない場合
+        cookies.permanent[:bookmark_post_id] = @post.id.to_s
+      else
+        #cookieがブラウザに保存されている場合
+        cookies.permanent[:bookmark_post_id] = cookies.permanent[:bookmark_post_id] + "," + @post.id.to_s 
+      end
+      Bookmark.create(customer_id: nil, post_id: @post.id)    # 「customer_idがnil」のレコードを追加
+      @bookmarks_count = @post.bookmarks.count    #いいね数の表示
+      @cookies = cookies[:bookmark_post_id]     #インスタンス変数化
+    else
+      # ログインしている場合(詳しい説明は省略)
+      @bookmark = current_customer.bookmarks.new(post_id: @post.id)
+      @bookmark.save
+      @bookmarks_count = @post.bookmarks.count
+    end
+          redirect_to post_path(@post)
+    
   end
-  
+
   def destroy
-    post = Post.find(params[:post_id])
-    current_customer.unlike(post)
-    redirect_back fallback_location: root_path
-    # Bookmark.find_by(customer_id: current_customer.id, post_id: params[:id]).destroy
-    # redirect_to posts_path
+    @post = Post.find(params[:post_id])
+    if current_customer.nil?
+      # (今回、ゲストのいいね取消し機能は実装しませんでした。)
+    else
+      # ログインしている場合(説明は省略)
+      @bookmark = current_customer.bookmarks.find_by(post_id: @post.id)
+      @bookmark.destroy
+      
+    end
+      redirect_to post_path(@post)
+
   end
+
+
+
+  # def create
+  #   post = Post.find(params[:post_id])
+  #   current_customer.bookmark(post)
+  #   redirect_back fallback_location: root_path
+  #   # Bookmark.create(customer_id: current_customer.id, post_id: params[:id])
+  #   # redirect_to posts_path
+  # end
   
+  # def destroy
+  #   post = Post.find(params[:post_id])
+  #   current_customer.unlike(post)
+  #   redirect_back fallback_location: root_path
+  #   # Bookmark.find_by(customer_id: current_customer.id, post_id: params[:id]).destroy
+  #   # redirect_to posts_path
+  # end
+
+
+ 
+
   private
-  
+
   def customer_params
     params.require(:bookmark).permit(:customer_id, :post_id)
   end
-  
+
 end

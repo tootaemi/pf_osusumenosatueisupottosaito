@@ -101,7 +101,7 @@ end
     @postnew = Post.new
   end
 
-
+  
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
 
@@ -109,8 +109,10 @@ end
       # @post = Post.find(post_params)
         @post.customer_id = current_customer.id
       @posts = Post.all
-      @post.save
-      redirect_to root_path(@post.id)
+      @post.save！
+      # redirect_to root_path(@post.id)
+      redirect_to customer_path(current_customer.id)
+      
     @postnew = Post.new(post_params)
      @post = current_customer.posts.new(post_params)
     end

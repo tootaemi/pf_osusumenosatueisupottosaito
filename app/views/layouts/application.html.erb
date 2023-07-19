@@ -77,6 +77,9 @@
               <% else %>
               </nav>
               <nav class="navbar navbar-dark bg-dark">
+                 <%= link_to root_path, class: "nav-link text-light", method: :get do %>
+              <i class="fas fa-home"></i>トップページ
+              <% end %>
                                   <li class="navbar-nav ml-auto">
 
                 <%= link_to customers_guest_sign_in_path, class: "nav-link text-light", method: :get do %>

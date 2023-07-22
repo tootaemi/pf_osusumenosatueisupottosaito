@@ -1,15 +1,15 @@
 class Customer::PostsController < ApplicationController
-  before_action :authenticate_customer!, only: [:edit, :update, :destroy]
-
- def top
-  @post = Post.find(params[:id])
-  if @post.save
-   redirect_to post_path(@posts.id)
-  else
-    render :index
-  end
- end
-
+    before_action :authenticate_customer!, only: [:edit, :update, :destroy]
+    
+    def top
+      @post = Post.find(params[:id])
+      if @post.save
+        redirect_to post_path(@posts.id)
+      else
+        render :index
+      end
+    end
+    
     def index
       @customers = Customer.all
       @bookmarks = Bookmark.all
@@ -19,6 +19,8 @@ class Customer::PostsController < ApplicationController
       # @posts = current_customer.posts.all  #投稿一覧を表示させるために全取得
       @posts = Post.limit(8).order('id DESC')
       @post = Post.all.page(params[:page]).per(8)
+      #@hashtags = @hashtags.all.page(params[:page]).per(10)
+
       @posts = Post.page(params[:page])
       @posts = Post.new(params[:search])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
@@ -44,10 +46,11 @@ class Customer::PostsController < ApplicationController
   else
     @posts = Post.all
   end
+  
     # @posts = current_customer.posts
 
  @post = Post.new
-    @posts = Post.page(params[:page]).per(8)
+    # @posts = Post.page(params[:page]).per(8)
      @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
     if params[:keyword]
       @posts = @posts.search(params[:keyword]).page(params[:page])
@@ -83,7 +86,7 @@ def show
     # @comments = @post.comments.includes(:customer)
     # @customer = Customer.find(params[:id])
     @post = Post.find(params[:id])
-    @posts = @post.post_tags.page(params[:page])
+    # @posts = @post.post_tags.page(params[:page])
 
 
     # @comment = Comment.new
@@ -101,7 +104,7 @@ end
     @postnew = Post.new
   end
 
-  
+
     def create
       # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
 
@@ -115,7 +118,72 @@ end
       
     @postnew = Post.new(post_params)
      @post = current_customer.posts.new(post_params)
+     @post.errors
+
     end
+
+
+  # def create
+    
+  #     @post = Post.new(post_params)
+  #     # @post = Post.find(post_params)
+  #       @post.customer_id = current_customer.id
+  #     @posts = Post.all
+  #     # @post
+  #     redirect_to root_path(@post.id)
+  #     # redirect_to customer_path(current_customer.id)
+      
+  #   @postnew = Post.new(post_params)
+  #   @post = current_customer.posts.new(post_params)
+    
+    
+    
+  
+
+  
+  #   def create
+  #     # @post = current_customer.posts.new(post_params)  # current_userはdeviseが用意してくれる、ログイン最中のユーザーを表す
+
+
+  # @post = Post.new(post_params)
+  #     # @post = Post.find(post_params)
+  #       @post.customer_id = current_customer.id
+  #     @posts = Post.all
+  #     @post.save
+  #     redirect_to root_path(@post.id)
+  #     # redirect_to customer_path(current_customer.id)
+      
+  #   @postnew = Post.new(post_params)
+  #   @post = current_customer.posts.new(post_params)
+
+  #     @post = Post.new(post_params)
+  #   if @post.save
+  #     redirect_to post_path(@post.id)
+  #   else
+  #     render :new
+  # end
+
+
+    #   @post = Post.new(post_params)
+    #   # @post = Post.find(post_params)
+    #     @post.customer_id = current_customer.id
+    #   @posts = Post.all
+    # if @post.save
+    # #       redirect_to list_path(@list.id)
+    # # else
+    # #   render :new
+    # # end
+    #   # @post.save
+    #   redirect_to root_path(@post.id)
+    # else
+    #   render :new
+    # end
+      # redirect_to customer_path(current_customer.id)
+      
+    # # @postnew = Post.new(post_params)
+    # @post = current_customer.posts.new(post_params)
+
+ 
 
     def edit
       @post = Post.find(params[:id])
@@ -172,8 +240,8 @@ def search
     end
 
     @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
-    #@tag = Tags.find(params[:tag_id])  #クリックしたタグを取得
-    #@posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+    # @tag = Tags.find(params[:tag_id])  #クリックしたタグを取得
+    # @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
     @customers = Customer.all
 
     if params[:name].present?
@@ -189,6 +257,7 @@ end
 
 
 def hashtags
+
   if params[:hashtags].nil?
    @hashtags = Tag.all.to_a.group_by{ |hashtag| hashtag.posts.count}
     @hashtags = Tag.all.group(:tag_name)
@@ -203,15 +272,38 @@ def hashtags
     end
     @hashtags = Tag.all.group(:tag_name)
   end
-  # @hashtags = Hashtag.all.page(params[:page]).per(10)
-  #@hashtags = Hashtag.all.page(params[:page]).per(10)
-  @hashtags = @hashtags.all.page(params[:page])
+  #@hashtags = @hashtags.all.page(params[:page]).per(8)
+  
+  
+  @post = Post.all.page(params[:page]).per(8)
+  @hashtag = Hashtag.all.page(params[:page]).per(8)
+  
+  
+    @hashtags = Hashtag.all
+  @customers = Customer.search(params[:hashtags])
+    if params[:hashtags].present?
+      @photos = Hashtag.where('caption LIKE ?',"%#{params[:hashtags]}%")
+      @hashtags = params[:hashtags]
+    else
+      @posts = Post.all
+    end
 
-  # @hashtags = Hashtag.all.page(params[:page]).per(10)
+    @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
+    # @tag = Tags.find(params[:tag_id])  #クリックしたタグを取得
+    # @posts = @tag.posts.all           #クリックしたタグに紐付けられた投稿を全て表示
+    @customers = Customer.all
+
+    if params[:name].present?
+      @customerrs = Customer.where('post LIKE ?', "%#{params[:post]}%")
+    else
+      @customers = Customer.none
+    end
+  
+  
+  
+  # @hashtags = @hashtags.all.page(params[:page])
      
 end
-
-
   def update
     @post = Post.find(params[:id])
     respond_to do |format|
@@ -232,7 +324,6 @@ end
     redirect_to posts_path
   end
 
-
 private
   def ensure
     @post = current_customer.posts
@@ -240,11 +331,9 @@ private
     redirect_to new_post_path unless @post
   end
 
-
 private
   def post_params
     params.require(:post).permit(:image, :address, :introduction, :hash_tags, :name)
-    #.merge(user_id: current_customer.id)
   end
 
 end

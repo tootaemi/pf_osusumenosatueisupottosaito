@@ -1,6 +1,6 @@
 class Customer::CommentsController < ApplicationController
-  before_action :authenticate_customer!
-
+    before_action :authenticate_customer!
+    
     def create
       @comment = current_customer.comments.new(comment_params)
       @post = @comment.post
@@ -11,18 +11,16 @@ class Customer::CommentsController < ApplicationController
         render 'customer/posts/show'
       end
     end
-
+    
     def destroy
       Comment.find(params[:id]).destroy
       redirect_back fallback_location: root_path
-      #redirect_to post_path
-      #@post = posts_path
     end
-
+    
     private
-
+    
     def comment_params
       params.require(:comment).permit(:post_id, :comment)
     end
-
+    
 end

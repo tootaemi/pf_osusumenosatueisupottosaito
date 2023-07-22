@@ -1,9 +1,8 @@
 class Customer::CustomersController< ApplicationController
-  before_action :authenticate_customer!
-  before_action :set_customer, only: [:bookmarks]
-  
+    before_action :authenticate_customer!
+    before_action :set_customer, only: [:bookmarks]
+    
     def top
-      #@customers = Customer.page(params[:page]).per(8)
       @customers = Customer.limit(4).order('id DESC')
       @customers = Customer.all
     end
@@ -46,7 +45,7 @@ class Customer::CustomersController< ApplicationController
       if
         redirect_to post_new_path(@post), notice: 'メッセージが送信されました'
       else
-        @customers = @post.customers.includes(:user)
+        @customers = @post.customers.includes(:customer)
         render :index
       end
     end

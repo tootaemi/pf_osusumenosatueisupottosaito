@@ -3,6 +3,14 @@
     <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
   </div>
         <p>※全ての項目を入力して投稿して下さい！</p>
+        <% if @post.errors.any? %>
+        <%= @post.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      <% end %>
 
 </div>
 <div class="mx-auto" style="width: 400px">

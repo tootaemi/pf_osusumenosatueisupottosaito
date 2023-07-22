@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   
   validates :address, presence: true, length: { maximum: 255 }
   validates :introduction, presence: true, length: { maximum: 2000 }
+  validates :image, presence: true
+  validates :hash_tags, presence: true
   
   has_one_attached :image
   

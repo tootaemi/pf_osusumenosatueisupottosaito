@@ -26,10 +26,10 @@
 					    <% @posts.each do |post| %>
 					    <th>
 					      <% if post.image.attached? %>
-					      <%= image_tag post.image, size: "90x90" %>
+					      <%= image_tag post.image, size: "45x45" %>
 					      <%#= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
 					      <% else %></th>
-					      <th><%= image_tag 'no_image', size: "90x90" %>
+					      <th><%= image_tag 'no_image', size: "45x45" %>
 					      <% end %>
 					      </th>
 					      <td>
@@ -42,7 +42,7 @@
 					        <%= post.introduction %>
 					      </td>
 					      <td>
-					        <%= post.hash_tags %><br/>							
+					        <%= post.hash_tags %><br/>
 					      </td>
 					      <td>
 					        <%= post.customer.name %>

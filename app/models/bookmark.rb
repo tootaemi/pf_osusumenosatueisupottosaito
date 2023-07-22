@@ -9,18 +9,15 @@ class Bookmark < ApplicationRecord
 
    belongs_to :post#, optional: true
    belongs_to :customer, optional: true
-
-
+   
     def bookmarks(customer)
       bookmarks.where(customer_id: customer.id).exists?
     end
-
-
+    
 def  bookmarked_by?(customer)
 #現在ログインしているユーザーによっていいねされてる？
     bookmarks.exists?(customer_id: customer.id)
 #いいねは存在してる？(いいねを既に押してるか、押していないか)
 end
-
 
 end

@@ -17,6 +17,13 @@ class Customer < ApplicationRecord
 
   # has_many :images, dependent: :destroy
   
+   validates :image, presence: true
+  validates :address, presence: true
+  validates :hash_tags, presence: true
+  
+   validates :image, presence: true
+  validates :address, presence: true
+  validates :hash_tags, presence: true
 
 
 

@@ -3,18 +3,18 @@
     <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
   </div>
         <p>※全ての項目を入力して投稿して下さい！</p>
-        <% if @post.errors.any? %>
-        <%= @post.errors.count %>件のエラーが発生しました
-        <ul>
-          <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      <% end %>
+   <% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 </div>
 <div class="mx-auto" style="width: 400px">
-     <%= form_with model: @post, url:posts_path ,local: false do |f| %>
+     <%= form_with model: @post, url:posts_path  do |f| %>
 
   <%#= form_with model:@post do |f| %>
   <div class="inputImage">
@@ -27,7 +27,7 @@
   </div>
   <div class="field">
       <%= f.label :写真の紹介文 %> &emsp;
-      <%= f.text_area :introduction, placeholder:"ここに説明文を記述します。", size:"30x5" %>
+      <%= f.text_area :introduction, placeholder:"ここに紹介文を記述します。", size:"30x5" %>
   </div>
   <div class="field">
       <%= f.label :タグ %>&emsp;

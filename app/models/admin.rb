@@ -5,4 +5,10 @@ class Admin < ApplicationRecord
           :recoverable, :validatable,:rememberable
   devise :database_authenticatable, :registerable,
          :recoverable, :validatable,:rememberable
+         
+           
+  # validates :name, presence: true
+  # validates :email, presence: true
+  # validates :password, presence: true, length: { maximum: 255 }
+    
 end

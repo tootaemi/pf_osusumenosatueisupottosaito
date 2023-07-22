@@ -6,17 +6,25 @@
       </span>
     </div>
     </br>
+       <% if @customer.errors.any? %>
+  <%= @customer.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
         <!--<div class="mx-auto">-->
-    <%= form_with model: @customer, url: customer_registration_path do |f| %>
+<%= form_with model: @customer, url: customer_registration_path do |f| %>
         <div class="mx-auto" style="width: 500px">
 
-      <%#= render "customer/shared/error_messages", resource: resource %>
+      <%= render "customer/shared/error_messages", resource: resource %>
       <div class="field">
-        <%= f.label :ユーザーネーム%>　　　　
+        <%= f.label :ユーザーネーム%>
         <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
       </div>
       <div class="row form-group">
-        　<%= f.label :メールアドレス%>　　　　
+        　<%= f.label :メールアドレス%>
         <%= f.email_field :email, autofocus: true %>
       </div>
       <div class="field">
@@ -26,7 +34,7 @@
         <%= f.password_field :password, autocomplete: "new-password"%>
       </div>
       <div class="field">
-        <%= f.label :パスワード（確認用） %>　
+        <%= f.label :パスワード（確認用） %>
         <%= f.password_field :password_confirmation, autocomplete: "new-password"%>
       </div>
       <div class="actions">

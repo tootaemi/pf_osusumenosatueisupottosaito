@@ -43,7 +43,7 @@ class Customer::CustomersController< ApplicationController
     def create
       @customers = Customer.all
       if
-        redirect_to post_new_path(@post), notice: 'メッセージが送信されました'
+        redirect_to post_new_path(@post)
       else
         @customers = @post.customers.includes(:customer)
         render :index

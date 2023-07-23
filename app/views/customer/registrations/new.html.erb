@@ -4,42 +4,39 @@
       <span class="p-3 mb-2 bg-light text-dark">新規会員登録
   </h2>
       </span>
+
+
     </div>
     </br>
-       <% if @customer.errors.any? %>
-  <%= @customer.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @customer.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+
         <!--<div class="mx-auto">-->
+
 <%= form_with model: @customer, url: customer_registration_path do |f| %>
         <div class="mx-auto" style="width: 500px">
 
       <%= render "customer/shared/error_messages", resource: resource %>
-      <div class="field">
-        <%= f.label :ユーザーネーム%>
-        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
-      </div>
+    
       <div class="row form-group">
         　<%= f.label :メールアドレス%>
-        <%= f.email_field :email, autofocus: true %>
-      </div>
+       　　　　　　　　　　 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%> 
+  　　</div>
       <div class="field">
         <%= f.label :パスワード%>
         <% if @minimum_password_length %>(<%= @minimum_password_length %> 文字以上)
-        <% end %>
-        <%= f.password_field :password, autocomplete: "new-password"%>
+        <% end %>　　　
+  　　　<%= f.password_field :password, autocomplete: "new-password"%>
       </div>
       <div class="field">
         <%= f.label :パスワード（確認用） %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password"%>
+  　　　　　　　<%= f.password_field :password_confirmation, autocomplete: "new-password"%>
+      </div>
+        <div class="field">
+        <%= f.label :ユーザーネーム%>
+  　　　　　　　　　　<%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
       </div>
       <div class="actions">
       </br>
-          　　　　　　　　　　<%= f.submit "新規登録" ,class: "btn btn-primary"%>
+          　　　　　　　　　　　　　<%= f.submit "新規登録" ,class: "btn btn-primary"%>
       </div>
       <% end %>
     </div>

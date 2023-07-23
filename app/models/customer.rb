@@ -4,6 +4,10 @@ class Customer < ApplicationRecord
   # # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
        :recoverable, :rememberable, :validatable
+       
+  validates :name, length: { minimum: 2 }
+   validates :email, presence: true
+   validates :password, presence: true
 
   # has_one :image, dependent: :destroy
   # belongs_to :post
@@ -17,12 +21,12 @@ class Customer < ApplicationRecord
 
   # has_many :images, dependent: :destroy
   
-  # validates :name, presence: true
-  # validates :email, presence: true
-  # validates :password, presence: true
 
 
 
+#  def full_name
+#   "#{last_name} #{first_name}"
+#  end
 #userオブジェクトのidとpostやlikeオブジェクトのuser_idが同じかどうかを判断
   def mine?(object)
    object.user_id == id
@@ -44,9 +48,7 @@ class Customer < ApplicationRecord
    bookmarks.where(post_id: post).exists?
  end
 
- def full_name
-   "#{last_name} #{first_name}"
- end
+
 
 
 

@@ -93,5 +93,3 @@ class Customer::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
-
-

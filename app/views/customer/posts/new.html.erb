@@ -1,24 +1,30 @@
-<div class="mx-auto" style="width: 800px">
-  <div class="container">
-    <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
-  </div>
-        <p>※全ての項目を入力して投稿して下さい！</p>
-   <% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
 
+    <h2>
+      <div class="container">
+        <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
+            <h4>※全ての項目を入力して投稿して下さい！</h4>
+
+        </div>
+     </h2>
+     <div class="mx-auto" style="width: 650px">
+        <p><% if @post.errors.any? %>
+    <div class="alert-danger">
+      <h3><%= @post.errors.count %>件のエラーが発生しました。</h3>
+        <p><% @post.errors.full_messages.each do |message| %></p>
+        <p class='error-message'><%= message %></p>
+        <% end %>
+    </div>
+<% end %>
+</p>
 </div>
+</br>
+
 <div class="mx-auto" style="width: 400px">
-     <%= form_with model: @post, url:posts_path  do |f| %>
+  <%= form_with model: @post, url:posts_path  do |f| %>
 
   <%#= form_with model:@post do |f| %>
   <div class="inputImage">
-      <%= f.label :写真 %>&emsp;
+    <%= f.label :写真 %>&emsp;
     <%= f.file_field :image, placeholder: "写真", accept: "image/*" %>
   </div>
   <div class="field">

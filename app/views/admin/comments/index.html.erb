@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to comment.updated_at.strftime("%Y/%m/%d %H:%M:%S"), admin_comment_path(comment) %></td>
       <td><%= comment.comment %></td>
-      <td><%#= comment.customer.name %></td>
+      <td><%= comment.customer.name %></td>
     </tr>
     <% end %>
   </table>

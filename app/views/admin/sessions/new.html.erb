@@ -9,6 +9,10 @@
     <% resource = Admin.new unless resource %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mx-auto" style="width: 500px">
+      
+      <% if flash[:alert] %>
+ <div class='alert alert-danger'><%= flash[:alert] %></div>
+<% end %>
       <div class="field">
         <%= f.label :メールアドレス %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email"%>

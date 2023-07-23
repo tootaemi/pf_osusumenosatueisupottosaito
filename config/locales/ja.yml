@@ -1,4 +1,21 @@
 ja:
+  activerecord:
+    models:
+      customer: '会員'
+      post: '投稿'
+    attributes:
+      customer:
+        name: 'ユーザーネーム'
+        email: 'メールアドレス'
+        password: 'パスワード'
+      admin:
+        email: 'メールアドレス'
+        password: 'パスワード'
+      post:
+        image: '写真'
+        address: '住所'
+        introduction: '紹介文'
+        hash_tags: 'タグ'
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
@@ -8,28 +25,26 @@ ja:
         post:
           attributes:
             image:
-              blank: "を選択して下さい"
+              blank: を選択して下さい。
             address:
-              blank: "を入力して下さい"
+              blank: を入力して下さい。
             introduction:
-              blank:  "を入力して下さい"
+              blank: を入力して下さい。
             hash_tags:
-              blank: "を入力して下さい"
+              blank: を入力して下さい。
         customer:
           attributes:
-          　name:
-          　 short: "が短すぎます (最低 2 文字)"
+            name:
+              too_short: が短すぎます 。(最低 2文字)
             email:
-              blank: "を空白にすることはできません"
+              blank: を空白にすることはできません。
             password:
-              blank: "を空白にすることはできません"
-    attributes:
-      post:
-        image: "写真"
-        address: "住所"
-        introduction: "紹介文 "
-        hash_tags: "タグ"
-      customer:
-        name: "ユーザーネーム"
-        email: "メールアドレス"
-        password: "パスワード"
+              blank: を空白にすることはできません。
+        # customer:
+        #   attributes:
+            # email:
+            #   invalid: "が無効です。"
+            # password:
+            #   invalid: "が無効です。"
+
+

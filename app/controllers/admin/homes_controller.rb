@@ -13,7 +13,7 @@ class Admin::HomesController < ApplicationController
     end
     
     private
-    　def customer_params
-    　  params.require(:customer).permit(:name, :email, :encrypted_password)
-    　end
+    def customer_params
+      params.require(:customer).permit(:name, :email, :encrypted_password)
+    end
 end

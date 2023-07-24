@@ -15,24 +15,25 @@
         <div class="mx-auto" style="width: 500px">
 
       <%= render "customer/shared/error_messages", resource: resource %>
-    
-      <div class="row form-group">
-        　<%= f.label :メールアドレス%>
-       　　　　　　　　　　 <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%> 
+
+      <div class="row field">
+        <div class="w-50 py-1"><%= f.label :メールアドレス%></div>
+        <div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%></div>
   　　</div>
-      <div class="field">
-        <%= f.label :パスワード%>
-        <% if @minimum_password_length %>(<%= @minimum_password_length %> 文字以上)
-        <% end %>　　　
-  　　　<%= f.password_field :password, autocomplete: "new-password"%>
+      <div class="row field">
+        <div class="w-50 py-1">
+          <%= f.label :パスワード%>
+          <% if @minimum_password_length %>(<%= @minimum_password_length %> 文字以上)<% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password"%>
       </div>
-      <div class="field">
-        <%= f.label :パスワード（確認用） %>
-  　　　　　　　<%= f.password_field :password_confirmation, autocomplete: "new-password"%>
+      <div class="row field py-1">
+        <div class="w-50"><%= f.label :パスワード（確認用） %></div>
+        <div><%= f.password_field :password_confirmation, autocomplete: "new-password"%></div>
       </div>
-        <div class="field">
-        <%= f.label :ユーザーネーム%>
-  　　　　　　　　　　<%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%>
+      <div class="row field py-1">
+        <div class="w-50"><%= f.label :ユーザーネーム%></div>
+        <div><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"山形"%></div>
       </div>
       <div class="actions">
       </br>

@@ -5,28 +5,34 @@
       </h2>
     </div>
     <table>
+     
+ 
       <tr>
         <td>コメント投稿日時</td>
         <td>
-          <td>　　　　<%= @comment.created_at.strftime('%Y/%m/%d %H:%M:%S') if @comment.created_at %></td>
+      <div class="row field">
+      <div class="w-50 py-1">
+        <%= @comment.created_at.strftime('%Y/%m/%d %H:%M:%S') if @comment.created_at %>
+      </div>
+      </div>
         </td>
         </br>
       </tr>
       <tr>
         <td>コメント内容</td>
         <td>
-          <td>　　　　<%= @comment.comment %></td>
+          <td><%= @comment.comment %></td>
         </td>
       </tr>
       <tr>
         <td>名前</td>
         <td>
-          <td>　　　　<%= @customer.name %></td>
+          <td><%= @customer.name %></td>
         </td>
       </tr>
         </br>
         <td>
-         　　　　　　　　　　 <%= link_to "コメント削除", admin_comment_path(@comment),method: :delete, class:"btn btn-danger" %>
+          <%= link_to "コメント削除", admin_comment_path(@comment),method: :delete, class:"btn btn-danger" %>
         </td>
       </table>
   </div>

@@ -1,25 +1,21 @@
 ja:
   activerecord:
     models:
-      customer: '会員'
-      post: '投稿'
+      customer: 会員
+      post: 投稿
     attributes:
       customer:
-        name: 'ユーザーネーム'
-        email: 'メールアドレス'
-        password: 'パスワード'
+        name: ユーザーネーム
+        email: メールアドレス
+        password: パスワード
       admin:
-        email: 'メールアドレス'
-        password: 'パスワード'
+        email: メールアドレス
+        password: パスワード
       post:
-        image: '写真'
-        address: '住所'
-        introduction: '紹介文'
-        hash_tags: 'タグ'
-  time:
-    formats:
-      default: "%Y/%m/%d %H:%M:%S"
-  activerecord:
+        image: 写真
+        address: 住所
+        introduction: 紹介文
+        hash_tags: タグ
     errors:
       models:
         post:
@@ -40,6 +36,10 @@ ja:
               blank: を空白にすることはできません。
             password:
               blank: を空白にすることはできません。
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+
         # customer:
         #   attributes:
             # email:

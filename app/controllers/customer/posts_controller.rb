@@ -161,6 +161,7 @@ def hashtags
       @posts = []
     else
       @posts = @hashtag.posts.page(params[:page]).per(8)
+      
     end
     @hashtags = Tag.all.group(:tag_name)
   end

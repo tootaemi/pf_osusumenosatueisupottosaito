@@ -1,49 +1,48 @@
 <div class="row">
-  <div class="col-md-6">
-    <div class="p-3 mb-2 bg-light text-dark">
-      <%= @customer.name %>さんの会員詳細
-    </div>
-  </div>
+   <div class="col-md-6">
+      <div class="p-3 mb-2 bg-light text-dark">
+         <%= @customer.name %>さんの会員詳細
+      </div>
+   </div>
 </div>
-
 <div class="row">
-  <div class="col-xs-7">
-    <div>
-      <p><div class="col-xs-4">会員ID</div>
-       <p><div class="col-xs-4"><%= @customer.id %></div>
-      </p>
-    </div>
-  </div>
+   <div class="col-xs-7">
+      <div>
+         <p>
+         <div class="col-xs-4">会員ID</div>
+         <p>
+         <div class="col-xs-4"><%= @customer.id %></div>
+         </p>
+      </div>
+   </div>
 </div>
-
 <br> 
 <div class="row">
-  <div class="col-xs-7">
-    <div>
-      <p class="col-xs-4">氏名</p>
-             <p><div class="col-xs-4"><%= @customer.name %></div>
-      </p>
-    </div>
-  </div>
+   <div class="col-xs-7">
+      <div>
+         <p class="col-xs-4">氏名</p>
+         <p>
+         <div class="col-xs-4"><%= @customer.name %></div>
+         </p>
+      </div>
+   </div>
 </div>
 <div class="row">
-  <div class="col-xs-7">
-    <div>
-      <p class="col-xs-4">メールアドレス</p>
-             <p><div class="col-xs-4"><%= @customer.email %></div>
-      </p>
-    </div>
-  </div>
+   <div class="col-xs-7">
+      <div>
+         <p class="col-xs-4">メールアドレス</p>
+         <p>
+         <div class="col-xs-4"><%= @customer.email %></div>
+         </p>
+      </div>
+   </div>
 </div>
 </br>
-
 </tr>
-
-    <div style="text-align:center">
-      <div class="row actions">
-        <div class="w-75 py-3">
-  <%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
-
-        </div>
+<div style="text-align:center">
+   <div class="row actions">
+      <div class="w-75 py-3">
+         <%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
       </div>
-    </div>
+   </div>
+</div>

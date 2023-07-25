@@ -1,36 +1,30 @@
 <div class="row">
   <div class="col-md-8">
     <div class="p-3 mb-2 bg-light text-dark">
-      <h2>コメント詳細
-      </h2>
+      <h2>コメント詳細</h2>
     </div>
-    <table>
-     
- 
-      <tr>
-        <td>コメント投稿日時</td>
-        <td>
-      <div class="row field">
-      <div class="w-50 py-1">
+        <p class="col-xs-5">コメント投稿日時：</p>
+      <div class="w-75 py-4">
         <%= @comment.created_at.strftime('%Y/%m/%d %H:%M:%S') if @comment.created_at %>
       </div>
+        </br>
+        
+            <p class="col-xs-5">コメント内容：</p>
+      <div class="w-75 py-4">
+        <%= @comment.comment %>
       </div>
-        </td>
-        </br>
-      </tr>
+    
+      </br>
+
       <tr>
-        <td>コメント内容</td>
-        <td>
-          <td><%= @comment.comment %></td>
-        </td>
-      </tr>
-      <tr>
-        <td>名前</td>
-        <td>
+        <td>名前：</td>
+         </tr>
+         <tr>
           <td><%= @customer.name %></td>
-        </td>
+        
       </tr>
         </br>
+        
         <td>
           <%= link_to "コメント削除", admin_comment_path(@comment),method: :delete, class:"btn btn-danger" %>
         </td>

@@ -3,23 +3,47 @@
     <div class="p-3 mb-2 bg-light text-dark">
       <%= @customer.name %>さんの会員詳細
     </div>
-    <table>
-      <tr>
-        <td>会員ID</td>
-          <td><%= @customer.id %></td>
-       </tr>
-      <tr>
-        <td>名前</td>
-          <td><%= @customer.name %></td>
-      </tr>
-          <tr>
-            <td>メールアドレス</td>
-              <td><%= @customer.email %></td>
-          </tr>
-              <td>
-                </br>
-                　　　　　　　　　　<%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
-            　</td>
-      </table>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-7">
+    <div>
+      <p><div class="col-xs-4">会員ID</div>
+       <p><div class="col-xs-4"><%= @customer.id %></div>
+      </p>
+    </div>
+  </div>
+</div>
+
+<br> 
+<div class="row">
+  <div class="col-xs-7">
+    <div>
+      <p class="col-xs-4">氏名</p>
+             <p><div class="col-xs-4"><%= @customer.name %></div>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-7">
+    <div>
+      <p class="col-xs-4">メールアドレス</p>
+             <p><div class="col-xs-4"><%= @customer.email %></div>
+      </p>
+    </div>
+  </div>
+</div>
+</br>
+
+</tr>
+
+    <div style="text-align:center">
+      <div class="row actions">
+        <div class="w-75 py-3">
+  <%= link_to "編集する" ,edit_admin_customer_path(@customer.id) ,class: "btn btn-success" %>
+
+        </div>
+      </div>
+    </div>

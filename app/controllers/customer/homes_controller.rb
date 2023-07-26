@@ -1,5 +1,5 @@
 class Customer::HomesController< ApplicationController
-  
+    
     def top
       @posts = Post.limit(8).order('id DESC')
       @customer = Customer.new
@@ -17,10 +17,9 @@ class Customer::HomesController< ApplicationController
       @bookmarks = Bookmark.where(customer_id: current_customer.id)
     end
     
-private
-  
-  def home_params
-    params.require(:home).permit(:image, :address, :introduction, :hash_tags, :name)
-  end
-  
+    private
+    def home_params
+      params.require(:home).permit(:image, :address, :introduction, :hash_tags, :name)
+    end
+    
 end

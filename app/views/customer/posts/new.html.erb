@@ -1,8 +1,8 @@
 <h2>
-  <div class="container">
-    <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
-    <h4>※全ての項目を入力して投稿して下さい！</h4>
-  </div>
+    <div class="container">
+      <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
+      <h4>※全ての項目を入力して投稿して下さい！</h4>
+    </div>
 </h2>
 <div class="mx-auto" style="width: 650px">
   <p><% if @post.errors.any? %>
@@ -27,21 +27,17 @@
     <div><%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%></div>
   </div>
   <div class="row field">
-    <div class="w-25 py-2"><%= f.label :写真の紹介文 %>
-    </div>
+    <div class="w-25 py-2"><%= f.label :写真の紹介文 %></div>
     <div><%= f.text_area :introduction, placeholder:"ここに紹介文を記述します。", size:"30x5" %></div>
   </div>
   <div class="row field">
-    <div class="w-25 py-2"><%= f.label :タグ %>
-    </div>
+    <div class="w-25 py-2"><%= f.label :タグ %></div>
     <div><%= f.text_field :hash_tags, autofocus: true, id:"inputPrice", placeholder: "＃山形県 ＃水族館 ＃クラゲ"  %></div>
   </div>
-
   <div style="text-align:center">
-  <div class="row actions">
-    <div class="w-75 py-3"><%= f.submit "投稿する",class: "btn btn-success" %>
+    <div class="row actions">
+      <div class="w-75 py-3"><%= f.submit "投稿する",class: "btn btn-success" %></div>
+    </div>
   </div>
-  </div>
-  </div>
-<% end %>
+  <% end %>
 </div>

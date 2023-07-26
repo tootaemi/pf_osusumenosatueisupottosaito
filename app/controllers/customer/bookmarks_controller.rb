@@ -1,6 +1,6 @@
 class Customer::BookmarksController < ApplicationController
-  before_action :posts_path
-  
+    before_action :posts_path
+    
     def index
       @post = Post.new
       @posts = Post.all
@@ -30,7 +30,7 @@ class Customer::BookmarksController < ApplicationController
       @bookmark.save
       @bookmarks_count = @post.bookmarks.count
       end
-       redirect_to post_path(@post)
+      redirect_to post_path(@post)
     end
     
     def destroy
@@ -40,29 +40,12 @@ class Customer::BookmarksController < ApplicationController
       @bookmark = current_customer.bookmarks.find_by(post_id: @post.id)
       @bookmark.destroy
       end
-       redirect_to post_path(@post)
+      redirect_to post_path(@post)
     end
-
-  # def create
-  #   post = Post.find(params[:post_id])
-  #   current_customer.bookmark(post)
-  #   redirect_back fallback_location: root_path
-  #   # Bookmark.create(customer_id: current_customer.id, post_id: params[:id])
-  #   # redirect_to posts_path
-  # end
-  
-  # def destroy
-  #   post = Post.find(params[:post_id])
-  #   current_customer.unlike(post)
-  #   redirect_back fallback_location: root_path
-  #   # Bookmark.find_by(customer_id: current_customer.id, post_id: params[:id]).destroy
-  #   # redirect_to posts_path
-  # end
-  
+    
   private
-
   def customer_params
     params.require(:bookmark).permit(:customer_id, :post_id)
   end
-
+  
 end

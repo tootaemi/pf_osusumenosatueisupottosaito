@@ -1,5 +1,5 @@
 class Customer::TagsController < ApplicationController
-    
+  
     def top
       @tags = Tag.all
     end
@@ -22,7 +22,6 @@ class Customer::TagsController < ApplicationController
     end
     
     private
-    
     def tags_params
       params.require(:tag).permit(:id, :tag_name)
     end

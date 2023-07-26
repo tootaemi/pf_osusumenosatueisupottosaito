@@ -1,41 +1,17 @@
 # frozen_string_literal: true
 class Customer::RegistrationsController < Devise::RegistrationsController
-# class Companies::RegistrationsController < Devise::RegistrationsController
-# class RegistrationsController < Devise::RegistrationsController
-
-
-  # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_sign_in_params, only: [:update]
-  # before_action :ensure_normal_user, only: :edit
-
-#   def ensure_normal_user
-#     if resource.email == "testt@test.com"
-# redirect_to customer_path(@customer.id), alert: 'ゲストユーザーの更新・削除はできません。'
-#     end
-#   end
-
-
-
-# before_action :ensure_normal_customer, only: :destroy
-# before_action :ensure_normal_customer, only: %i[update destroy]
-
-
+    before_action :configure_sign_in_params, only: [:update]
 
   # ログイン後のリダイレクト先
   def after_sign_in_path_for(resource_or_scope)
     root_path(resource)
   end
 
-  # # ログアウト後のリダイレクト先
-  # def after_sign_out_path_for(resource_or_scope)
-  #   root_path 
-  # end
   # def after_sign_up_path_for(resource_or_scope)
   # "/customer/#{current_customer.id}"
   # end
 
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+
 
   # GET /resource/sign_up
   # def new

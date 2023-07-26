@@ -27,16 +27,15 @@
 					    <th>
 					      <% if post.image.attached? %>
 					      <%= image_tag post.image, size: "45x45" %>
-					      <%#= image_tag post.image.variant(resize: "300x200").processed, class: "img-fluid" %>
 					      <% else %></th>
 					      <th><%= image_tag 'no_image', size: "45x45" %>
 					      <% end %>
 					      </th>
 					      <td>
-					        <%= post.created_at.strftime('%Y/%m/%d') %>
+					      	<%= post.created_at.strftime('%Y/%m/%d') %>
 					      </td>
 					      <td>
-					        <%= post.address %><br/>
+					      	<%= post.address %><br/>
 					      </td>
 					      <td>
 					        <%= post.introduction %>
@@ -48,8 +47,9 @@
 					        <%= post.customer.name %>
 					      </td>
 					      <%= form_with model: @post, url: posts_url, method: :post do |f| %>
-					      <td><%= link_to '表示する', post_path(post),class:"btn btn-primary" %></td>
-					      <% end %>
+					      <td><%= link_to '表示する', post_path(post),class:"btn btn-primary" %>
+					      </td>
+					     <% end %>
 					  </tr>
 					</tbody>
 					<% end %>
@@ -59,8 +59,7 @@
 	</div>
 </div>
 <div class="mx-auto" style="width: 250px">
-  <p class="text-center">
-<%= paginate @posts %>
-  </p>
+	<p class="text-center">
+		<%= paginate @posts %>
+	</p>
 </div>
-

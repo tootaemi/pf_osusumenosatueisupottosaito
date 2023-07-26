@@ -1,5 +1,4 @@
 class Admin::CommentsController < ApplicationController
-
     def index
       @comments = Comment.all
       @comment = Comment.new
@@ -9,7 +8,7 @@ class Admin::CommentsController < ApplicationController
       @post = Post.new
       @comments = Comment.all.page(params[:page]).per(10)
     end
-
+    
     def show
       @comment = Comment.find(params[:id])
       @customer = @comment.customer
@@ -23,7 +22,7 @@ class Admin::CommentsController < ApplicationController
         redirect_back(fallback_location: root_path)
       end
     end
-
+    
     def destroy
       comment = Comment.find(params[:id])
       comment.destroy

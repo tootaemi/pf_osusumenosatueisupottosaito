@@ -86,13 +86,11 @@ class Customer::CustomersController< ApplicationController
     end
     
     private
-    
     def set_customer
       @customer = Customer.find(params[:id])
     end
     
     private
-    
     def customer_params
       params.require(:customer).permit(:name, :email, :encrypted_password)
     end

@@ -17,16 +17,15 @@ class Customer::SessionsController < Devise::SessionsController
   # end
 
   # ログアウト後のリダイレクト先
-  def after_sign_out_path_for(resource_or_scope)
-    root_path
-  end
-
-
-  def new_guest
-    customer = Customer.guest
-    sign_in customer
-    redirect_to root_path
-  end
+    def after_sign_out_path_for(resource_or_scope)
+      root_path
+    end
+    
+    def new_guest
+      customer = Customer.guest
+      sign_in customer
+      redirect_to root_path
+    end
 
   # GET /resource/sign_in
   # def new
@@ -34,6 +33,7 @@ class Customer::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
+  
   def create
     p '-------create-----'
     p params

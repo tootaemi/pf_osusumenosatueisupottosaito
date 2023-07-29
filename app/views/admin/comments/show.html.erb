@@ -1,17 +1,23 @@
-<div class="row">
-   <div class="col-md-8">
-      <div class="p-3 mb-2 bg-light text-dark">
-         <h2>コメント詳細</h2>
+    <h2>
+      <div class="container">
+        <div class="row">
+          <div calss="col-xs-12">
+            <span class="p-3 mb-2 bg-light text-dark">
+              コメント詳細
+            </span>
+          </div>
+        </div>
       </div>
+    </h2>
       <p class="col-xs-5">コメント投稿日時：</p>
       <div class="w-75 py-3">
          <%= @comment.created_at.strftime('%Y/%m/%d %H:%M:%S') if @comment.created_at %>
       </div>
-      <p class="col-auto">コメント内容：</p>
-      <div class="w-75 py-3">
+      <p class="col-xs-5">コメント内容：</p>
+      <div class="w-100 py-3">
          <%= @comment.comment %>
       </div>
-      <p class="col-xs-5">名前：</p>
+      <p class="col-xs-5">ユーザーネーム：</p>
       <div class="w-75 py-3">
          <%= @customer.name %>
       </div>

@@ -1,48 +1,45 @@
-<!--<div class="mx-auto" style="width: 500px">-->
-  <h2>
-    <div class="container">
-      <span class="p-3 mb-2 bg-light text-dark">ログイン
-      </span>
-    </div>
-  </h2>
+    <h2>
+      <div class="container">
+        <span class="p-3 mb-2 bg-light text-dark">ログイン</span>
+      </div>
+    </h2>
   </br>
   <div class="container">
-    <span class="p-3 mb-2 bg-light text-dark">
-      会員の方はこちらからログイン
-    </span>
+    <span class="p-3 mb-2 bg-light text-dark">会員の方はこちらからログイン</span>
   </div>
   <div class="mx-auto">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mx-auto" style="width: 500px">
-    </br>
-
-<% if flash[:alert] %>
- <div class='alert alert-danger'><%= flash[:alert] %></div>
+  </br>
+  <% if flash[:alert] %>
+  <div class='alert alert-danger'><%= flash[:alert] %>
+  </div>
 <% end %>
-      
-      
-      
-    <div class="field">
-      <%= f.label :メールアドレス %>　　
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%>
-    </div>
-    </br>
-    <div class="field">
-      <%= f.label :パスワード%>　　　　
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-    <div class="actions">
-    </br>
-    　　　　　　　　　　<%= f.submit "ログイン" ,class: "btn btn-primary"%>
-    </div>
-    <% end %>
-    </div>
-    </div>
-    </br>
-    <div class="container">
-      <span class="p-3 mb-2 bg-light text-dark">会員登録がお済みでない方
-      </span>
-    </div>
-    </br>
-    <%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。
-    
+<div class="row field">
+  <div class="w-25 py-1"><%= f.label :メールアドレス%></div>
+  <div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"sample@example.com"%>
+  </div>
+</div>
+</br>
+<div class="row field">
+  <div class="w-25 py-1">
+    <%= f.label :パスワード%>
+    <% if @minimum_password_length %>(<%= @minimum_password_length %> 文字以上)
+  <% end %>
+  </div>
+  <%= f.password_field :password, autocomplete: "current-password"%>
+  </div>
+</br>
+<div class="actions  col-xs-6 col-xs-offset-4">
+  <div class="w-50"><%= f.submit "ログイン" ,class: "btn btn-primary"%>
+  </div>
+</div>
+<% end %>
+</div>
+</div>
+</br>
+<div class="actions  col-xs-8">
+  <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方</span>
+</br>
+<%= link_to "こちら", new_customer_session_path %>からログインしてください。
+</div>

@@ -1,10 +1,14 @@
-<div class="row">
-   <div class="col-md-6">
-     <div class="p-3 mb-2 bg-light text-dark">
+<h2>
+    <div class="container">
+      <div class="row">
+        <div calss="col-xs-12">
+          <span class="p-3 mb-2 bg-light text-dark">
        <%= @customer.name %>さんの会員詳細
+          </span>
+        </div>
       </div>
-   </div>
-</div>
+    </div>
+</h2>
 <div class="row">
    <div class="col-xs-7">
       <div>
@@ -20,7 +24,7 @@
 <div class="row">
    <div class="col-xs-7">
       <div>
-         <p class="col-xs-4">氏名</p>
+         <p class="col-xs-4">ユーザーネーム</p>
          <p>
          <div class="col-xs-4"><%= @customer.name %></div>
          </p>

@@ -1,19 +1,17 @@
-<!--<div class="mx-auto" style="width:450px">-->
-	<!--<div class="container">-->
-	      <h2>
-  <div class="container">
-    <span class="p-3 mb-2 bg-light text-dark">
-    			<%= current_customer.name %>さんのマイページ
-    </span>
-  </div>
-</h2>
+		<h2>
+			<div class="container">
+				<span class="p-3 mb-2 bg-light text-dark">
+					<%= current_customer.name %>さんのマイページ
+				</span>
+			</div>
+		</h2>
 		<div class="container">
 			<p class="text-left">
 				<div class="container-left">
 					<table class="table col table-bordered">
 						<div class="table-secondary">
 							<tr>
-								<td class="bg-light">名前</td>
+								<td class="bg-light">ユーザーネーム</td>
 								<td><%= current_customer.name %></td>
 							</tr>
 							<tr>
@@ -23,14 +21,12 @@
 						</div>
 					</table>
 				</div>
-				    <div style="text-align:center">
-      <div class="row actions">
-        <div class="w-75 py-3">
-        	<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
-        </div>
-      </div>
-    </div>
+				<div style="text-align:center">
+					<div class="row actions">
+						<div class="w-75 py-3">
+							<%= link_to "編集する", edit_customer_path(current_customer) ,class: "btn btn-success" %>
+						</div>
+					</div>
+				</div>
 			</p>
 		</div>
-	<!--</div>-->
-<!--</div>-->

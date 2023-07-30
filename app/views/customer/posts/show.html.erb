@@ -48,18 +48,20 @@
       <% end %>
       </div>
     <% end %>
+    </div>
     <div class="col-md-8">
       <h3>コメント件数：<%= @post.comments.count %></h3>
       <% @comments.each do |comment| %>
       <table class="table">
         <tbody>
           <tr>
+            <td>ユーザーネーム：</td>
             <td><%= comment.customer.name %></td>
-            <td>
-              <%= comment.created_at.strftime('%Y/%m/%d') %>
-              <% if comment.customer == current_customer %>
-              <%=link_to "消去", comment_path(comment), method: :delete, remote: false, class: "btn btn-xs btn-danger" %>
-            <% end %>
+            <td>コメント投稿日時：</td>
+            <td><%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+            <% if comment.customer == current_customer %>
+            <%=link_to "消去", comment_path(comment), method: :delete, remote: false, class: "btn btn-xs btn-danger" %>
+          <% end %>
             </td>
           </tr>
           <tr>

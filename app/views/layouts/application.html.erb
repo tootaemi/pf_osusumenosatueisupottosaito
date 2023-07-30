@@ -37,7 +37,7 @@
               </nav>
               <% elsif customer_signed_in? %>
               <div class="text-center">
-                <p>ようこそ、<%= current_customer.name %>さん!</p>
+                <p>ようこそ、<%= current_customer.name %>さん！</p>
               </div>
               <nav class="navbar navbar-dark bg-dark">
                 <%= link_to root_path, class: "nav-link text-light", method: :get do %>

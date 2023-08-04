@@ -44,6 +44,3 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
-## 使用素材
-
-https://docs.google.com/spreadsheets/d/1N4rRy6qq6NEqPCmocNlI3Y3Wutuyr1dbHsOAyPwA8ls/edit#gid=885378170

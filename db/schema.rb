@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2023_06_10_130351) do
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.string "address", default: "", null: false
-    t.text "introduction", default: "", null: false
+    t.text "introduction", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

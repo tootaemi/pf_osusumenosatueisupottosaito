@@ -36,6 +36,16 @@
 
 
 ## 設計書
+- ER図　https://app.diagrams.net/#G1fmfKNtBANi_HmoSI4xYeZ2WdWHAA6dwt#%7B%22pageId%22%3A%227S3G85xsw6M0RY2nELfC%22%7D
+
+- テーブル定義書　https://docs.google.com/spreadsheets/d/1a-Qpatqc3pyH3KdRdIxWs6sxBo1agXCIaotb9eUJS58/edit?hl=JA#gid=0
+
+- 詳細設計　https://docs.google.com/spreadsheets/d/1vtEee730szirnOpIDvLG2KBMdCg_8BMmZaae-TOthK0/edit#gid=549108681
+
+- 画面遷移図　https://app.diagrams.net/#G1fmfKNtBANi_HmoSI4xYeZ2WdWHAA6dwt#%7B%22pageId%22%3A%22YBNgqp9whCjbROzyymYa%22%7D
+
+- ワイヤーフレーム　https://app.diagrams.net/#G1fmfKNtBANi_HmoSI4xYeZ2WdWHAA6dwt#%7B%22pageId%22%3A%22WfT-iHVFAZngdogu5FSp%22%7D
+
 
 ## 開発環境
 - OS：Linux(CentOS)

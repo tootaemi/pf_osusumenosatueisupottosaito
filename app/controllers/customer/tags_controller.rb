@@ -1,6 +1,7 @@
 class Customer::TagsController < ApplicationController
     def top
       @tags = Tag.all
+      
     end
     
     def index

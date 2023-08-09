@@ -11,4 +11,4 @@
   # password: "12345678"
   # )
 
-Admin.create(:email => "admin0@example.com", :password => "12345678", :password_confirmation => "12345678")
+Admin.create(:email => "admin0@example.com", :password => "12345678")

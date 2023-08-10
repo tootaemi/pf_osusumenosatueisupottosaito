@@ -1,36 +1,36 @@
-<h2>
+    <h2>
+      <div class="container">
+        <span class="p-3 mb-2 bg-light text-dark">管理者ログイン</span>
+      </div>
+    </h2>
+  </br>
   <div class="container">
-    <span class="p-3 mb-2 bg-light text-dark">管理者ログイン</span>
-  </div>
-</h2>
-</br>
-<div class="container">
-  <% resource = Admin.new unless resource %>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="mx-auto" style="width: 800px">
-    <% if flash[:alert] %>
-    <div class='alert alert-danger'><%= flash[:alert] %></div>
-  <% end %>
-  <div class="form-group col-xs-10">
-    <div class="w-50 py-2">
-      <%= f.label :"メールアドレス", class: "col-sm-5 control-label" %>
-      <%= f.text_field :email %>
+    <% resource = Admin.new unless resource %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="mx-auto" style="width: 800px">
+      <% if flash[:alert] %>
+      <div class='alert alert-danger'><%= flash[:alert] %></div>
+    <% end %>
+    <div class="form-group col-xs-10">
+      <div class="w-50 py-2">
+        <%= f.label :"メールアドレス", class: "col-sm-5 control-label" %>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="form-group col-xs-10">
+      <div class="w-50 py-2">
+        <%= f.label :"パスワード", class: "col-sm-5 control-label" %>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+    </div>
+  </br>
+  <div style="text-align:center">
+    <div class="actions">
+      <div class="w-25 py-1">
+        <%= f.submit "ログイン" ,class: "btn btn-primary"%>
+      </div>
     </div>
   </div>
-  <div class="form-group col-xs-10">
-    <div class="w-50 py-2">
-      <%= f.label :"パスワード", class: "col-sm-5 control-label" %>
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-  </div>
- </br>
- <div style="text-align:center">
-   <div class="actions">
-     <div class="w-25 py-1">
-       <%= f.submit "ログイン" ,class: "btn btn-primary"%>
-     </div>
-   </div>
- </div>
 <% end %>
+    </div>
   </div>
-</div>

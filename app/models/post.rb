@@ -26,22 +26,14 @@ class Post < ApplicationRecord
     after_initialize :to_hash_tags
     after_validation :to_sent_tags
     after_save :save_tag
-
-
+    
     def to_hash_tags
       if self.tags.any?
         sorted_tags = self.tags.order(created_at: :asc)
         self.hash_tags = sorted_tags.map { |o| "#" + o.tag_name }.join(" ")
       end
     end
-
-
-    # def to_hash_tags
-    #   if self.tags.any?
-    #     self.hash_tags = self.tags.map{|o| "#" + o.tag_name }.join(" ")
-    #   end
-    # end
-
+    
     def to_sent_tags
       if self.hash_tags.present?
         self.sent_tags = self.hash_tags.gsub(/[[:space:]]/, '').split(/＃/).select{|s| s.present? }

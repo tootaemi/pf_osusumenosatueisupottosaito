@@ -1,5 +1,5 @@
 class Customer::HomesController< ApplicationController
-    
+  
     def top
       @posts = Post.limit(8).order('id DESC')
       @customer = Customer.new

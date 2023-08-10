@@ -1,33 +1,33 @@
-<h2>
-    <div class="container">
-      <span class="p-3 mb-2 bg-light text-dark">投稿編集</span>
+    <h2>
+      <div class="container">
+        <span class="p-3 mb-2 bg-light text-dark">投稿編集</span>
+      </div>
+    </h2>
+  </br>
+  <div class="mx-auto" style="width: 400px">
+    <%= form_with(model:@post, url:post_path, local: true ,method: :put) do |f| %>
+    <div class="row inputImage">
+      <div class="w-25 py-2"><%= f.label :写真 %></div>
+      <div><%= f.file_field :image, placeholder: "写真", accept: "image/*" %></div>
     </div>
-</h2>
-</br>
-<div class="mx-auto" style="width: 400px">
-  <%= form_with(model:@post, url:post_path, local: true ,method: :put) do |f| %>
-  <div class="row inputImage">
-    <div class="w-25 py-2"><%= f.label :写真 %></div>
-    <div><%= f.file_field :image, placeholder: "写真", accept: "image/*" %></div>
-  </div>
-  <div class="row field">
-    <div class="w-25 py-2"><%= f.label :写真の住所 %></div>
-    <div><%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%></div>
-  </div>
-  <div class="row field">
-    <div class="w-25 py-2"><%= f.label :写真の紹介文 %></div>
-    <div><%= f.text_area :introduction, placeholder:"ここに紹介文を記述します。", size:"30x5" %></div>
-  </div>
-  <div class="row field">
-    <div class="w-25 py-2"><%= f.label :タグ %></div>
-    <div><%= f.text_field :hash_tags, autofocus: true, id:"inputPrice", placeholder: "＃山形県 ＃水族館 ＃クラゲ"  %></div>
-  </div>
-  <div style="text-align:center">
-    <div class="row actions">
-      <div class="w-75 py-3">
-        <%= f.submit "編集内容を保存する", class: "btn btn-primary" %>
+    <div class="row field">
+      <div class="w-25 py-2"><%= f.label :写真の住所 %></div>
+      <div><%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"〒997-0045  山形県鶴岡市西新斎町9-10"%></div>
+    </div>
+    <div class="row field">
+      <div class="w-25 py-2"><%= f.label :写真の紹介文 %></div>
+      <div><%= f.text_area :introduction, placeholder:"ここに紹介文を記述します。", size:"30x5" %></div>
+    </div>
+    <div class="row field">
+      <div class="w-25 py-2"><%= f.label :タグ %></div>
+      <div><%= f.text_field :hash_tags, autofocus: true, id:"inputPrice", placeholder: "＃山形県 ＃水族館 ＃クラゲ"  %></div>
+    </div>
+    <div style="text-align:center">
+      <div class="row actions">
+        <div class="w-75 py-3">
+          <%= f.submit "編集内容を保存する", class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
+  <% end %>
   </div>
-<% end %>
-</div>

@@ -34,7 +34,7 @@ class Customer::PostsController < ApplicationController
         tag = Tag.find_by(tag_name: keyword)
         @posts = tag.nil? ? Post.all : tag.posts
       else
-          @posts = Post.all
+        @posts = Post.all
       end
       @post = Post.new
       @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
@@ -43,7 +43,7 @@ class Customer::PostsController < ApplicationController
       else
         @posts = @posts.page(params[:page])
       end
-      @keyword = params[:keyword]
+        @keyword = params[:keyword]
     end
     
     def show
@@ -62,9 +62,9 @@ class Customer::PostsController < ApplicationController
       else
         @comments = @post.comments
       end
-      @posts = @post.post_tags.page(params[:page])
-      @post = Post.find(params[:id])
-      @comment = Comment.new
+        @posts = @post.post_tags.page(params[:page])
+        @post = Post.find(params[:id])
+        @comment = Comment.new
     end
     
     def new
@@ -148,7 +148,7 @@ class Customer::PostsController < ApplicationController
           @posts = tag.posts.page(params[:page]).per(8)
         end
       else
-        @posts = Post.all.page(params[:page]).per(8)
+          @posts = Post.all.page(params[:page]).per(8)
       end
     end
     
@@ -159,8 +159,8 @@ class Customer::PostsController < ApplicationController
           format.html { redirect_to @post, notice: "Post  was successfully updated." }
             format.json { render :show, status: :ok, location: @post }
         else
-                format.html { render :edit, status: :unprocessable_entity }
-                  format.json { render json: @post.errors, status: :unprocessable_entity }
+          format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @post.errors, status: :unprocessable_entity }
         end
       end
     end

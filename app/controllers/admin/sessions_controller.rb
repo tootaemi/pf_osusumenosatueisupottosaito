@@ -2,6 +2,7 @@ class Admin::SessionsController < Devise::SessionsController
     skip_before_action :method_name, raise: false
     
     def new
+      
     end
     
     def after_sign_in_path_for(resource)

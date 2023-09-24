@@ -1,19 +1,19 @@
-<% if current_customer.bookmark?(@post)  %>
-  <%# bookmarkしていれば、ブックマークしているボタンのとこへ %>
-  <%= render 'unbookmark', post: post %>
-<% else  %>
-  <%# bookmarkしていなければ、ブックマークしていないボタンのとこへ %>
-  <%= render 'bookmark', post: post %>
+<% if current_customer.bookmark?(@post) %>
+  <% # bookmarkしていれば、ブックマークしているボタンのとこへ %>
+  <%= render "unbookmark", post: post %>
+<% else %>
+  <% # bookmarkしていなければ、ブックマークしていないボタンのとこへ %>
+  <%= render "bookmark", post: post %>
 <% end %>
 
   <div class='mr10 float-right'>
-  <%= link_to bookmarks_path(post_id: post.id), method: :post , id: "js-bookmark-button-for-board-#{post.id}" do %>
+  <%= link_to bookmarks_path(post_id: post.id), method: :post, id: "js-bookmark-button-for-board-#{post.id}" do %>
     <i class="far fa-star"></i>
   <% end %>
 </div>
 
 <div class='mr10 float-right'>
-  <%= link_to bookmark_path(current_user.bookmarks.find_by(post_id:board.id)), method: :delete , id: "js-bookmark-button-for-board-#{post.id}" do %>
+  <%= link_to bookmark_path(current_user.bookmarks.find_by(post_id: board.id)), method: :delete, id: "js-bookmark-button-for-board-#{post.id}" do %>
     <i class="fas fa-star"></i>
   <% end %>
 </div>

@@ -2,34 +2,34 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :名前 %>
-      （姓）<%= f.text_field :last_name, autofocus: true, id:"inputName", placeholder:"令和"%>
+      （姓）<%= f.text_field :last_name, autofocus: true, id: "inputName", placeholder: "令和" %>
     </div>
     <div class="field">
-      （名）<%= f.text_field :first_name, autofocus: true, id:"inputName", placeholder:"道子"%>
-    </div>
-    <div class="field">
-      <%= f.label :フリガナ %><br />
-      （セイ）<%= f.text_field :last_name_kana, autofocus: true, id:"inputName", placeholder:"レイワ"%>
+      （名）<%= f.text_field :first_name, autofocus: true, id: "inputName", placeholder: "道子" %>
     </div>
     <div class="field">
       <%= f.label :フリガナ %><br />
-      （メイ）<%= f.text_field :first_name_kana, autofocus: true, id:"inputName", placeholder:"ミチコ"%>
+      （セイ）<%= f.text_field :last_name_kana, autofocus: true, id: "inputName", placeholder: "レイワ" %>
+    </div>
+    <div class="field">
+      <%= f.label :フリガナ %><br />
+      （メイ）<%= f.text_field :first_name_kana, autofocus: true, id: "inputName", placeholder: "ミチコ" %>
       </div>
       <div class="field">
         <%= f.label :メールアドレス %>
-        <%= f.text_field :email, autofocus: true, id:"inputName", placeholder:"sample@example.com"%>
+        <%= f.text_field :email, autofocus: true, id: "inputName", placeholder: "sample@example.com" %>
       </div>
       <div class="field">
         <%= f.label :郵便番号 %>
-        <%= f.text_field :postal_code, autofocus: true, id:"inputName", placeholder:"0000000"%>
+        <%= f.text_field :postal_code, autofocus: true, id: "inputName", placeholder: "0000000" %>
       </div>
       <div class="field">
         <%= f.label :住所 %>
-        <%= f.text_field :address, autofocus: true, id:"inputName", placeholder:"東京都渋谷区代々木神園町0-0"%>
+        <%= f.text_field :address, autofocus: true, id: "inputName", placeholder: "東京都渋谷区代々木神園町0-0" %>
       </div>
       <div class="field">
         <%= f.label :電話番号（ハイフンなし） %><br />
-        <%= f.text_field :telephone_number, autofocus: true, id:"inputName", placeholder:"0000000000"%>
+        <%= f.text_field :telephone_number, autofocus: true, id: "inputName", placeholder: "0000000000" %>
       </div>
       <div class="field">
         <%= f.label :パスワード（6文字以上） %>

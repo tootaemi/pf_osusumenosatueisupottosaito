@@ -27,11 +27,11 @@
 									<%= image_tag post.image, size: "45x45" %>
 								<% else %>
 								</th>
-								<th><%= image_tag 'no_image', size: "45x45" %>
+								<th><%= image_tag "no_image", size: "45x45" %>
 							<% end %>
 								</th>
 								<td>
-									<%= post.created_at.strftime('%Y/%m/%d') %>
+									<%= post.created_at.strftime("%Y/%m/%d") %>
 								</td>
 								<td>
 									<%= post.address %><br/>
@@ -46,7 +46,7 @@
 									<%= post.customer.name %>
 								</td>
 								<%= form_with model: @post, url: posts_url, method: :post do |f| %>
-								<td><%= link_to '表示する', post_path(post),class:"btn btn-primary" %></td>
+								<td><%= link_to "表示する", post_path(post), class: "btn btn-primary" %></td>
 							<% end %>
 							</tr>
 						</tbody>

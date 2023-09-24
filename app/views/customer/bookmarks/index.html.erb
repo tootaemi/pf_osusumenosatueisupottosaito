@@ -18,7 +18,7 @@
 									<tr>
 										<% @bookmarks.each do |bookmark| %>
 										<td>
-											<%= image_tag bookmark.post.image,size: "100x100" if bookmark.post.image.present? %>
+											<%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %>
 										</td>
 										<td>
 											<%= bookmark.post.address %>
@@ -30,7 +30,7 @@
 											<%= bookmark.post.hash_tags %>
 										</td>
 										<td>
-											<%= bookmark.post.created_at.strftime('%Y/%m/%d') %>
+											<%= bookmark.post.created_at.strftime("%Y/%m/%d") %>
 										</td>
 										<td>
 											<%= bookmark.post.customer.name %>

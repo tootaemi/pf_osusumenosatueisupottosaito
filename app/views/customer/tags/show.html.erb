@@ -1,5 +1,5 @@
     <h2>Actions --></h2>
-    <%= link_to 'Delete', tag_path(@tag), method: :delete, data: {confirm: '関連づいた記事のタグが空になりますがタグを削除しますか？'} %>
+    <%= link_to "Delete", tag_path(@tag), method: :delete, data: { confirm: "関連づいた記事のタグが空になりますがタグを削除しますか？" } %>
     <h2>Tag --></h2>
     <h3><%= @tag_name %></h3>
     <ul>
@@ -11,7 +11,7 @@
     </ul>
     <h2>ハッシュタグ一覧</h2>
     <div class= "hashtag-name"></div>
-    <%= link_to 'Back', posts_path %>
+    <%= link_to "Back", posts_path %>
     <p id="notice"><%= notice %></p>
     <h1>投稿一覧</h1>
     <table>
@@ -26,10 +26,10 @@
         <% @posts.each do |post| %>
         <tr>
           <td><%= post.introduction %></td>
-          <td><%= link_to 'Show', post %></td>
+          <td><%= link_to "Show", post %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
 <br>
-<%= link_to 'New Post', new_post_path %>
+<%= link_to "New Post", new_post_path %>

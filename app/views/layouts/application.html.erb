@@ -6,16 +6,16 @@
         <%= csrf_meta_tags %>
         <%= csp_meta_tag %>
         <script src="https://kit.fontawesome.com/52d99e1ee3.js" crossorigin="anonymous"></script>
-        <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <%= stylesheet_pack_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+        <%= javascript_pack_tag "application", 'data-turbolinks-track': "reload" %>
         <script src="https://kit.fontawesome.com/52d99e1ee3.js" crossorigin="anonymous"></script>
       </head>
       <body>
-        <header class="<%= (admin_signed_in? ? "admin_header" : "" ) %>">
+        <header class="<%= (admin_signed_in? ? "admin_header" : "") %>">
           <div class="header-content">
             <ul class="flex">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-              <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+              <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
               <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
               </head>
               <% if admin_signed_in? %>

@@ -11,31 +11,31 @@ class Customer::PostsController < ApplicationController
   end
 
   def index
-    @customers = Customer.all
-    @bookmarks = Bookmark.all
-    @customer = Customer.new
-    @customer = current_customer
-    @tag_list = Tag.all
-    @posts = Post.limit(8).order("id DESC")
-    @post = Post.all.page(params[:page]).per(8)
-    @posts = Post.page(params[:page])
-    @posts = Post.new(params[:search])
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    keyword = params[:keyword]
-    if keyword.present?
-      @posts = Post.search(keyword)
-    end
-    @keyword = keyword
-    @posts = Post.all
-    @keyword = params[:keyword]
-    tag = params[:keyword].present? ? Tag.find_by(tag_name: params[:keyword]) : nil
-    if params[:keyword].present?
-      keyword = params[:keyword].gsub(/[#＃]/, "")
-      tag = Tag.find_by(tag_name: keyword)
-      @posts = tag.nil? ? Post.all : tag.posts
-    else
-      @posts = Post.all
-    end
+    # @customers = Customer.all
+    # @bookmarks = Bookmark.all
+    # @customer = Customer.new
+    # @customer = current_customer
+    # @tag_list = Tag.all
+    # @posts = Post.limit(8).order("id DESC")
+    # @post = Post.all.page(params[:page]).per(8)
+    # @posts = Post.page(params[:page])
+    # @posts = Post.new(params[:search])
+    # @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    # keyword = params[:keyword]
+    # if keyword.present?
+    #   @posts = Post.search(keyword)
+    # end
+    # @keyword = keyword
+    # @posts = Post.all
+    # @keyword = params[:keyword]
+    # tag = params[:keyword].present? ? Tag.find_by(tag_name: params[:keyword]) : nil
+    # if params[:keyword].present?
+    #   keyword = params[:keyword].gsub(/[#＃]/, "")
+    #   tag = Tag.find_by(tag_name: keyword)
+    #   @posts = tag.nil? ? Post.all : tag.posts
+    # else
+    #   @posts = Post.all
+    # end
     @post = Post.new
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
     if params[:keyword]
@@ -43,7 +43,7 @@ class Customer::PostsController < ApplicationController
     else
       @posts = @posts.page(params[:page])
     end
-    @keyword = params[:keyword]
+    # @keyword = params[:keyword]
   end
 
   def show

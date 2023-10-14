@@ -4,23 +4,17 @@
   写真好きの為のサイトです📸
   </p>
 </div>
-<!--<p class="text-right">-->
-<!--<div class="row">-->
-  <!--<div class="col-md-3">-->
-    <div class="d-flex justify-content-end">
-      <%= form_with url: posts_path, method: :get, local: true, class: "boards__searchForm" do |f| %>
-      <div class="input-group">
-        <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
-        <span class="input-group-btn input-group-append">
-          <%= button_tag name: "", class: "btn btn-secondary" do %>
-          <i class="fas fa-search"></i>検索
-          <% end %>
-        </span>
-      </div>
-    </div>
-  <!--</div>-->
-  <!--</p>-->
-<!--</div>-->
+<div class="d-flex justify-content-end">
+  <%= form_with url: posts_path, method: :get, local: true, class: "boards__searchForm" do |f| %>
+  <div class="input-group">
+    <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
+    <span class="input-group-btn input-group-append">
+      <%= button_tag name: "", class: "btn btn-secondary" do %>
+      <i class="fas fa-search"></i>検索
+      <% end %>
+    </span>
+  </div>
+</div>
 <% end %></br>
 <div class="row">
   <% @posts.each do |post| %>
@@ -31,8 +25,8 @@
         <% if post.image.attached? %>
         <%= image_tag post.image.variant(resize: "250x250").processed, class: "img-fluid" %>
       <% else %>
-      <%= image_tag "no_image", size: "80x80" %>
-    <% end %>
+    <%= image_tag "no_image", size: "80x80" %>
+  <% end %>
       </p>
     </div>
   <% end %>

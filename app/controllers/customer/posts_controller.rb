@@ -47,23 +47,24 @@ class Customer::PostsController < ApplicationController
   end
 
   def show
+    # @post = Post.find(params[:id])
+    # @comment = Comment.new
+    # @comments = @post.comments.includes(:customer)
+    @bookmark_count = Bookmark.where(post_id: params[:id]).count
+    # @customer = Customer.where(id: params[:id])
+    # @posts = customer_path
+    # @posts = Post.all
+    # @hash_tags = @hash_tag
+    # @comment = Comment.where(id: params[:id])
+
     @post = Post.find(params[:id])
-    @comment = Comment.new
-    @comments = @post.comments.includes(:customer)
-    @bookmark_count = Bookmark.where(post_id: @post.id).count
-    @customer = Customer.where(id: params[:id])
-    @posts = customer_path
-    @posts = Post.all
-    @hash_tags = @hash_tag
-    @comment = Comment.where(id: params[:id])
     @comments = @post.comments
-    if @comment.nil?
-      @comments = []
-    else
-      @comments = @post.comments
-    end
+    # if @comment.nil?
+    #   @comments = []
+    # else
+    #   @comments = @post.comments
+    # end
     @posts = @post.post_tags.page(params[:page])
-    @post = Post.find(params[:id])
     @comment = Comment.new
   end
 

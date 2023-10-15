@@ -1,33 +1,30 @@
-    <h2>
-      <div class="container">
-        <div class="row">
-          <div calss="col-xs-12">
-            <span class="p-3 mb-2 bg-light text-dark">
-              コメント詳細
-            </span>
-          </div>
-        </div>
+<h2>
+  <div class="container">
+    <div class="row">
+      <div calss="col-xs-12">
+        <span class="p-3 mb-2 bg-light text-dark">
+          コメント詳細
+        </span>
       </div>
-    </h2>
-      <p class="col-xs-5">コメント投稿日時：</p>
-      <div class="w-75 py-3">
-         <%= @comment.created_at.strftime("%Y/%m/%d %H:%M:%S") if @comment.created_at %>
-      </div>
-      <p class="col-xs-5">コメント内容：</p>
-      <div class="w-100 py-3">
-         <%= @comment.comment %>
-      </div>
-      <p class="col-xs-5">ユーザーネーム：</p>
-      <div class="w-75 py-3">
-         <%= @customer.name %>
-      </div>
-      </br>
-      <div style="text-align:center">
-         <div class="row actions">
-            <div class="w-75 py-3">
-               <%= link_to "コメント削除", admin_comment_path(@comment), method: :delete, class: "btn btn-danger" %>
-            </div>
-         </div>
-      </div>
-   </div>
+    </div>
+    </div>
+</h2>
+<p class="col-xs-5">コメント投稿日時：</p>
+<div class="w-75 py-3">
+  <%= @comment.created_at.strftime("%Y/%m/%d %H:%M:%S") if @comment.created_at %>
+</div>
+<p class="col-xs-5">コメント内容：</p>
+<div class="w-100 py-3">
+  <%= @comment.comment %>
+</div>
+<p class="col-xs-5">ユーザーネーム：</p>
+<div class="w-75 py-3">
+  <%= @customer.name %>
+</div></br>
+<div style="text-align:center">
+  <div class="row actions">
+    <div class="w-75 py-3">
+      <%= link_to "コメント削除", admin_comment_path(@comment), method: :delete, class: "btn btn-danger" %>
+    </div>
+  </div>
 </div>

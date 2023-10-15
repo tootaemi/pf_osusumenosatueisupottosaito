@@ -59,14 +59,12 @@ class Customer::PostsController < ApplicationController
     end
   end
 
- 
-  
 def destroy
   @post = Post.find(params[:id])
   @post.destroy
     redirect_to posts_path
 end
-  
+
 
   def find_post
     @post = Post.find(params[:id])
@@ -111,6 +109,9 @@ end
       @posts = Post.all.page(params[:page]).per(8)
     end
   end
+  
+  
+  
 
   def update
     @post = Post.find(params[:id])
@@ -124,7 +125,7 @@ end
       end
     end
   end
-
+  
   private
 
   def ensure

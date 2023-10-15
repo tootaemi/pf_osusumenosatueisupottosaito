@@ -47,17 +47,6 @@ class Customer::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.customer.name
   end
-
-  def update
-    @post = current_post
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      @post.save_tags(params[:post][:tag])
-      redirect_to root_path
-    else
-      render :edit
-    end
-  end
   
   def destroy
     @post = Post.find(params[:id])

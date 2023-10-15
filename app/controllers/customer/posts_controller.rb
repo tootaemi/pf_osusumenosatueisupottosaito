@@ -31,7 +31,6 @@ class Customer::PostsController < ApplicationController
   def new
     @post = Post.new
     @post = current_customer.posts.build
-    @postnew = Post.new
   end
 
   def create

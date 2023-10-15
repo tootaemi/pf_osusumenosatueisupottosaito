@@ -1,11 +1,6 @@
 class Admin::CommentsController < ApplicationController
+  
   def index
-    @comments = Comment.all
-    @comment = Comment.new
-    @customers = Customer.all
-    @customer = Customer.new
-    @posts = Post.all
-    @post = Post.new
     @comments = Comment.all.page(params[:page]).per(10)
   end
 

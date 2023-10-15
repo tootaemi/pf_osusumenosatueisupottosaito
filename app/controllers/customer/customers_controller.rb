@@ -16,16 +16,16 @@ class Customer::CustomersController < ApplicationController
   end
 
   def show
-    @bookmarks = Bookmark.where(id: params[:id])
+    # @bookmarks = Bookmark.where(id: params[:id])
     @customer = current_customer
     @customers = Customer.where(id: params[:id])
-    @posts = Post.where(id: params[:id])
-    @customer = Customer.all
-    @customer = Customer.new
-    @posts = Post.all
-    @post = @customer.posts
-    @post_new = Post.new
-    @posts = @customer.posts
+    # @posts = Post.where(id: params[:id])
+    # @customer = Customer.all
+    # @customer = Customer.new
+    # @posts = Post.all
+    # @post = @customer.posts
+    # @post_new = Post.new
+    # @posts = @customer.posts
   end
 
   def search

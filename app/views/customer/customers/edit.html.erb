@@ -1,13 +1,12 @@
-    <% if @customer.email == "test@test.com" %>
-    <h3>ゲストユーザーはユーザー情報の編集ができません。</h3>
-  <% else %>
-  <h2>
-    <div class="container">
-      <span class="p-3 mb-2 bg-light text-dark">会員情報編集</span>
-    </div>
-  </h2>
-  <%= form_with(model: @customer, url: customer_path, local: true, method: :patch) do |f| %>
-</br>
+<% if @customer.email == "test@test.com" %>
+<h3>ゲストユーザーはユーザー情報の編集ができません。</h3>
+<% else %>
+<h2>
+  <div class="container">
+    <span class="p-3 mb-2 bg-light text-dark">会員情報編集</span>
+  </div>
+</h2>
+<%= form_with(model: @customer, url: customer_path, local: true, method: :patch) do |f| %></br>
 <div class="row field">
   <div class="w-25 py-2">
     <%= f.label :ユーザーネーム %>
@@ -16,10 +15,10 @@
 </div>
 <div class="row field">
   <div class="w-25 py-2">
-    <%= f.label :メールアドレス %></div>
-    <div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %></div>
-</div>
-</br>
+    <%= f.label :メールアドレス %>
+  </div>
+  <div><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %></div>
+</div></br>
 <div style="text-align:center">
   <div class="row actions">
     <div class="w-75 py-3">

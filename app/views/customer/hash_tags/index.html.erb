@@ -1,18 +1,17 @@
-    <h2>ハッシュタグ一覧</h2>
-    <% @hashtags.each do |hashtag| %>
-    <% name = hashtag["name"]
-       count = hashtag["count"]
-       id = hashtag["id"] %>
-    <p>
-      <%= link_to "##{name}(#{count})", hashtag_path(id) %>
-    </p>
+<h2>ハッシュタグ一覧</h2>
+<% @hashtags.each do |hashtag| %>
+<% name = hashtag["name"]
+   count = hashtag["count"]
+   id = hashtag["id"] %>
+   <p>
+     <%= link_to "##{name}(#{count})", hashtag_path(id) %>
+   </p>
   <% end %>
   <h2>ハッシュタグ #<%= @hashtag.hashname %></h2>
   <div class= "hashtag-name">
     <% @hashtags.sort.reverse.each do |count| %>
     <% count[1].each do |hashtag| %>
-    <p><%= link_to "##{hashtag.hashname} (#{hashtag.posts.count}) 件", "/post/hashtag/#{hashtag.hashname}", data: { "turbolinks" => false } %>
-    </p>
+    <p><%= link_to "##{hashtag.hashname} (#{hashtag.posts.count}) 件", "/post/hashtag/#{hashtag.hashname}", data: { "turbolinks" => false } %></p>
     <% end %>
   <% end %>
   </div>
@@ -21,7 +20,7 @@
     <li>
       <%= t.body %>
     </li>
-  <% end %>
+    <% end %>
   </ul>
   <%= link_to "Back", posts_path %>
   <p id="notice"><%= notice %></p>
@@ -44,6 +43,5 @@
       </tr>
     <% end %>
     </tbody>
-  </table>
-<br>
-<%= link_to "New Post", new_post_path %>
+  </table><br>
+  <%= link_to "New Post", new_post_path %>

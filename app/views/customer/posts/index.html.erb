@@ -1,64 +1,52 @@
-		<div class="mx-auto" style="width: 1000px">
-			<div class="container">
-				<span class="p-3 mb-2 bg-light text-dark">おすすめの撮影スポット一覧</span>
-			</div>
-		</div>
-		<div class="container mt-5">
-			<div class="row justify-content-center">
-				<div class="col-12">
-					<div class="text-left">
-						<table class="col-lg table-bordered">
-							<thead class="bg-light">
-								<tr>
-									<td class="text-left">写真</td>
-									<td class="text-left">投稿日</td>
-									<td class="text-left">写真の住所</td>
-									<td class="text-left">写真の紹介文</td>
-									<td class="text-left">タグ</td>
-									<td class="text-left">投稿者</td>
-									<td class="text-left">詳細</td>
-								</tr>
-							</thead>
-						<tbody>
-							<tr>
-								<% @posts.each do |post| %>
-								<th>
-									<% if post.image.attached? %>
-									<%= image_tag post.image, size: "45x45" %>
-								<% else %>
-								</th>
-								<th><%= image_tag "no_image", size: "45x45" %>
-							<% end %>
-								</th>
-								<td>
-									<%= post.created_at.strftime("%Y/%m/%d") %>
-								</td>
-								<td>
-									<%= post.address %><br/>
-									</td>
-									<td>
-										<%= post.introduction %>
-									</td>
-									<td>
-										<%= post.hash_tags %><br/>
-									</td>
-									<td>
-										<%= post.customer.name %>
-									</td>
-									<%= form_with model: @post, url: posts_url, method: :post do |f| %>
-									<td><%= link_to "表示する", post_path(post), class: "btn btn-primary" %>
-									</td>
-								<% end %>
-							</tr>
+<div class="mx-auto" style="width: 1000px">
+	<div class="container">
+		<span class="p-3 mb-2 bg-light text-dark">おすすめの撮影スポット一覧</span>
+	</div>
+</div>
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-12">
+			<div class="text-left">
+				<table class="col-lg table-bordered">
+					<thead class="bg-light">
+						<tr>
+							<td class="text-left">写真</td>
+							<td class="text-left">投稿日</td>
+							<td class="text-left">写真の住所</td>
+							<td class="text-left">写真の紹介文</td>
+							<td class="text-left">タグ</td>
+							<td class="text-left">投稿者</td>
+							<td class="text-left">詳細</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr><% @posts.each do |post| %>
+						<th>
+							<% if post.image.attached? %>
+							<%= image_tag post.image, size: "45x45" %>
+							<% else %>
+						</th>
+						<th><%= image_tag "no_image", size: "45x45" %>
+						<% end %>
+						</th>
+						<td><%= post.created_at.strftime("%Y/%m/%d") %></td>
+						<td><%= post.address %><br/></td>
+						<td><%= post.introduction %></td>
+						<td><%= post.hash_tags %><br/></td>
+						<td><%= post.customer.name %></td>
+						<%= form_with model: @post, url: posts_url, method: :post do |f| %>
+						<td><%= link_to "表示する", post_path(post), class: "btn btn-primary" %></td>
+						<% end %>
+						</tr>
 						</tbody>
-					<% end %>
-						</table>
-					</div>
-				</div>
+						<% end %>
+				</table>
 			</div>
 		</div>
-		<div class="mx-auto">
-			<p class="text-center">
-				<%= paginate @posts %>
-			</p>
-		</div>
+	</div>
+</div>
+<div class="mx-auto">
+	<p class="text-center">
+		<%= paginate @posts %>
+	</p>
+</div>

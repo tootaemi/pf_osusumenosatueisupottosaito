@@ -2,7 +2,7 @@
   <div class="container">
     <span class="p-3 mb-2 bg-light text-dark">新規投稿📷</span>
     <h4>※全ての項目を入力して投稿して下さい！
-    </div>
+  </div>
 </h2>
 <div class="mx-auto" style="width: 650px">
   <p><% if @post.errors.any? %>
@@ -14,8 +14,7 @@
   </div>
 <% end %>
   </p>
-</div>
-</br>
+</div></br>
 <div class="mx-auto" style="width: 400px">
   <%= form_with model: @post, url: posts_path do |f| %>
   <div class="row inputImage">
@@ -37,7 +36,7 @@
   <div style="text-align:center">
     <div class="row actions">
       <div class="w-75 py-3"><%= f.submit "投稿する", class: "btn btn-success" %></div>
-    </div>
   </div>
+</div>
 <% end %>
 </div>

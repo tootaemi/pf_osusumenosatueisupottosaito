@@ -1,30 +1,29 @@
-		<h2>
-			<div class="container">
-				<div class="p-3 mb-2 bg-light text-dark">
-					<div><%= current_customer.name %>さんの詳細ページ</div>
-				</div>
+<h2>
+	<div class="container">
+		<div class="p-3 mb-2 bg-light text-dark">
+			<div><%= current_customer.name %>さんの詳細ページ</div>
+		</div>
+	</div>
+</h2>
+<div class="container">
+	<div class="container-left">
+		<table class="table col table-bordered">
+			<div class="table-secondary">
+				<tr>
+					<td class="bg-light">ユーザーネーム</td>
+					<td><%= current_customer.name %></td>
+				</tr>
+				<tr>
+					<td class="bg-light">メールアドレス</td>
+					<td><%= current_customer.email %></td></tr>
 			</div>
-		</h2>
-		<div class="container">
-			<div class="container-left">
-				<table class="table col table-bordered">
-					<div class="table-secondary">
-						<tr>
-							<td class="bg-light">ユーザーネーム</td>
-							<td><%= current_customer.name %></td>
-						</tr>
-						<tr>
-							<td class="bg-light">メールアドレス</td>
-							<td><%= current_customer.email %></td></tr>
-					</div>
-				</table>
-			</div>
-		</br>
-		<div style="text-align:center">
-			<div class="row actions">
-				<div class="w-75 py-3">
-					<%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success" %>
-        </div>
-      </div>
-    </div>
-	 </div>
+		</table>
+	</div></br>
+<div style="text-align:center">
+	<div class="row actions">
+		<div class="w-75 py-3">
+			<%= link_to "編集する", edit_customer_path(current_customer), class: "btn btn-success" %>
+		</div>
+	</div>
+</div>
+</div>

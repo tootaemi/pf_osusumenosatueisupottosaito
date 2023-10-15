@@ -1,6 +1,6 @@
 class Customer::PostsController < ApplicationController
   before_action :authenticate_customer!, only: [:edit, :update, :destroy]
-
+  
   def top
     @post = Post.find(params[:id])
     if @post.save
@@ -9,7 +9,7 @@ class Customer::PostsController < ApplicationController
       render :index
     end
   end
-
+  
   def index
     @post = Post.new
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
@@ -19,7 +19,7 @@ class Customer::PostsController < ApplicationController
       @posts = @posts.page(params[:page])
     end
   end
-
+  
   def show
     @bookmark_count = Bookmark.where(post_id: params[:id]).count
     @post = Post.find(params[:id])
@@ -27,7 +27,7 @@ class Customer::PostsController < ApplicationController
     @posts = @post.post_tags.page(params[:page])
     @comment = Comment.new
   end
-
+  
   def new
     @post = Post.new
     @post = current_customer.posts.build
@@ -58,14 +58,13 @@ class Customer::PostsController < ApplicationController
       render :edit
     end
   end
-
-def destroy
-  @post = Post.find(params[:id])
-  @post.destroy
+  
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
     redirect_to posts_path
-end
-
-
+  end
+  
   def find_post
     @post = Post.find(params[:id])
   end
@@ -110,9 +109,6 @@ end
     end
   end
   
-  
-  
-
   def update
     @post = Post.find(params[:id])
     respond_to do |format|
@@ -125,8 +121,6 @@ end
       end
     end
   end
-  
-  private
 
   def ensure
     @post = current_customer.posts

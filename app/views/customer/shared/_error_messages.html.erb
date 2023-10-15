@@ -1,19 +1,18 @@
-    <% if resource.errors.any? %>
-    <div id="error_explanation" data-turbo-cache="false">
-      <h2>
-      <%= I18n.t("errors.messages.not_saved",
+<% if resource.errors.any? %>
+<div id="error_explanation" data-turbo-cache="false">
+  <h2>
+ <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
                  resource: resource.class.model_name.human.downcase) %>
-    </h2>
-    <div><% if @customer.errors.any? %>
-    <div class="alert-danger">
-      <h3><%= @customer.errors.count %>件のエラーが発生しました。</h3>
-      <p><% @customer.errors.full_messages.each do |message| %></p>
-      <p class='error-message'><%= message %></p>
+  </h2>
+  <div><% if @customer.errors.any? %>
+  <div class="alert-danger">
+    <h3><%= @customer.errors.count %>件のエラーが発生しました。</h3>
+    <p><% @customer.errors.full_messages.each do |message| %></p>
+    <p class='error-message'><%= message %></p>
     <% end %>
-    </div>
+  </div>
   <% end %>
   </div>
-  </ul>
-    </div>
-  <% end %>
+</div>
+<% end %>

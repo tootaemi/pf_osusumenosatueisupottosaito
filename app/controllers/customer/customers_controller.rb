@@ -7,35 +7,19 @@ class Customer::CustomersController < ApplicationController
     @customers = Customer.all
   end
 
-  def index
-    @customer = current_customer
-    @post = Post.new
-    @posts = Post.all
-    @customer = Customer.new
-    @customers = Customer.all
-  end
-
   def show
-    # @bookmarks = Bookmark.where(id: params[:id])
     @customer = current_customer
     @customers = Customer.where(id: params[:id])
-    # @posts = Post.where(id: params[:id])
-    # @customer = Customer.all
-    # @customer = Customer.new
-    # @posts = Post.all
-    # @post = @customer.posts
-    # @post_new = Post.new
-    # @posts = @customer.posts
   end
-
+  
   def search
     @collections = Collection.search(params[:keyword])
   end
-
+  
   def edit
     @customer = Customer.find(params[:id])
   end
-
+  
   def new
     @customer = Customer.new
   end
@@ -79,7 +63,6 @@ class Customer::CustomersController < ApplicationController
   end
 
   def bookmarks
-    bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:post_id)
     @bookmarks = Bookmark.where(customer_id: @customer.id).pluck(:post_id)
     @bookmark_posts = Post.find(bookmarks)
   end

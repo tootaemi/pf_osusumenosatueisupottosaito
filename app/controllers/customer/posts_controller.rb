@@ -59,15 +59,14 @@ class Customer::PostsController < ApplicationController
     end
   end
 
-  def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to post_path(@post)
-    redirect_to post_path(params[:post_id])
-    @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to post_path
-    Post.find_by(params[:id]).destroy
-  end
+ 
+  
+def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
+    redirect_to posts_path
+end
+  
 
   def find_post
     @post = Post.find(params[:id])
@@ -124,12 +123,6 @@ class Customer::PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to posts_path
   end
 
   private

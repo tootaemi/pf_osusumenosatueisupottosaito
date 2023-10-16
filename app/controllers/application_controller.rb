@@ -13,24 +13,6 @@ class ApplicationController < ActionController::Base
     root_path(resource)
   end
 
-  # ログイン
-  # def log_in(customer)
-  #   session[:customer_id] = customer.id
-  # end
-
-  # # 現在ログイン中のユーザーのセッションを返すメソッド
-  # def current_customer
-  #   if(customer_id = session[:customer_id])
-  #     @current_customer ||= Customer.find_by(id: customer_id)
-  #   end
-  # end
-
-  # # ログアウト
-  # def log_out
-  #   session.delete(:customer_id)
-  #   @current_customer = nil
-  # end
-
   private
 
   def configure_permitted_parameters
@@ -46,11 +28,5 @@ class ApplicationController < ActionController::Base
     sign_in customer
     redirect_to posts_path
   end
-
-  # def configure_permitted_parameters
-  #   if resource_class == Customer
-  #     devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email, :encrypted_password])
-  #   end
-  # end
-
+  
 end

@@ -18,8 +18,11 @@
 							<tr>
 								<% @bookmarks.each do |bookmark| %>
 								<td>
-									<%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %>
-								</td>
+									<%= link_to bookmarks_path(bookmark) do %>
+									<div>
+										<p><%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %></p>
+									</div>
+								<% end %>
 								<td>
 									<%= bookmark.post.address %>
 								</td>
@@ -34,6 +37,14 @@
 								</td>
 								<td>
 									<%= bookmark.post.customer.name %>
+								</td>
+										<%= form_with model: @post, url: posts_url, method: :post do |f| %>
+						<td><%= link_to "表示する", bookmarks_path(bookmark), class: "btn btn-primary" %></td>
+										<p><%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %></p>
+
+						<% end %>
+						
+						</tr>
 								</td>
 							</tr>
 						</tbody>

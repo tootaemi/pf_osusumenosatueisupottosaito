@@ -4,6 +4,9 @@ class Customer::BookmarksController < ApplicationController
   def index
     @bookmarks = Bookmark.where(customer: current_customer.id)
     @bookmarks = @bookmarks.page(params[:page]).per(8)
+    
+    @posts = Post.all
+    @posts = @posts.page(params[:page])
   end
 
   def show

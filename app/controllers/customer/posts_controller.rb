@@ -62,6 +62,7 @@ class Customer::PostsController < ApplicationController
   end
 
   def bookmarks
+    @posts = current_customer.posts
     @posts = current_customer.bookmarks_posts
   end
 

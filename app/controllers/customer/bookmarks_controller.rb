@@ -7,8 +7,7 @@ class Customer::BookmarksController < ApplicationController
     @bookmark = Bookmark.new
     
     @posts = Post.all
-    @post = @posts.page(params[:page])
-    # @post = Post.new
+    @posts = @posts.page(params[:page])
   end
   
   def show

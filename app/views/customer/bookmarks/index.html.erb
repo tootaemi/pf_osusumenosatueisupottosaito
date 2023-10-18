@@ -18,15 +18,15 @@
 							<tr>
 								<% @bookmarks.each do |bookmark| %>
 								<td>
-									
 									    <%= link_to post_path(@post) do %>
+									    <%#= link_to post_path(@post) do %>
 									    
-    <%= link_to posts_url do %>
+    <%#= link_to posts_url do %>
 							<div>
 										<p><%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %></p>
 									</div>
 																<% end %>
-																																<% end %>
+																																<%# end %>
 
 
 								<td>

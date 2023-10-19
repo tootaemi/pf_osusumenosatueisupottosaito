@@ -2,6 +2,7 @@ class Customer::CustomersController < ApplicationController
   before_action :authenticate_customer!
   before_action :set_customer, only: [:bookmarks]
 
+
   def top
     @customers = Customer.limit(4).order("id DESC")
     @customers = Customer.all
@@ -11,15 +12,15 @@ class Customer::CustomersController < ApplicationController
     @customer = current_customer
     @customers = Customer.where(id: params[:id])
   end
-  
+
   def search
     @collections = Collection.search(params[:keyword])
   end
-  
+
   def edit
     @customer = Customer.find(params[:id])
   end
-  
+
   def new
     @customer = Customer.new
   end
@@ -44,6 +45,12 @@ class Customer::CustomersController < ApplicationController
   end
 
   def destroy
+    @customer = Customer.find(params[:id])
+    if current_customer.id == @customer.id && @customer.destroy
+      redirect_to :root
+    else
+      redirect_to :root
+    end
   end
 
   def destroy_confirm
@@ -72,8 +79,6 @@ class Customer::CustomersController < ApplicationController
   def set_customer
     @customer = Customer.find(params[:id])
   end
-
-  private
 
   def customer_params
     params.require(:customer).permit(:name, :email, :encrypted_password)

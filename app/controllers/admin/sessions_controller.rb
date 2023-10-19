@@ -1,5 +1,6 @@
 class Admin::SessionsController < Devise::SessionsController
   skip_before_action :method_name, raise: false
+  before_action :admin_signed_in?
   
   def new
   end

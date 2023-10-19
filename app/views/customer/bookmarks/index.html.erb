@@ -18,17 +18,11 @@
 							<tr>
 								<% @bookmarks.each do |bookmark| %>
 								<td>
-									    <%= link_to post_path(@post) do %>
-									    <%#= link_to post_path(@post) do %>
-									    
-    <%#= link_to posts_url do %>
-							<div>
-										<p><%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %></p>
-									</div>
-																<% end %>
-																																<%# end %>
-
-
+									<%= link_to post_path(bookmark.post.id)  do %>
+										<div>
+											<p><%= image_tag bookmark.post.image, size: "100x100" if bookmark.post.image.present? %></p>
+										</div>
+									<% end %>
 								<td>
 									<%= bookmark.post.address %>
 								</td>
@@ -47,8 +41,7 @@
 									<td>
 								</td>
 
-										<%#= form_with model: @post, url: posts_url, method: :post do |f| %>
-						<%# end %>
+
 
 
 						</tr>

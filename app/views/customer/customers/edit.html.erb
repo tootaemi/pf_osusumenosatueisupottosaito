@@ -23,6 +23,9 @@
   <div class="row actions">
     <div class="w-75 py-3">
       <%= f.submit "変更を保存", class: "btn btn-success" %>
+      <% if current_customer.id == @customer.id %>
+        <%= link_to "退会", customer_path(@customer.id), method: :delete, data: { confirm: "【確認】アカウントを削除してもよろしいですか？" } %>
+      <% end %>
     </div>
   </div>
 </div>

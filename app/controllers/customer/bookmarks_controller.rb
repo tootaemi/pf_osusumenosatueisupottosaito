@@ -1,11 +1,10 @@
 class Customer::BookmarksController < ApplicationController
   before_action :posts_path
-
+  
   def index
     @bookmarks = Bookmark.where(customer: current_customer.id)
     @bookmarks = @bookmarks.page(params[:page]).per(8)
     @bookmark = Bookmark.new
-    
     @posts = Post.all
     @post = @posts.page(params[:page])
   end

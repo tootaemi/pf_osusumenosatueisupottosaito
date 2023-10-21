@@ -21,17 +21,17 @@
       <% if current_customer && current_customer.bookmark?(@post.id) %>
       <%= link_to post_bookmarks_path(@post), method: :delete, remote: false do %>
       <span class="fa fa-heart like-btn-unlike"></span>
-        <% end %>
-          <% else %>
-          <%= link_to post_bookmarks_path(@post), method: :post, remote: false do %>
-          <span class="fa fa-heart-o like-btn"></span>
-            <% end %>
-              <% end %>
+      <% end %>
+      <% else %>
+      <%= link_to post_bookmarks_path(@post), method: :post, remote: false do %>
+      <span class="fa fa-heart-o like-btn"></span>
+      <% end %>
+      <% end %>
     </div>
     <% end %>
     <div class="like-btn">
       <h3>いいね件数：<%= @bookmark_count %></h3>
-      </div>
+    </div>
   </div>
 </div>
 <div class="row">

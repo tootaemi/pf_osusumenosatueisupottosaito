@@ -25,4 +25,3 @@ module Osusumenosatueisupotto
 
   end
 end
-

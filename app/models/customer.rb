@@ -7,9 +7,9 @@ class Customer < ApplicationRecord
   validates :name, length: { minimum: 2 }
   has_one_attached :image
 
-  has_many :postss, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :commentss, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def mine?(object)
     object.user_id == id

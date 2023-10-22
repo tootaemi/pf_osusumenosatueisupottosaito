@@ -30,7 +30,9 @@
   <% end %>
   </div>
 </div></br>
-<div class="actions  col-xs-8">
-  <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方</span></br>
-  <%= link_to "こちら", new_customer_session_path %>からログインしてください。
+<span class="mb-2 bg-light text-dark"></span></br>
+<div class="container">
+  <span class="p-3 mb-2 bg-light text-dark">会員登録がお済みでない方</span>
 </div>
+<span class="mb-2 bg-light text-dark"></span></br>
+<%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。

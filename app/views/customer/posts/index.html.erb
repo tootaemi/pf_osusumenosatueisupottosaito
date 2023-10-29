@@ -14,7 +14,7 @@
     </span>
   </div>
 </div>
-<% end %></br>
+<% end %><br>
 <div class="container mt-5">
 	<div class="row justify-content-center">
 		<div class="col-12">
@@ -42,9 +42,9 @@
 						<% end %>
 						</th>
 						<td><%= post.created_at.strftime("%Y/%m/%d") %></td>
-						<td><%= post.address %><br/></td>
+						<td><%= post.address %><br></td>
 						<td><%= post.introduction %></td>
-						<td><%= post.hash_tags %><br/></td>
+						<td><%= post.hash_tags %><br></td>
 						<td><%= post.customer.name %></td>
 						<%= form_with model: @post, url: posts_url, method: :post do |f| %>
 						<td><%= link_to "表示する", post_path(post), class: "btn btn-primary" %></td>

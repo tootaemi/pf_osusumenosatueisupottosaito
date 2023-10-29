@@ -2,7 +2,7 @@
   <div class="container">
     <span class="p-3 mb-2 bg-light text-dark">新規会員登録</span>
   </div>
-</h2></br>
+</h2><br>
 <%= form_with model: @customer, url: customer_registration_path do |f| %>
 <div class="mx-auto" style="width: 500px">
   <%= render "customer/shared/error_messages", resource: resource %>
@@ -25,13 +25,13 @@
   <div class="row field py-1">
     <div class="w-50"><%= f.label :ユーザーネーム %></div>
     <div><%= f.text_field :name, autofocus: true, id: "inputName", placeholder: "山形" %></div>
-  </div></br>
+  </div><br>
   <div class="actions  col-xs-6 col-xs-offset-4">
     <div class="w-25"><%= f.submit "新規登録", class: "btn btn-primary" %></div>
   </div>
   <% end %>
-</div></br>
+</div><br>
 <div class="actions  col-xs-8">
-  <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方</span></br>
+  <span class="p-3 mb-2 bg-light text-dark">既に登録済みの方</span><br>
   <%= link_to "こちら", new_customer_session_path %>からログインしてください。
 </div>

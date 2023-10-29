@@ -2,7 +2,7 @@
   <div class="container">
     <span class="p-3 mb-2 bg-light text-dark">管理者ログイン</span>
   </div>
-</h2></br>
+</h2><br>
 <div class="container">
   <% resource = Admin.new unless resource %>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -21,7 +21,7 @@
         <%= f.label :"パスワード", class: "col-sm-5 control-label" %>
         <%= f.password_field :password, autocomplete: "current-password" %>
       </div>
-    </div></br>
+    </div><br>
     <div style="text-align:center">
       <div class="actions">
         <div class="w-25 py-1">

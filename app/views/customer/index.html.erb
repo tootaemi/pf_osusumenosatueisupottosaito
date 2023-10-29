@@ -8,11 +8,11 @@
   （名）<%= f.text_field :first_name, autofocus: true, id: "inputName", placeholder: "道子" %>
 </div>
 <div class="field">
-  <%= f.label :フリガナ %><br />
+  <%= f.label :フリガナ %><br>
   （セイ）<%= f.text_field :last_name_kana, autofocus: true, id: "inputName", placeholder: "レイワ" %>
 </div>
 <div class="field">
-  <%= f.label :フリガナ %><br />
+  <%= f.label :フリガナ %><br>
   （メイ）<%= f.text_field :first_name_kana, autofocus: true, id: "inputName", placeholder: "ミチコ" %>
 </div>
 <div class="field">
@@ -28,18 +28,18 @@
   <%= f.text_field :address, autofocus: true, id: "inputName", placeholder: "東京都渋谷区代々木神園町0-0" %>
 </div>
 <div class="field">
-  <%= f.label :電話番号（ハイフンなし） %><br />
+  <%= f.label :電話番号（ハイフンなし） %><br>
   <%= f.text_field :telephone_number, autofocus: true, id: "inputName", placeholder: "0000000000" %>
 </div>
 <div class="field">
   <%= f.label :パスワード（6文字以上） %>
   <% if @minimum_password_length %>
   <em>(<%= @minimum_password_length %> characters minimum)</em>
-  <% end %><br />
+  <% end %><br>
   <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
   <div class="field">
-    <%= f.label :パスワード（確認用） %><br />
+    <%= f.label :パスワード（確認用） %><br>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
   <div class="actions">

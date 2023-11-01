@@ -23,7 +23,6 @@
     <div>
       <p>
         <% if post.image.attached? %>
-        <%#= image_tag post.image, size: "300x300" %>
         <%= image_tag post.image.variant(resize: "200x200").processed, class: "img-fluid", style: "height:200px; width:200px;" %>
       <% else %>
     <%= image_tag "no_image", size: "80x80" %>
